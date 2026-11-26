@@ -1,4 +1,4 @@
-"""Testes do orquestrador de alto nível (cálculo + validação + memorial)."""
+"""Testes do orquestrador de alto nível (cálculo + validaçêo + memorial)."""
 
 from lib.service import solve_rectangular_beam
 

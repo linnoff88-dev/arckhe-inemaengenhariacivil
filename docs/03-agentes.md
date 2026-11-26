@@ -5,7 +5,7 @@
 ### `orchestrator`
 **Responsabilidade:** Receber o problema do usuário, identificar o domínio correto, rotear para o agente especialista adequado.
 
-**Não faz:** cálculos, interpretação de normas, geração de documentos.
+**Nêo faz:** cálculos, interpretaçêo de normas, geraçêo de documentos.
 
 **Entradas:** linguagem natural (qualquer problema de engenharia)
 **Saídas:** handoff para agente especialista com contexto estruturado
@@ -48,7 +48,7 @@
 **Ferramentas MCP:** `calculate_footing`, `calculate_pile_capacity`
 
 ### `geotechnical/retaining-walls`
-**Responsabilidade:** Muros de arrimo e estruturas de contenção.
+**Responsabilidade:** Muros de arrimo e estruturas de contençêo.
 **Capacidades:** empuxo ativo/passivo, deslizamento, tombamento, ruptura
 **Normas:** NBR 11682:2009
 
@@ -74,7 +74,7 @@
 
 ### `hydraulic/stormwater`
 **Responsabilidade:** Drenagem pluvial urbana.
-**Capacidades:** bacias de contribuição, tempo de concentração, dimensionamento
+**Capacidades:** bacias de contribuiçêo, tempo de concentraçêo, dimensionamento
 **Referências:** Manual DAEE, manuais municipais
 
 ---
@@ -87,30 +87,30 @@
 **Referências:** DNIT 005/2003, método USACE
 
 ### `roads/earthwork`
-**Responsabilidade:** Terraplanagem e movimentação de terra.
-**Capacidades:** volumes de corte/aterro, compactação, empréstimos
+**Responsabilidade:** Terraplanagem e movimentaçêo de terra.
+**Capacidades:** volumes de corte/aterro, compactaçêo, empréstimos
 
 ---
 
 ## Agentes de Suporte
 
 ### `budget`
-**Responsabilidade:** Orçamentação de obras civis.
+**Responsabilidade:** Orçamentaçêo de obras civis.
 **Capacidades:** composições SINAPI, BDI, cronograma físico-financeiro
 **Integrações:** SINAPI (CSV), planilhas Excel
 
 ### `review`
-**Responsabilidade:** Revisão técnica independente de cálculos existentes.
-**Capacidades:** verificação de hipóteses, limitações, conformidade normativa
-**Saídas:** relatório de revisão com parecer técnico
+**Responsabilidade:** Revisêo técnica independente de cálculos existentes.
+**Capacidades:** verificaçêo de hipóteses, limitações, conformidade normativa
+**Saídas:** relatório de revisêo com parecer técnico
 
 ### `report`
-**Responsabilidade:** Geração de documentação técnica.
+**Responsabilidade:** Geraçêo de documentaçêo técnica.
 **Capacidades:** memorial de cálculo, relatório técnico, laudo, parecer
 **Saídas:** Markdown → PDF, Excel
 
 ### `norms`
-**Responsabilidade:** Consulta e interpretação de normas técnicas.
+**Responsabilidade:** Consulta e interpretaçêo de normas técnicas.
 **Capacidades:** localizar tabelas, interpolar valores, identificar requisitos
 **Base de dados:** `normas/` (tabelas JSON extraídas das NBRs)
 
@@ -131,9 +131,9 @@
 | water-supply | Água | NBR 12218, 5626 |
 | sewage | Esgoto | NBR 9649 |
 | stormwater | Drenagem | DAEE |
-| pavement | Pavimentação | DNIT 005 |
+| pavement | Pavimentaçêo | DNIT 005 |
 | earthwork | Terraplenagem | — |
 | budget | Orçamento | SINAPI |
-| review | Revisão | — |
-| report | Documentação | ABNT NBR 14724 |
+| review | Revisêo | — |
+| report | Documentaçêo | ABNT NBR 14724 |
 | norms | Normas | Todas |

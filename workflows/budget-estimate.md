@@ -11,8 +11,8 @@ Nenhum custo é inventado: preços vêm de `consultar_preco_sinapi` e a montagem
 termina com o aviso de responsabilidade técnica.
 
 > ⚠️ **Preços de amostra.** A base `data/sinapi_amostra.csv` é ILUSTRATIVA, só para
-> demonstração. Em uso real, substitua pela **SINAPI vigente e regional**
-> (desonerada/não desonerada, mês de referência e UF). Alerte sempre o usuário.
+> demonstraçêo. Em uso real, substitua pela **SINAPI vigente e regional**
+> (desonerada/nêo desonerada, mês de referência e UF). Alerte sempre o usuário.
 
 ## Fluxo
 
@@ -23,7 +23,7 @@ Extraia do projeto/pedido a lista de serviços e insumos com, para cada um:
 - `codigo` (código SINAPI do serviço/insumo);
 - `quantidade` (na unidade do código — confira a unidade antes).
 
-Confirme com o usuário quando faltar quantidade ou houver dúvida de unidade. Não chute.
+Confirme com o usuário quando faltar quantidade ou houver dúvida de unidade. Nêo chute.
 
 ### Passo 2 — Conferir preços (opcional, item a item)
 
@@ -39,8 +39,8 @@ Código inexistente => erro: abstenha-se e peça o código correto da SINAPI vig
 ### Passo 3 — Definir o BDI
 
 BDI (Benefícios e Despesas Indiretas) entra como **percentual único** sobre o custo
-direto, faixa aceita **[0, 40] %** (referência Acórdão TCU 2622/2013). A composição
-detalhada (administração central, risco, despesas financeiras, tributos, lucro) é
+direto, faixa aceita **[0, 40] %** (referência Acórdêo TCU 2622/2013). A composiçêo
+detalhada (administraçêo central, risco, despesas financeiras, tributos, lucro) é
 responsabilidade do orçamentista — registre as premissas adotadas.
 
 ### Passo 4 — Montar o orçamento
@@ -53,27 +53,27 @@ montar_orcamento(
 )
 ```
 
-Retorna o pacote padrão: `resultado` (itens detalhados, subtotal, valor do BDI, total),
+Retorna o pacote padrêo: `resultado` (itens detalhados, subtotal, valor do BDI, total),
 `validacao`, `memorial_markdown`, `aviso` e `aprovado`.
 
-### Passo 5 — Validação automática
+### Passo 5 — Validaçêo automática
 
 A camada `lib/validators/budget_check.py` reverifica de forma determinística: preços > 0,
 quantidades ≥ 0, BDI na faixa, custo de cada item = quantidade × preço, subtotal = Σ
-custos e total = subtotal·(1 + BDI). Se `aprovado` for falso, **não apresente como final**
+custos e total = subtotal·(1 + BDI). Se `aprovado` for falso, **nêo apresente como final**
 — aponte o que reprovou e corrija.
 
-### Passo 6 — Memorial e documentação
+### Passo 6 — Memorial e documentaçêo
 
 Apresente o `memorial_markdown` (tabela de itens com qtd/preço/custo, subtotal, BDI,
-total + validação + aviso). Para consolidar com outros cálculos do projeto, registre o
+total + validaçêo + aviso). Para consolidar com outros cálculos do projeto, registre o
 bundle (`registrar_calculo_no_projeto`) e gere o relatório (`gerar_relatorio_projeto`)
 pelo agente `report`.
 
 ## Saída esperada
 
-1. Tabela orçamentária (código, descrição, unidade, quantidade, preço unit., custo).
+1. Tabela orçamentária (código, descriçêo, unidade, quantidade, preço unit., custo).
 2. Subtotal (custo direto), BDI aplicado e total geral.
-3. Relatório de validação aritmética (aprovado/reprovado).
-4. Alerta de que os preços são de amostra e devem ser atualizados.
+3. Relatório de validaçêo aritmética (aprovado/reprovado).
+4. Alerta de que os preços sêo de amostra e devem ser atualizados.
 5. Aviso de responsabilidade técnica (obrigatório).

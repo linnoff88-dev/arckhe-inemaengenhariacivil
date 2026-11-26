@@ -1,6 +1,6 @@
-"""Camada de unidades — registry `pint` compartilhado e verificação dimensional.
+"""Camada de unidades — registry `pint` compartilhado e verificaçêo dimensional.
 
-Regra do projeto: unidades são sempre verificadas antes de qualquer operação.
+Regra do projeto: unidades sêo sempre verificadas antes de qualquer operaçêo.
 Todo o resto do código deve importar `ureg` / `Q_` DAQUI (pint só opera entre
 quantidades do mesmo registry).
 """
@@ -14,10 +14,10 @@ Q_ = ureg.Quantity
 
 
 def ensure(value, unit: str) -> float:
-    """Valida a dimensão de ``value`` e devolve a magnitude na unidade ``unit``.
+    """Valida a dimensêo de ``value`` e devolve a magnitude na unidade ``unit``.
 
     - Se ``value`` for um :class:`pint.Quantity`, converte para ``unit`` e devolve a
-      magnitude. Dimensão incompatível levanta ``pint.DimensionalityError``.
+      magnitude. Dimensêo incompatível levanta ``pint.DimensionalityError``.
     - Se ``value`` for um número puro, assume-se que já está em ``unit``.
     """
     if isinstance(value, ureg.Quantity):

@@ -1,7 +1,7 @@
-"""Exportação do memorial (Markdown) para um PDF simples (reportlab).
+"""Exportaçêo do memorial (Markdown) para um PDF simples (reportlab).
 
 Camada de saída determinística: recebe o texto do memorial e o desenha em A4, linha a
-linha, com quebra de página automática. Não interpreta Markdown nem recalcula nada — é
+linha, com quebra de página automática. Nêo interpreta Markdown nem recalcula nada — é
 um despejo legível do memorial já gerado pela engine.
 """
 

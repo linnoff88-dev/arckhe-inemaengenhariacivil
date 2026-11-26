@@ -111,7 +111,7 @@
   <div class="wrap">
     <div>
       <span class="chip">Plataforma de agentes de IA · v1.0.0</span>
-      <h1>Cálculo de engenharia civil com IA que <span class="amb">não inventa número</span>.</h1>
+      <h1>Cálculo de engenharia civil com IA que <span class="amb">nêo inventa número</span>.</h1>
       <p class="lead">O agente entende o problema e escolhe o método normativo. A conta sai do Python — validada, com referência à norma e memorial pronto. Nunca do modelo de linguagem.</p>
       <div class="cta">
         <a class="btn" href="#guia">Começar o guia</a>
@@ -119,13 +119,13 @@
       </div>
     </div>
     <figure>
-<pre><span class="c"># pergunte em português; a engine responde com cálculo + validação</span>
+<pre><span class="c"># pergunte em português; a engine responde com cálculo + validaçêo</span>
 <span class="k">&gt;</span> Dimensione uma viga 25×50 C30,
-  vão 5 m, g=10 e q=10 kN/m
+  vêo 5 m, g=10 e q=10 kN/m
 
 <span class="c">Md   = 101,17 kN·m       x/d = 0,141 (dúctil)</span>
 <span class="c">As   = 5,40 cm²  →  3 Ø 16 mm</span>
-<span class="s">validação: unidades ✓ física ✓ norma ✓ equilíbrio ✓
+<span class="s">validaçêo: unidades ✓ física ✓ norma ✓ equilíbrio ✓
 APROVADO</span>
 <span class="c"># + memorial em Markdown e aviso de responsabilidade (ART)</span></pre>
     </figure>
@@ -135,11 +135,11 @@ APROVADO</span>
 <section id="oque"><div class="wrap">
   <span class="chip">O que é</span>
   <h2>A IA orquestra. O Python calcula.</h2>
-  <p class="sub">Uma plataforma onde engenheiros conversam com agentes de IA para resolver cálculos de engenharia civil. A divisão de trabalho é a decisão central do projeto — e o que a torna confiável.</p>
+  <p class="sub">Uma plataforma onde engenheiros conversam com agentes de IA para resolver cálculos de engenharia civil. A divisêo de trabalho é a decisêo central do projeto — e o que a torna confiável.</p>
   <div class="grid g3">
-    <div class="card"><h3>🧠 IA que orquestra</h3><p>Interpreta o pedido em linguagem natural, identifica o domínio, escolhe o método normativo e explica cada etapa. Não soma, não multiplica, não interpola.</p></div>
+    <div class="card"><h3>🧠 IA que orquestra</h3><p>Interpreta o pedido em linguagem natural, identifica o domínio, escolhe o método normativo e explica cada etapa. Nêo soma, nêo multiplica, nêo interpola.</p></div>
     <div class="card"><h3>🐍 Python que calcula</h3><p>Toda aritmética é determinística, com unidades verificadas via <code>pint</code> e modelos Pydantic. O número sai sempre de uma ferramenta — nunca do LLM.</p></div>
-    <div class="card"><h3>✅ Validação obrigatória</h3><p>Unidades, física, norma e equilíbrio checados antes de apresentar. Cada resultado vem com memorial e o aviso de responsabilidade técnica.</p></div>
+    <div class="card"><h3>✅ Validaçêo obrigatória</h3><p>Unidades, física, norma e equilíbrio checados antes de apresentar. Cada resultado vem com memorial e o aviso de responsabilidade técnica.</p></div>
   </div>
 </div></section>
 
@@ -152,14 +152,14 @@ APROVADO</span>
     <span>Agente · escolhe o método</span><span class="arr">→</span>
     <span>MCP server</span><span class="arr">→</span>
     <span>Engine Python · cálculo</span><span class="arr">→</span>
-    <span>Validação</span><span class="arr">→</span>
+    <span>Validaçêo</span><span class="arr">→</span>
     <span>Memorial + aviso (ART)</span>
   </div>
   <div class="grid g4" style="margin-top:22px">
     <div class="card"><span class="num">1</span><h3>Agentes</h3><p>Um <code>orchestrator</code> roteia para o especialista (concreto, fundações, aço…). Interpreta e documenta; nunca calcula.</p></div>
-    <div class="card"><span class="num">2</span><h3>MCP server</h3><p>Ferramentas finas expõem cada cálculo ao agente. Sem ferramenta para o pedido → abstenção (não inventa).</p></div>
+    <div class="card"><span class="num">2</span><h3>MCP server</h3><p>Ferramentas finas expõem cada cálculo ao agente. Sem ferramenta para o pedido → abstençêo (nêo inventa).</p></div>
     <div class="card"><span class="num">3</span><h3>Engine Python</h3><p>Núcleos por domínio com fórmulas normativas, unidades <code>pint</code> e resultados Pydantic.</p></div>
-    <div class="card"><span class="num">4</span><h3>Validação + memorial</h3><p>4 verificações independentes, depois o memorial em Markdown com o disclaimer de responsabilidade.</p></div>
+    <div class="card"><span class="num">4</span><h3>Validaçêo + memorial</h3><p>4 verificações independentes, depois o memorial em Markdown com o disclaimer de responsabilidade.</p></div>
   </div>
 </div></section>
 
@@ -180,7 +180,7 @@ APROVADO</span>
 <section id="guia"><div class="wrap">
   <span class="chip">Guia de uso · passo a passo</span>
   <h2>Do clone ao primeiro cálculo</h2>
-  <p class="sub">Comandos reais do projeto — copiáveis. Os três primeiros passos validam que a engine está sã antes de você pedir qualquer coisa.</p>
+  <p class="sub">Comandos reais do projeto — copiáveis. Os três primeiros passos validam que a engine está sê antes de você pedir qualquer coisa.</p>
 
   <div class="step"><div class="b">1</div><div>
     <h3>Instalar dependências</h3>
@@ -190,7 +190,7 @@ APROVADO</span>
 
   <div class="step"><div class="b">2</div><div>
     <h3>Rodar a suíte de testes</h3>
-    <p>Cada cálculo nasceu de um teste com valor conferido à mão e a cláusula NBR citada.</p>
+    <p>Cada cálculo nasceu de um teste com valor conferido à mêo e a cláusula NBR citada.</p>
 <pre><span class="k">uv run pytest -q</span>  <span class="c"># 359 testes (334 unitários + 25 E2E)</span></pre>
   </div></div>
 
@@ -204,12 +204,12 @@ APROVADO</span>
     <h3>Pedir um cálculo no Claude Code</h3>
     <p>Com o MCP conectado, fale em português; o agente escolhe o método e devolve o memorial.</p>
 <pre><span class="c"># exemplo de pedido</span>
-<span class="s">"Dimensione uma viga 25×50 cm de C30, vão 5 m, g=10 e q=10 kN/m."</span></pre>
+<span class="s">"Dimensione uma viga 25×50 cm de C30, vêo 5 m, g=10 e q=10 kN/m."</span></pre>
   </div></div>
 
   <div class="step"><div class="b">5</div><div>
     <h3>Ou chamar a engine direto, em Python</h3>
-    <p>Todo cálculo é uma função <code>solve_*</code> que devolve o bundle padrão (resultado, validação, memorial, aviso, aprovado).</p>
+    <p>Todo cálculo é uma funçêo <code>solve_*</code> que devolve o bundle padrêo (resultado, validaçêo, memorial, aviso, aprovado).</p>
 <pre><span class="k">from</span> lib.service <span class="k">import</span> solve_rectangular_beam
 
 b = solve_rectangular_beam(b_cm=<span class="k">25</span>, h_cm=<span class="k">50</span>, fck_mpa=<span class="k">30</span>, fyk_mpa=<span class="k">500</span>,
@@ -223,34 +223,34 @@ print(b[<span class="s">"memorial_markdown"</span>])        <span class="c"># me
 <section id="dominios"><div class="wrap">
   <span class="chip">Domínios · 18 cálculos</span>
   <h2>O que a plataforma calcula</h2>
-  <p class="sub">Lista completa (com cada <code>solve_*</code>, ferramenta MCP e norma) no <a href="https://github.com/inematds/inemaengenhariacivil/blob/main/docs/14-catalogo-calculos.md">catálogo de cálculos</a>. A fonte que o agente consulta em tempo de execução é a ferramenta <code>listar_capacidades</code>.</p>
+  <p class="sub">Lista completa (com cada <code>solve_*</code>, ferramenta MCP e norma) no <a href="https://github.com/inematds/inemaengenhariacivil/blob/main/docs/14-catalogo-calculos.md">catálogo de cálculos</a>. A fonte que o agente consulta em tempo de execuçêo é a ferramenta <code>listar_capacidades</code>.</p>
   <div class="grid g3">
-    <div class="card"><h3>🏛️ Concreto armado</h3><p>Viga (flexão), pilar com 2ª ordem, sapata isolada, laje em 1 e 2 direções. <span class="mut">NBR 6118 · 6122</span></p></div>
+    <div class="card"><h3>🏛️ Concreto armado</h3><p>Viga (flexêo), pilar com 2ª ordem, sapata isolada, laje em 1 e 2 direções. <span class="mut">NBR 6118 · 6122</span></p></div>
     <div class="card"><h3>⛰️ Geotecnia & fundações</h3><p>Capacidade de carga (Vesic), recalque (elástico/adensamento), empuxo (Rankine/Coulomb), estaca por SPT. <span class="mut">Aoki-Velloso × Décourt</span></p></div>
     <div class="card"><h3>💧 Hidráulica & saneamento</h3><p>Conduto forçado (Hazen-Williams/Darcy-Weisbach), canal aberto (Manning), perda de carga.</p></div>
-    <div class="card"><h3>🔩 Estruturas metálicas</h3><p>Barra comprimida, ligação parafusada, solda de filete. <span class="mut">NBR 8800</span></p></div>
+    <div class="card"><h3>🔩 Estruturas metálicas</h3><p>Barra comprimida, ligaçêo parafusada, solda de filete. <span class="mut">NBR 8800</span></p></div>
     <div class="card"><h3>🛣️ Pavimento · terra · taludes</h3><p>Pavimento flexível (DNER/DNIT), balanço corte/aterro, talude (infinito e Fellenius). <span class="mut">NBR 11682</span></p></div>
-    <div class="card"><h3>💰 Orçamento & documentação</h3><p>Custo direto + BDI (base tipo SINAPI, amostra), memória por projeto e relatório consolidado.</p></div>
+    <div class="card"><h3>💰 Orçamento & documentaçêo</h3><p>Custo direto + BDI (base tipo SINAPI, amostra), memória por projeto e relatório consolidado.</p></div>
   </div>
-  <p class="sub" style="margin-top:22px"><strong class="amb">Escopo honesto:</strong> é um copiloto para educação, pesquisa e verificação cruzada — <strong>não</strong> substitui TQS/Eberick/SAP2000 nem a responsabilidade técnica do engenheiro (ART). Protendido, madeira, alvenaria, dinâmica e métodos avançados ficam como abstenção explícita.</p>
+  <p class="sub" style="margin-top:22px"><strong class="amb">Escopo honesto:</strong> é um copiloto para educaçêo, pesquisa e verificaçêo cruzada — <strong>nêo</strong> substitui TQS/Eberick/SAP2000 nem a responsabilidade técnica do engenheiro (ART). Protendido, madeira, alvenaria, dinâmica e métodos avançados ficam como abstençêo explícita.</p>
 </div></section>
 
 <section id="roadmap"><div class="wrap">
   <span class="chip">Roadmap</span>
   <h2>Seis fases — todas concluídas</h2>
   <p class="sub">Plano completo em <a href="https://github.com/inematds/inemaengenhariacivil/blob/main/docs/06-fases-implementacao.md">docs/06-fases-implementacao.md</a>. Cada fase fechou com testes verdes, <code>ruff</code> limpo e selftest do MCP OK.</p>
-  <div class="phase"><div class="tag">v0.1.0</div><div class="d"><strong>Fase 1 — Fundação</strong><span>Viga de concreto (flexão NBR 6118) + camada de validação + MCP server.</span></div></div>
+  <div class="phase"><div class="tag">v0.1.0</div><div class="d"><strong>Fase 1 — Fundaçêo</strong><span>Viga de concreto (flexêo NBR 6118) + camada de validaçêo + MCP server.</span></div></div>
   <div class="phase"><div class="tag">v0.2.0</div><div class="d"><strong>Fase 2 — Estrutural</strong><span>Pilares, lajes, sapatas, cargas (NBR 6120), combinações e exports Excel/PDF.</span></div></div>
   <div class="phase"><div class="tag">v0.3.0</div><div class="d"><strong>Fase 3 — Geotecnia + Hidráulica</strong><span>Capacidade de carga, recalque, empuxo, estacas; condutos, canal e perdas.</span></div></div>
-  <div class="phase"><div class="tag">v0.4.0</div><div class="d"><strong>Fase 4 — Orçamento + Documentação</strong><span>Base SINAPI + BDI, memória por projeto e relatório consolidado.</span></div></div>
-  <div class="phase"><div class="tag">v0.5.0</div><div class="d"><strong>Fase 5 — Normas + Metálicas</strong><span>NBR 8800 (compressão, ligações), consulta normativa e interpolação de tabelas.</span></div></div>
-  <div class="phase"><div class="tag">v1.0.0</div><div class="d"><strong>Fase 6 — Polimento</strong><span>Pavimento, terraplenagem e taludes + suíte E2E, docs completas e guia de contribuição.</span></div></div>
+  <div class="phase"><div class="tag">v0.4.0</div><div class="d"><strong>Fase 4 — Orçamento + Documentaçêo</strong><span>Base SINAPI + BDI, memória por projeto e relatório consolidado.</span></div></div>
+  <div class="phase"><div class="tag">v0.5.0</div><div class="d"><strong>Fase 5 — Normas + Metálicas</strong><span>NBR 8800 (compressêo, ligações), consulta normativa e interpolaçêo de tabelas.</span></div></div>
+  <div class="phase"><div class="tag">v1.0.0</div><div class="d"><strong>Fase 6 — Polimento</strong><span>Pavimento, terraplenagem e taludes + suíte E2E, docs completas e guia de contribuiçêo.</span></div></div>
 </div></section>
 
 <footer>
   <div class="wrap">
     <div class="pill">Python</div><div class="pill">MCP</div><div class="pill">Pydantic</div><div class="pill">pint</div><div class="pill">NBR 6118/6120/6122/8800</div><div class="pill">Claude Code</div>
-    <p style="margin-top:18px">INEMA Engenharia Civil · projeto de pesquisa/educação ·
+    <p style="margin-top:18px">INEMA Engenharia Civil · projeto de pesquisa/educaçêo ·
       <a href="https://github.com/inematds/inemaengenhariacivil">github.com/inematds/inemaengenhariacivil</a> ·
       <a href="https://inema.club">INEMA.CLUB</a></p>
   </div>

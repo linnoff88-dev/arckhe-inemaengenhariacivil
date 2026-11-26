@@ -1,18 +1,18 @@
-# Visão Geral da Plataforma
+# Visêo Geral da Plataforma
 
 ## Objetivo
 
 Construir um framework profissional de agentes de IA para engenharia de cálculos que possa crescer continuamente, permitindo adicionar centenas de novas skills e agentes sem necessidade de reestruturar o projeto.
 
-## Decisão Arquitetural Central
+## Decisêo Arquitetural Central
 
 | Componente | Tecnologia | Responsabilidade |
 |------------|-----------|-----------------|
 | Cálculos numéricos | Python (numpy/scipy/sympy) | Toda a matemática |
-| Verificação dimensional | Python (pint) | Unidades e dimensões |
-| Orquestração | Claude Code Skills | Interpretação, seleção de método |
+| Verificaçêo dimensional | Python (pint) | Unidades e dimensões |
+| Orquestraçêo | Claude Code Skills | Interpretaçêo, seleçêo de método |
 | Bridge LLM ↔ Python | MCP Servers | Chamada de ferramentas |
-| Documentação | Markdown + PDF/Excel | Memorial, relatório |
+| Documentaçêo | Markdown + PDF/Excel | Memorial, relatório |
 | Persistência | JSON/YAML + SQLite | Projetos, histórico |
 
 ## Por que Python para cálculos?
@@ -26,7 +26,7 @@ Construir um framework profissional de agentes de IA para engenharia de cálculo
 
 ```
 Usuário → Agente Orquestrador → Agente Especialista
-       → MCP Server → Python Engine → Validação
+       → MCP Server → Python Engine → Validaçêo
        → Memorial + Excel + PDF + Checklist
        → Usuário (com aviso de responsabilidade)
 ```
@@ -40,7 +40,7 @@ Usuário → Agente Orquestrador → Agente Especialista
 | `03-agentes.md` | Lista e responsabilidades de cada agente |
 | `04-skills.md` | Lista de skills independentes |
 | `05-dependencias.md` | Todas as dependências e versões |
-| `06-fases-implementacao.md` | Plano de implementação em 6 fases |
+| `06-fases-implementacao.md` | Plano de implementaçêo em 6 fases |
 | `07-estrategia-testes.md` | Como testar o sistema |
 | `08-validacao-calculos.md` | Como validar cálculos de engenharia |
 | `09-evolucao-futura.md` | Como expandir sem reescrever |

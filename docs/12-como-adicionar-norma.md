@@ -24,7 +24,7 @@ normas/
     "pagina": 105,
     "data_vigencia": "2014-03-31"
   },
-  "columns": ["Seção", "ρ_min (%)"],
+  "columns": ["Seçêo", "ρ_min (%)"],
   "rows": [
     ["Retangular", "0.150"],
     ["T (alma)", "0.150"],
@@ -53,16 +53,16 @@ mkdir -p normas/NBRxxxx/tables
 ## Metadados
 
 - **Código:** NBR xxxx
-- **Edição:** AAAA
+- **Ediçêo:** AAAA
 - **Título completo:** [título oficial ABNT]
-- **Status:** Em vigor / Em revisão
+- **Status:** Em vigor / Em revisêo
 - **Substitui:** NBR xxxx:BBBB (se aplicável)
 
 ## Tabelas Disponíveis
 
 | Arquivo | Tabela | Conteúdo |
 |---------|--------|---------|
-| `tabela_X_Y.json` | Tab. X.Y | Descrição |
+| `tabela_X_Y.json` | Tab. X.Y | Descriçêo |
 
 ## Uso no Código
 
@@ -96,5 +96,5 @@ NORM_REGISTRY = {
 - [ ] README.md com metadados completos
 - [ ] Tabelas extraídas em JSON com metadados
 - [ ] `normative_check.py` atualizado
-- [ ] Testes de interpolação para as tabelas críticas
+- [ ] Testes de interpolaçêo para as tabelas críticas
 - [ ] Agentes relevantes atualizados com referência à norma

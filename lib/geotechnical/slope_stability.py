@@ -2,20 +2,20 @@
 
 Toda a aritmética vive aqui (camada Python determinística). O LLM apenas interpreta
 o problema, chama estas funções via MCP e explica o resultado. O disclaimer de
-responsabilidade técnica é adicionado na camada de integração, não aqui.
+responsabilidade técnica é adicionado na camada de integraçêo, nêo aqui.
 
 Métodos e hipóteses
 -------------------
 Talude infinito (Das, "Fundamentos de Engenharia Geotécnica") — superfície de
-ruptura plana e paralela à face, profundidade ``z`` muito menor que a extensão do
-talude (efeitos de borda desprezados). Para solo c-φ, com poro-pressão ``u`` na
+ruptura plana e paralela à face, profundidade ``z`` muito menor que a extensêo do
+talude (efeitos de borda desprezados). Para solo c-φ, com poro-pressêo ``u`` na
 base da fatia:
 
     FS = [ c + (γ·z·cos²β − u)·tanφ ] / (γ·z·sinβ·cosβ)
 
 Casos-limite:
-  - solo friccional puro (c=0) e sem percolação (u=0): FS = tanφ/tanβ;
-  - percolação paralela ao talude com lençol na superfície: u = γ_w·z·cos²β
+  - solo friccional puro (c=0) e sem percolaçêo (u=0): FS = tanφ/tanβ;
+  - percolaçêo paralela ao talude com lençol na superfície: u = γ_w·z·cos²β
     (informe ``u`` calculado pelo engenheiro; aqui ``u`` entra direto).
 
 Fellenius (1936) — método ordinário (sueco) das fatias, superfície de ruptura
@@ -24,20 +24,20 @@ circular. Despreza as forças entre fatias; o equilíbrio é tomado normal à ba
     FS = Σ[ c·ΔL + (W·cosα − u·ΔL)·tanφ ] / Σ( W·sinα )
 
 onde, por fatia, ``W`` é o peso por metro de talude (kN/m), ``α`` o ângulo da base
-com a horizontal, ``ΔL`` o comprimento da base e ``u`` a poro-pressão na base.
+com a horizontal, ``ΔL`` o comprimento da base e ``u`` a poro-pressêo na base.
 É conservador frente a Bishop simplificado.
 
-Bishop simplificado: FORA DE ESCOPO nesta fase (exige iteração de FS porque o termo
+Bishop simplificado: FORA DE ESCOPO nesta fase (exige iteraçêo de FS porque o termo
 ``mα = cosα + sinα·tanφ/FS`` depende do próprio FS). Abstém-se em favor de Fellenius,
-que é o limite inferior usual e não requer iteração.
+que é o limite inferior usual e nêo requer iteraçêo.
 
-Classificação do fator de segurança (FS,mín usual ≈ 1,5, NBR 11682):
+Classificaçêo do fator de segurança (FS,mín usual ≈ 1,5, NBR 11682):
   - instável: FS < 1,0
   - crítico:  1,0 ≤ FS < 1,5
   - estável:  FS ≥ 1,5
 
-Abstenção: entradas fora de faixa física (φ∉[0,50]°, γ∉[10,25] kN/m³, c<0, z≤0,
-β∉(0,90)°) ou geometria inválida (sem fatias, ΔL≤0, W≤0, esforço atuante não
+Abstençêo: entradas fora de faixa física (φ∉[0,50]°, γ∉[10,25] kN/m³, c<0, z≤0,
+β∉(0,90)°) ou geometria inválida (sem fatias, ΔL≤0, W≤0, esforço atuante nêo
 positivo) levantam ``ValueError``.
 """
 
@@ -60,7 +60,7 @@ class Slice(BaseModel):
     w_kn: peso da fatia por metro de talude (kN/m).
     alpha_deg: ângulo da base com a horizontal (graus; negativo perto do pé).
     dl_m: comprimento da base da fatia (m).
-    u_kpa: poro-pressão na base da fatia (kPa).
+    u_kpa: poro-pressêo na base da fatia (kPa).
     """
 
     w_kn: float
@@ -70,7 +70,7 @@ class Slice(BaseModel):
 
 
 class InfiniteSlopeResult(BaseModel):
-    """Fator de segurança de talude infinito (com ou sem percolação)."""
+    """Fator de segurança de talude infinito (com ou sem percolaçêo)."""
 
     # entrada (eco)
     c_kpa: float
@@ -81,8 +81,8 @@ class InfiniteSlopeResult(BaseModel):
     u_kpa: float
     # resultado
     fs: float
-    resisting_kpa: float       # numerador (tensão cisalhante resistente, kPa)
-    driving_kpa: float         # denominador (tensão cisalhante atuante, kPa)
+    resisting_kpa: float       # numerador (tensêo cisalhante resistente, kPa)
+    driving_kpa: float         # denominador (tensêo cisalhante atuante, kPa)
     classification: str
     fs_min_usual: float = FS_SLOPE_MIN
     # metadados
@@ -131,7 +131,7 @@ def infinite_slope_fs(
 
     Fonte: Das, "Fundamentos de Engenharia Geotécnica". Para solo friccional puro
     sem água, reduz a FS = tanφ/tanβ. Entradas fora de faixa física levantam
-    ``ValueError`` (abstenção).
+    ``ValueError`` (abstençêo).
     """
     if not (PHI_MIN <= phi_deg <= PHI_MAX):
         raise ValueError(f"φ={phi_deg}° fora da faixa física [{PHI_MIN}, {PHI_MAX}].")
@@ -152,7 +152,7 @@ def infinite_slope_fs(
     cos_b = math.cos(beta)
     sin_b = math.sin(beta)
 
-    sigma = gamma_kn_m3 * z_m * cos_b**2          # tensão normal total (kPa)
+    sigma = gamma_kn_m3 * z_m * cos_b**2          # tensêo normal total (kPa)
     resisting = c_kpa + (sigma - u_kpa) * math.tan(phi)
     driving = gamma_kn_m3 * z_m * sin_b * cos_b
     fs = resisting / driving
@@ -174,7 +174,7 @@ def fellenius_fs(
 
     FS = Σ[c·ΔL + (W·cosα − u·ΔL)·tanφ] / Σ(W·sinα). Fonte: Fellenius (1936).
     Despreza forças entre fatias (conservador). Entradas inválidas levantam
-    ``ValueError`` (abstenção).
+    ``ValueError`` (abstençêo).
     """
     if not (PHI_MIN <= phi_deg <= PHI_MAX):
         raise ValueError(f"φ={phi_deg}° fora da faixa física [{PHI_MIN}, {PHI_MAX}].")
@@ -200,7 +200,7 @@ def fellenius_fs(
 
     if driving <= 0.0:
         raise ValueError(
-            f"Σ(W·sinα)={driving:.3f} ≤ 0: esforço atuante não positivo, FS "
+            f"Σ(W·sinα)={driving:.3f} ≤ 0: esforço atuante nêo positivo, FS "
             "indefinido (geometria/superfície inválida)."
         )
 

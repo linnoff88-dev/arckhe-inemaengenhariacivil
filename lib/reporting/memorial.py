@@ -1,4 +1,4 @@
-"""Geração do memorial de cálculo (Markdown) para elementos de concreto armado."""
+"""Geraçêo do memorial de cálculo (Markdown) para elementos de concreto armado."""
 
 from __future__ import annotations
 
@@ -35,17 +35,17 @@ _STATUS_ICON = {"ok": "✓", "warning": "⚠", "fail": "✗"}
 
 
 def _validation_section(rep: ValidationReport, numero: int) -> list[str]:
-    """Tabela de validação automática + avisos (mesmo formato em todos os memoriais)."""
+    """Tabela de validaçêo automática + avisos (mesmo formato em todos os memoriais)."""
     linhas: list[str] = []
     add = linhas.append
-    add(f"## {numero}. Validação automática")
+    add(f"## {numero}. Validaçêo automática")
     add("")
-    add("| Verificação | Status | Detalhe |")
+    add("| Verificaçêo | Status | Detalhe |")
     add("|-------------|--------|---------|")
     for c in rep.checks:
         add(f"| {c.name} | {_STATUS_ICON.get(c.status, c.status)} | {c.detail} |")
     add("")
-    add(f"**Resultado da validação:** {'APROVADO' if rep.passed else 'REPROVADO'}")
+    add(f"**Resultado da validaçêo:** {'APROVADO' if rep.passed else 'REPROVADO'}")
     add("")
     if rep.warnings:
         add("### Avisos")
@@ -71,18 +71,18 @@ def render_beam_memorial(r: BeamFlexureResult, rep: ValidationReport) -> str:
     add("# Memorial de Cálculo — Viga de Concreto Armado")
     add("")
     add(f"**Norma:** {r.norma}  ")
-    add("**Elemento:** Viga retangular biapoiada — flexão simples (ELU)")
+    add("**Elemento:** Viga retangular biapoiada — flexêo simples (ELU)")
     add("")
 
     add("## 1. Dados de entrada")
     add("")
     add("| Parâmetro | Valor |")
     add("|-----------|-------|")
-    add(f"| Seção (b × h) | {r.b_cm:.0f} × {r.h_cm:.0f} cm |")
+    add(f"| Seçêo (b × h) | {r.b_cm:.0f} × {r.h_cm:.0f} cm |")
     add(f"| Altura útil d | {r.d_cm:.1f} cm |")
     add(f"| Concreto | {classe_c} (fck = {r.fck_mpa:.0f} MPa) |")
     add(f"| Aço | {classe_aco} (fyk = {r.fyk_mpa:.0f} MPa) |")
-    add(f"| Vão | {r.vao_m:.2f} m |")
+    add(f"| Vêo | {r.vao_m:.2f} m |")
     add(f"| Carga permanente g (excl. PP) | {r.g_knm:.2f} kN/m |")
     add(f"| Carga variável q | {r.q_knm:.2f} kN/m |")
     add("")
@@ -100,7 +100,7 @@ def render_beam_memorial(r: BeamFlexureResult, rep: ValidationReport) -> str:
     add(f"- fyd = fyk/1,15 = {r.fyd_mpa:.2f} MPa")
     add("")
 
-    add("## 4. Flexão (estado-limite último)")
+    add("## 4. Flexêo (estado-limite último)")
     add("")
     add(f"- Linha neutra: x = {r.x_cm:.2f} cm")
     add(f"- x/d = {r.x_over_d:.3f} ({'dúctil' if r.ductile else 'verificar ductilidade'})")
@@ -115,14 +115,14 @@ def render_beam_memorial(r: BeamFlexureResult, rep: ValidationReport) -> str:
     add(f"- Detalhamento: **{bitola}** (As,ef = {r.bars.as_ef_cm2:.2f} cm²)")
     add("")
 
-    add("## 6. Validação automática")
+    add("## 6. Validaçêo automática")
     add("")
-    add("| Verificação | Status | Detalhe |")
+    add("| Verificaçêo | Status | Detalhe |")
     add("|-------------|--------|---------|")
     for c in rep.checks:
         add(f"| {c.name} | {_STATUS_ICON.get(c.status, c.status)} | {c.detail} |")
     add("")
-    add(f"**Resultado da validação:** {'APROVADO' if rep.passed else 'REPROVADO'}")
+    add(f"**Resultado da validaçêo:** {'APROVADO' if rep.passed else 'REPROVADO'}")
     add("")
 
     if rep.warnings:
@@ -146,7 +146,7 @@ def render_column_memorial(r: ColumnResult, rep: ValidationReport) -> str:
         bitola = (f"{r.bitolas.n_bars} Ø {r.bitolas.phi_mm:.1f} mm "
                   f"(As,ef = {r.bitolas.as_ef_cm2:.2f} cm²)")
     else:
-        bitola = "detalhar manualmente (sem combinação comercial disponível)"
+        bitola = "detalhar manualmente (sem combinaçêo comercial disponível)"
 
     linhas: list[str] = []
     add = linhas.append
@@ -154,14 +154,14 @@ def render_column_memorial(r: ColumnResult, rep: ValidationReport) -> str:
     add("# Memorial de Cálculo — Pilar de Concreto Armado")
     add("")
     add(f"**Norma:** {r.norma}  ")
-    add("**Elemento:** Pilar retangular — flexão composta normal com 2ª ordem (ELU)")
+    add("**Elemento:** Pilar retangular — flexêo composta normal com 2ª ordem (ELU)")
     add("")
 
     add("## 1. Dados de entrada")
     add("")
     add("| Parâmetro | Valor |")
     add("|-----------|-------|")
-    add(f"| Seção (b × h) | {r.b_cm:.0f} × {r.h_cm:.0f} cm |")
+    add(f"| Seçêo (b × h) | {r.b_cm:.0f} × {r.h_cm:.0f} cm |")
     add(f"| Comprimento de flambagem le | {r.le_cm:.0f} cm |")
     add(f"| Concreto | {classe_c} (fck = {r.fck_mpa:.0f} MPa) |")
     add(f"| Aço | {classe_aco} (fyk = {r.fyk_mpa:.0f} MPa) |")
@@ -179,13 +179,13 @@ def render_column_memorial(r: ColumnResult, rep: ValidationReport) -> str:
 
     add("## 3. Esbeltez (NBR 6118 15.8.2)")
     add("")
-    add(f"- Raio de giração: i = {r.i_cm:.2f} cm")
+    add(f"- Raio de giraçêo: i = {r.i_cm:.2f} cm")
     add(f"- **Índice de esbeltez: λ = le/i = {r.esbeltez:.1f}**")
     add(f"- Esbeltez-limite: λ1 = {r.lambda1:.1f}")
-    add(f"- Classificação: **{r.classe}**")
+    add(f"- Classificaçêo: **{r.classe}**")
     add("")
 
-    add("## 4. Efeitos de 2ª ordem (pilar-padrão, curvatura aproximada)")
+    add("## 4. Efeitos de 2ª ordem (pilar-padrêo, curvatura aproximada)")
     add("")
     add(f"- Força normal adimensional: ν = {r.nu:.3f}")
     add(f"- Curvatura: 1/r = {r.one_over_r:.5f} 1/m")
@@ -227,7 +227,7 @@ def render_footing_memorial(r: FootingResult, rep: ValidationReport) -> str:
     add("| Parâmetro | Valor |")
     add("|-----------|-------|")
     add(f"| Carga normal característica Nk | {r.nk_kn:.2f} kN |")
-    add(f"| Tensão admissível do solo σ_adm | {r.sigma_adm_kpa:.1f} kPa |")
+    add(f"| Tensêo admissível do solo σ_adm | {r.sigma_adm_kpa:.1f} kPa |")
     add(f"| Pilar (a × b) | {r.pilar_a_cm:.0f} × {r.pilar_b_cm:.0f} cm |")
     add(f"| Concreto | {classe_c} (fck = {r.fck_mpa:.0f} MPa) |")
     add(f"| Aço | {classe_aco} (fyk = {r.fyk_mpa:.0f} MPa) |")
@@ -238,22 +238,22 @@ def render_footing_memorial(r: FootingResult, rep: ValidationReport) -> str:
     add(f"- Área necessária: A_nec = {r.area_nec_m2:.3f} m²")
     add(f"- **Lado adotado: L = {r.lado_cm:.0f} cm** (área efetiva = {r.area_efetiva_m2:.3f} m²)")
     add(f"- Altura: h = {r.altura_h_cm:.0f} cm · altura útil d = {r.d_cm:.1f} cm")
-    add(f"- Sapata rígida (NBR 6118 22.6.1): {'sim' if r.rigida else 'NÃO'}")
+    add(f"- Sapata rígida (NBR 6118 22.6.1): {'sim' if r.rigida else 'NêO'}")
     add("")
 
-    add("## 3. Tensão no solo")
+    add("## 3. Tensêo no solo")
     add("")
     add(f"- Peso próprio da sapata: pp = {r.pp_sapata_kn:.2f} kN")
-    add(f"- **Tensão no solo: σ_solo = {r.sigma_solo_kpa:.1f} kPa** "
+    add(f"- **Tensêo no solo: σ_solo = {r.sigma_solo_kpa:.1f} kPa** "
         f"(σ_adm = {r.sigma_adm_kpa:.1f} kPa)")
     add("")
 
-    add("## 4. Armadura de flexão (método das bielas, NBR 6118 22.6.4.1)")
+    add("## 4. Armadura de flexêo (método das bielas, NBR 6118 22.6.4.1)")
     add("")
     add(f"- Força normal de cálculo: Nd = γf·Nk = {r.nd_kn:.2f} kN")
     add(f"- fyd = fyk/1,15 = {r.fyd_mpa:.2f} MPa")
-    add(f"- As (direção x) = {r.as_x_cm2:.2f} cm² → **{bitola_x}**")
-    add(f"- As (direção y) = {r.as_y_cm2:.2f} cm² → **{bitola_y}**")
+    add(f"- As (direçêo x) = {r.as_x_cm2:.2f} cm² → **{bitola_x}**")
+    add(f"- As (direçêo y) = {r.as_y_cm2:.2f} cm² → **{bitola_y}**")
     add("")
 
     linhas += _validation_section(rep, 5)
@@ -265,7 +265,7 @@ def render_slab_memorial(r: SlabResult, rep: ValidationReport) -> str:
     classe_c = f"C{int(round(r.fck_mpa))}"
     classe_aco = f"CA-{int(round(r.fyk_mpa / 10))}"
     duas = r.tipo == "duas_direcoes"
-    titulo = "duas direções (apoiada nos 4 lados)" if duas else "uma direção"
+    titulo = "duas direções (apoiada nos 4 lados)" if duas else "uma direçêo"
 
     linhas: list[str] = []
     add = linhas.append
@@ -273,17 +273,17 @@ def render_slab_memorial(r: SlabResult, rep: ValidationReport) -> str:
     add("# Memorial de Cálculo — Laje Maciça de Concreto Armado")
     add("")
     add(f"**Norma:** {r.norma}  ")
-    add(f"**Elemento:** Laje maciça armada em {titulo} — flexão (ELU)")
+    add(f"**Elemento:** Laje maciça armada em {titulo} — flexêo (ELU)")
     add("")
 
     add("## 1. Dados de entrada")
     add("")
     add("| Parâmetro | Valor |")
     add("|-----------|-------|")
-    add(f"| Vão lx (menor) | {r.lx_m:.2f} m |")
+    add(f"| Vêo lx (menor) | {r.lx_m:.2f} m |")
     if duas and r.ly_m is not None:
-        add(f"| Vão ly (maior) | {r.ly_m:.2f} m |")
-        add(f"| Relação λ = ly/lx | {r.ly_m / r.lx_m:.2f} |")
+        add(f"| Vêo ly (maior) | {r.ly_m:.2f} m |")
+        add(f"| Relaçêo λ = ly/lx | {r.ly_m / r.lx_m:.2f} |")
     add(f"| Espessura h | {r.h_cm:.1f} cm |")
     add(f"| Altura útil d | {r.d_cm:.1f} cm |")
     add(f"| Concreto | {classe_c} (fck = {r.fck_mpa:.0f} MPa) |")
@@ -297,7 +297,7 @@ def render_slab_memorial(r: SlabResult, rep: ValidationReport) -> str:
     add(f"- Peso próprio: pp = {r.pp_knm2:.3f} kN/m²")
     add(f"- Carga de cálculo: p_d = {r.pd_knm2:.2f} kN/m²")
     if duas and r.py_knm2 is not None and r.my_knm is not None:
-        add(f"- Quinhão de carga: px = {r.px_knm2:.2f} kN/m² · py = {r.py_knm2:.2f} kN/m²")
+        add(f"- Quinhêo de carga: px = {r.px_knm2:.2f} kN/m² · py = {r.py_knm2:.2f} kN/m²")
         add(f"- **Mx = {r.mx_knm:.2f} kN·m/m** · **My = {r.my_knm:.2f} kN·m/m**")
     else:
         add(f"- **Momento de cálculo: Mx = {r.mx_knm:.2f} kN·m/m**")
@@ -305,8 +305,8 @@ def render_slab_memorial(r: SlabResult, rep: ValidationReport) -> str:
 
     add("## 3. Armadura (por metro)")
     add("")
-    add(f"- As (direção x) = {r.as_x_cm2_m:.2f} cm²/m (As,mín = {r.as_min_x_cm2_m:.2f} cm²/m)")
-    rotulo_y = "direção y" if duas else "distribuição"
+    add(f"- As (direçêo x) = {r.as_x_cm2_m:.2f} cm²/m (As,mín = {r.as_min_x_cm2_m:.2f} cm²/m)")
+    rotulo_y = "direçêo y" if duas else "distribuiçêo"
     add(f"- As ({rotulo_y}) = {r.as_y_cm2_m:.2f} cm²/m (As,mín = {r.as_min_y_cm2_m:.2f} cm²/m)")
     add(f"- x/d (x) = {r.x_over_d_x:.3f}"
         + (f" · x/d (y) = {r.x_over_d_y:.3f}" if r.x_over_d_y is not None else ""))
@@ -323,21 +323,21 @@ def render_slab_memorial(r: SlabResult, rep: ValidationReport) -> str:
 def render_bearing_capacity_memorial(
     r: BearingCapacityResult, rep: ValidationReport
 ) -> str:
-    """Memorial da capacidade de carga de fundação rasa (Vesic, NBR 6122)."""
+    """Memorial da capacidade de carga de fundaçêo rasa (Vesic, NBR 6122)."""
     linhas: list[str] = []
     add = linhas.append
 
-    add("# Memorial de Cálculo — Capacidade de Carga de Fundação Rasa")
+    add("# Memorial de Cálculo — Capacidade de Carga de Fundaçêo Rasa")
     add("")
     add(f"**Norma:** {r.norma}  ")
-    add(f"**Método:** {r.metodo} — fundação {r.shape} (estado-limite último GEO)")
+    add(f"**Método:** {r.metodo} — fundaçêo {r.shape} (estado-limite último GEO)")
     add("")
 
     add("## 1. Dados de entrada")
     add("")
     add("| Parâmetro | Valor |")
     add("|-----------|-------|")
-    add(f"| Coesão c | {r.c_kpa:.1f} kPa |")
+    add(f"| Coesêo c | {r.c_kpa:.1f} kPa |")
     add(f"| Ângulo de atrito φ | {r.phi_deg:.1f}° |")
     add(f"| Peso específico γ | {r.gamma_kn_m3:.1f} kN/m³ |")
     add(f"| Largura/diâmetro B | {r.b_m:.2f} m |")
@@ -357,11 +357,11 @@ def render_bearing_capacity_memorial(
 
     add("## 3. Capacidade de carga (q_ult = c·Nc·sc + q·Nq·sq + 0,5·γ·B·Nγ·sγ)")
     add("")
-    add(f"- Parcela de coesão: c·Nc·sc = {r.term_cohesion_kpa:.1f} kPa")
+    add(f"- Parcela de coesêo: c·Nc·sc = {r.term_cohesion_kpa:.1f} kPa")
     add(f"- Parcela de sobrecarga: q·Nq·sq = {r.term_surcharge_kpa:.1f} kPa")
     add(f"- Parcela de peso: 0,5·γ·B·Nγ·sγ = {r.term_weight_kpa:.1f} kPa")
     add(f"- **Capacidade última: q_ult = {r.q_ult_kpa:.1f} kPa**")
-    add(f"- **Tensão admissível: q_adm = q_ult/FS = {r.q_adm_kpa:.1f} kPa**")
+    add(f"- **Tensêo admissível: q_adm = q_ult/FS = {r.q_adm_kpa:.1f} kPa**")
     add("")
 
     linhas += _validation_section(rep, 4)
@@ -386,7 +386,7 @@ def render_elastic_settlement_memorial(
     add("")
     add("| Parâmetro | Valor |")
     add("|-----------|-------|")
-    add(f"| Pressão aplicada q | {r.q_kpa:.1f} kPa |")
+    add(f"| Pressêo aplicada q | {r.q_kpa:.1f} kPa |")
     add(f"| Largura B | {r.b_m:.2f} m |")
     add(f"| Coeficiente de Poisson ν | {r.poisson_nu:.2f} |")
     add(f"| Fator de influência Iw | {r.iw:.3f} |")
@@ -421,11 +421,11 @@ def render_consolidation_settlement_memorial(
     add("")
     add("| Parâmetro | Valor |")
     add("|-----------|-------|")
-    add(f"| Índice de compressão Cc | {r.cc:.3f} |")
+    add(f"| Índice de compressêo Cc | {r.cc:.3f} |")
     add(f"| Índice de vazios inicial e0 | {r.e0:.2f} |")
     add(f"| Espessura da camada H | {r.h_m:.2f} m |")
-    add(f"| Tensão efetiva inicial σ0 | {r.sigma0_kpa:.1f} kPa |")
-    add(f"| Acréscimo de tensão Δσ | {r.delta_sigma_kpa:.1f} kPa |")
+    add(f"| Tensêo efetiva inicial σ0 | {r.sigma0_kpa:.1f} kPa |")
+    add(f"| Acréscimo de tensêo Δσ | {r.delta_sigma_kpa:.1f} kPa |")
     add("")
 
     add("## 2. Recalque (s = Cc/(1+e0)·H·log10((σ0+Δσ)/σ0))")
@@ -443,7 +443,7 @@ def render_earth_pressure_memorial(
     r: RankineEarthPressureResult | CoulombEarthPressureResult,
     rep: ValidationReport,
 ) -> str:
-    """Memorial do empuxo de terra (Rankine ou Coulomb) sobre estrutura de contenção."""
+    """Memorial do empuxo de terra (Rankine ou Coulomb) sobre estrutura de contençêo."""
     coulomb = isinstance(r, CoulombEarthPressureResult)
     linhas: list[str] = []
     add = linhas.append
@@ -463,8 +463,8 @@ def render_earth_pressure_memorial(
     add(f"| Ângulo de atrito φ | {r.phi_deg:.1f}° |")
     if coulomb:
         add(f"| Atrito solo-muro δ | {r.delta_deg:.1f}° |")
-        add(f"| Inclinação do tardoz β | {r.beta_deg:.1f}° |")
-        add(f"| Inclinação do terrapleno α | {r.alpha_deg:.1f}° |")
+        add(f"| Inclinaçêo do tardoz β | {r.beta_deg:.1f}° |")
+        add(f"| Inclinaçêo do terrapleno α | {r.alpha_deg:.1f}° |")
     add("")
 
     add("## 2. Coeficientes de empuxo")
@@ -477,8 +477,8 @@ def render_earth_pressure_memorial(
     add("")
     add(f"- **Empuxo ativo: Ea = {r.ea_active_kn_m:.2f} kN/m**")
     add(f"- Empuxo passivo: Ep = {r.ep_passive_kn_m:.2f} kN/m")
-    add(f"- Ponto de aplicação: z = H/3 = {r.point_of_application_m:.3f} m da base "
-        "(distribuição triangular)")
+    add(f"- Ponto de aplicaçêo: z = H/3 = {r.point_of_application_m:.3f} m da base "
+        "(distribuiçêo triangular)")
     add("")
 
     linhas += _validation_section(rep, 4)
@@ -498,7 +498,7 @@ def render_pile_comparison_memorial(
         "(Aoki-Velloso × Décourt-Quaresma)")
     add("")
     add(f"**Norma:** {a.norma}  ")
-    add("**Método:** dois métodos semiempíricos por SPT, com validação por divergência")
+    add("**Método:** dois métodos semiempíricos por SPT, com validaçêo por divergência")
     add("")
 
     add("## 1. Dados de entrada")
@@ -524,12 +524,12 @@ def render_pile_comparison_memorial(
         f"{d.rult_kn:.1f} | {d.radm_kn:.1f} |")
     add("")
 
-    add("## 3. Comparação entre métodos")
+    add("## 3. Comparaçêo entre métodos")
     add("")
     add(f"- Rult (Aoki-Velloso) = {r.rult_aoki_kn:.1f} kN")
     add(f"- Rult (Décourt-Quaresma) = {r.rult_decourt_kn:.1f} kN")
     add(f"- **Divergência relativa = {r.divergencia_pct:.1f}% (limite 20%)**")
-    add(f"- Métodos convergem: {'sim' if r.convergem else 'NÃO — revisão recomendada'}")
+    add(f"- Métodos convergem: {'sim' if r.convergem else 'NêO — revisêo recomendada'}")
     add("")
 
     linhas += _validation_section(rep, 4)
@@ -555,7 +555,7 @@ def render_pipe_flow_memorial(r: PipeFlowResult, rep: ValidationReport) -> str:
     add("")
     add("| Parâmetro | Valor |")
     add("|-----------|-------|")
-    add(f"| Vazão Q | {r.Q_m3s:.4f} m³/s |")
+    add(f"| Vazêo Q | {r.Q_m3s:.4f} m³/s |")
     add(f"| Diâmetro D | {r.D_m:.3f} m |")
     add(f"| Comprimento L | {r.L_m:.1f} m |")
     if r.coef_C is not None:
@@ -586,7 +586,7 @@ def render_open_channel_memorial(r: OpenChannelResult, rep: ValidationReport) ->
 
     add("# Memorial de Cálculo — Escoamento em Canal Aberto (Manning)")
     add("")
-    add(f"**Método:** Fórmula de Manning — seção {r.geometria}  ")
+    add(f"**Método:** Fórmula de Manning — seçêo {r.geometria}  ")
     add("**Referência:** Chow, *Open-Channel Hydraulics* (1959).")
     add("")
 
@@ -611,7 +611,7 @@ def render_open_channel_memorial(r: OpenChannelResult, rep: ValidationReport) ->
     add(f"- Perímetro molhado: P = {r.perimetro_m:.4f} m")
     add(f"- Raio hidráulico: R = A/P = {r.raio_hidraulico_m:.4f} m")
     add(f"- Velocidade média: V = {r.V_ms:.3f} m/s")
-    add(f"- **Vazão: Q = {r.Q_m3s:.4f} m³/s**")
+    add(f"- **Vazêo: Q = {r.Q_m3s:.4f} m³/s**")
     add("")
 
     linhas += _validation_section(rep, 3)
@@ -647,7 +647,7 @@ def render_head_loss_memorial(r: HeadLossResult, rep: ValidationReport) -> str:
         add(f"| {it.tipo} | {it.K:.2f} | {it.quantidade} | {it.h_m:.4f} |")
     add("")
 
-    add("## 3. Composição")
+    add("## 3. Composiçêo")
     add("")
     add(f"- Perda distribuída: hf,dist = {r.hf_distribuida_m:.3f} m")
     add(f"- Perda localizada total: hf,loc = {r.hf_localizada_m:.3f} m")
@@ -663,14 +663,14 @@ def render_head_loss_memorial(r: HeadLossResult, rep: ValidationReport) -> str:
 
 
 def render_compression_memorial(r: CompressionResult, rep: ValidationReport) -> str:
-    """Memorial da barra comprimida de aço (flambagem por flexão, NBR 8800:2008 §5.3)."""
+    """Memorial da barra comprimida de aço (flambagem por flexêo, NBR 8800:2008 §5.3)."""
     linhas: list[str] = []
     add = linhas.append
 
-    add("# Memorial de Cálculo — Barra Comprimida de Aço (flambagem por flexão)")
+    add("# Memorial de Cálculo — Barra Comprimida de Aço (flambagem por flexêo)")
     add("")
     add(f"**Norma:** {r.norma}  ")
-    add("**Elemento:** Perfil laminado comprimido — flambagem global por flexão (ELU)")
+    add("**Elemento:** Perfil laminado comprimido — flambagem global por flexêo (ELU)")
     add("")
 
     add("## 1. Dados de entrada")
@@ -682,7 +682,7 @@ def render_compression_memorial(r: CompressionResult, rep: ValidationReport) -> 
     add(f"| Resistência ao escoamento fy | {r.fy_mpa:.0f} MPa |")
     add(f"| Módulo de elasticidade E | {r.e_mpa:.0f} MPa |")
     add(f"| Coeficiente de flambagem local Q | {r.q:.2f} |")
-    add(f"| Área da seção A | {r.area_cm2:.2f} cm² |")
+    add(f"| Área da seçêo A | {r.area_cm2:.2f} cm² |")
     add(f"| Inércia no eixo de flambagem Iy | {r.i_cm4:.1f} cm⁴ |")
     add("")
 
@@ -690,12 +690,12 @@ def render_compression_memorial(r: CompressionResult, rep: ValidationReport) -> 
     add("")
     add(f"- Carga de flambagem de Euler: Ne = π²·E·Iy/(KL)² = {r.ne_kn:.2f} kN")
     add(f"- Esbeltez reduzida: λ0 = √(Q·A·fy/Ne) = {r.lambda_0:.4f}")
-    add(f"- Fator de redução por flambagem: χ = {r.chi:.4f}")
+    add(f"- Fator de reduçêo por flambagem: χ = {r.chi:.4f}")
     add("")
 
     add("## 3. Força axial resistente de cálculo")
     add("")
-    add(f"- Coeficiente de ponderação: γa1 = {r.gamma_a1:.2f}")
+    add(f"- Coeficiente de ponderaçêo: γa1 = {r.gamma_a1:.2f}")
     add(f"- **Nc,Rd = χ·Q·A·fy/γa1 = {r.nc_rd_kn:.2f} kN**")
     add("")
 
@@ -705,15 +705,15 @@ def render_compression_memorial(r: CompressionResult, rep: ValidationReport) -> 
 
 
 def render_bolted_memorial(r: BoltedConnectionResult, rep: ValidationReport) -> str:
-    """Memorial da ligação parafusada à cortante (NBR 8800:2008 §6.3)."""
-    plano = "rosqueada" if r.rosca_no_plano else "fuste (não rosqueada)"
+    """Memorial da ligaçêo parafusada à cortante (NBR 8800:2008 §6.3)."""
+    plano = "rosqueada" if r.rosca_no_plano else "fuste (nêo rosqueada)"
     linhas: list[str] = []
     add = linhas.append
 
-    add("# Memorial de Cálculo — Ligação Parafusada (cortante)")
+    add("# Memorial de Cálculo — Ligaçêo Parafusada (cortante)")
     add("")
     add(f"**Norma:** {r.norma}  ")
-    add("**Elemento:** Ligação por parafusos solicitada ao cortante (ELU)")
+    add("**Elemento:** Ligaçêo por parafusos solicitada ao cortante (ELU)")
     add("")
 
     add("## 1. Dados de entrada")
@@ -727,21 +727,21 @@ def render_bolted_memorial(r: BoltedConnectionResult, rep: ValidationReport) -> 
     add(f"| Resistência à ruptura da chapa fu | {r.fu_mpa:.0f} MPa |")
     add(f"| Número de planos de corte | {r.planos} |")
     add(f"| Plano de corte na parte | {plano} |")
-    add(f"| Coeficiente de ponderação γa2 | {r.gamma_a2:.2f} |")
+    add(f"| Coeficiente de ponderaçêo γa2 | {r.gamma_a2:.2f} |")
     add("")
 
     add("## 2. Resistência por parafuso")
     add("")
     add(f"- Área bruta do parafuso: Ab = π·db²/4 = {r.ab_cm2:.3f} cm²")
     add(f"- Cortante (§6.3.3.2): Fv,Rd = {r.fv_rd_kn:.2f} kN")
-    add(f"- Pressão de contato (§6.3.3.3, 2,4·db·t·fu/γa2): Fc,Rd = {r.fc_rd_kn:.2f} kN")
+    add(f"- Pressêo de contato (§6.3.3.3, 2,4·db·t·fu/γa2): Fc,Rd = {r.fc_rd_kn:.2f} kN")
     add(f"- **Resistência governante: Rd = {r.rd_bolt_kn:.2f} kN ({r.governante})**")
     add("")
 
     add("## 3. Número de parafusos")
     add("")
     add(f"- n = ⌈força/Rd⌉ = **{r.n_parafusos}** parafuso(s)")
-    add(f"- **Capacidade total da ligação: n·Rd = {r.capacidade_total_kn:.2f} kN**")
+    add(f"- **Capacidade total da ligaçêo: n·Rd = {r.capacidade_total_kn:.2f} kN**")
     add("")
 
     linhas += _validation_section(rep, 4)
@@ -767,7 +767,7 @@ def render_weld_memorial(r: WeldResult, rep: ValidationReport) -> str:
     add(f"| Força solicitante de cálculo | {r.forca_kn:.2f} kN |")
     add(f"| Perna do filete | {r.perna_mm:g} mm |")
     add(f"| Resistência do metal da solda fw | {r.fw_mpa:.0f} MPa |")
-    add(f"| Coeficiente de ponderação γa2 | {r.gamma_a2:.2f} |")
+    add(f"| Coeficiente de ponderaçêo γa2 | {r.gamma_a2:.2f} |")
     add("")
 
     add("## 2. Resistência da solda (Rd = 0,6·fw·aw/γa2)")
@@ -797,7 +797,7 @@ def render_pavement_memorial(r: PavementResult, rep: ValidationReport) -> str:
     add("# Memorial de Cálculo — Pavimento Flexível (DNER/DNIT)")
     add("")
     add(f"**Método:** {r.metodo}  ")
-    add("**Referência:** DNER (1981) / DNIT (2006), Manual de Pavimentação")
+    add("**Referência:** DNER (1981) / DNIT (2006), Manual de Pavimentaçêo")
     add("")
 
     add("## 1. Dados de entrada")
@@ -837,9 +837,9 @@ def render_pavement_memorial(r: PavementResult, rep: ValidationReport) -> str:
     add(f"| **Espessura total** | **{r.espessura_total_cm:.1f}** |")
     add("")
 
-    add("## 4. Verificação das inequações de equivalência estrutural (DNER)")
+    add("## 4. Verificaçêo das inequações de equivalência estrutural (DNER)")
     add("")
-    add("| Inequação | Σ esp.·K (cm) | H exigido (cm) | Atende |")
+    add("| Inequaçêo | Σ esp.·K (cm) | H exigido (cm) | Atende |")
     add("|-----------|---------------|----------------|--------|")
     for ineq in r.inequacoes:
         icon = "✓" if ineq.atende else "✗"
@@ -860,7 +860,7 @@ def render_earthwork_memorial(r: EarthworkResult, rep: ValidationReport) -> str:
     add("# Memorial de Cálculo — Terraplenagem (Balanço Corte/Aterro)")
     add("")
     add(f"**Método:** {r.metodo}  ")
-    add("**Referência:** DNIT, Manual de Implantação Básica de Rodovia")
+    add("**Referência:** DNIT, Manual de Implantaçêo Básica de Rodovia")
     add("")
 
     add("## 1. Dados de entrada")
@@ -877,7 +877,7 @@ def render_earthwork_memorial(r: EarthworkResult, rep: ValidationReport) -> str:
     add(f"- Volume de corte solto (transporte): V_solto = corte·Fe = "
         f"**{r.volume_corte_solto_m3:.1f} m³**")
     add(f"- **Balanço = corte − aterro = {r.balanco_m3:.1f} m³** "
-        f"(situação: **{r.situacao}**)")
+        f"(situaçêo: **{r.situacao}**)")
     add(f"- Volume de empréstimo (déficit): {r.volume_emprestimo_m3:.1f} m³")
     add(f"- Volume de bota-fora (excesso): {r.volume_bota_fora_m3:.1f} m³ "
         f"(solto: {r.volume_bota_fora_solto_m3:.1f} m³)")
@@ -905,21 +905,21 @@ def render_infinite_slope_memorial(
     add("")
     add("| Parâmetro | Valor |")
     add("|-----------|-------|")
-    add(f"| Coesão c | {r.c_kpa:.1f} kPa |")
+    add(f"| Coesêo c | {r.c_kpa:.1f} kPa |")
     add(f"| Ângulo de atrito φ | {r.phi_deg:.1f}° |")
     add(f"| Peso específico γ | {r.gamma_kn_m3:.1f} kN/m³ |")
     add(f"| Profundidade da ruptura z | {r.z_m:.2f} m |")
-    add(f"| Inclinação do talude β | {r.beta_deg:.1f}° |")
-    add(f"| Poro-pressão na base u | {r.u_kpa:.1f} kPa |")
+    add(f"| Inclinaçêo do talude β | {r.beta_deg:.1f}° |")
+    add(f"| Poro-pressêo na base u | {r.u_kpa:.1f} kPa |")
     add("")
 
     add("## 2. Fator de segurança "
         "(FS = [c + (γ·z·cos²β − u)·tanφ] / (γ·z·sinβ·cosβ))")
     add("")
-    add(f"- Tensão resistente (numerador): {r.resisting_kpa:.3f} kPa")
-    add(f"- Tensão atuante (denominador): {r.driving_kpa:.3f} kPa")
+    add(f"- Tensêo resistente (numerador): {r.resisting_kpa:.3f} kPa")
+    add(f"- Tensêo atuante (denominador): {r.driving_kpa:.3f} kPa")
     add(f"- **Fator de segurança: FS = {r.fs:.3f}**")
-    add(f"- Classificação: **{r.classification}** "
+    add(f"- Classificaçêo: **{r.classification}** "
         f"(FS,mín usual ≥ {r.fs_min_usual:.1f}, NBR 11682)")
     add("")
 
@@ -943,7 +943,7 @@ def render_fellenius_memorial(r: FelleniusResult, rep: ValidationReport) -> str:
     add("")
     add("| Parâmetro | Valor |")
     add("|-----------|-------|")
-    add(f"| Coesão c | {r.c_kpa:.1f} kPa |")
+    add(f"| Coesêo c | {r.c_kpa:.1f} kPa |")
     add(f"| Ângulo de atrito φ | {r.phi_deg:.1f}° |")
     add(f"| Número de fatias | {r.n_slices} |")
     add("")
@@ -954,7 +954,7 @@ def render_fellenius_memorial(r: FelleniusResult, rep: ValidationReport) -> str:
     add(f"- Σ resistente (numerador): {r.resisting_kn_m:.3f} kN/m")
     add(f"- Σ atuante (denominador): {r.driving_kn_m:.3f} kN/m")
     add(f"- **Fator de segurança: FS = {r.fs:.3f}**")
-    add(f"- Classificação: **{r.classification}** "
+    add(f"- Classificaçêo: **{r.classification}** "
         f"(FS,mín usual ≥ {r.fs_min_usual:.1f}, NBR 11682)")
     add("")
 
@@ -975,19 +975,19 @@ def render_orcamento_memorial(r: OrcamentoResult, rep: ValidationReport) -> str:
     add("")
     add(f"**Referência:** {r.norma}  ")
     add("**Base de preços:** tabela tipo SINAPI (amostra ILUSTRATIVA — substituir pela "
-        "SINAPI vigente/regional, com desoneração, mês de referência e UF do projeto)")
+        "SINAPI vigente/regional, com desoneraçêo, mês de referência e UF do projeto)")
     add("")
 
     add("## 1. Itens orçados")
     add("")
-    add("| Código | Descrição | Unid. | Qtd. | Preço unit. (R$) | Custo (R$) |")
+    add("| Código | Descriçêo | Unid. | Qtd. | Preço unit. (R$) | Custo (R$) |")
     add("|--------|-----------|-------|------|------------------|------------|")
     for it in r.itens:
         add(f"| {it.codigo} | {it.descricao} | {it.unidade} | "
             f"{it.quantidade:.2f} | {it.preco_unitario:.2f} | {it.custo:.2f} |")
     add("")
 
-    add("## 2. Composição do custo")
+    add("## 2. Composiçêo do custo")
     add("")
     add(f"- Subtotal (custo direto): R$ {r.subtotal:.2f}")
     add(f"- BDI aplicado: {r.bdi_pct:.2f}% → R$ {r.valor_bdi:.2f}")

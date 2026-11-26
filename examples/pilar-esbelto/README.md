@@ -4,18 +4,18 @@
 
 Dimensionar um pilar de concreto armado considerando efeitos de 2ª ordem:
 
-- **Seção:** 20 x 50 cm
+- **Seçêo:** 20 x 50 cm
 - **Altura:** 4,0 m (entre pavimentos)
 - **Concreto:** C30 (fck = 30 MPa)
 - **Aço:** CA-50 (fyk = 500 MPa)
 - **Carga normal:** Nd = 800 kN
 - **Momento de 1ª ordem:** Md1 = 40 kN·m
-- **Vinculação:** engastado na base, livre no topo
+- **Vinculaçêo:** engastado na base, livre no topo
 
 ## Verificações Necessárias
 
 1. Índice de esbeltez λ
-2. Classificação: pilar curto, médio ou esbelto
+2. Classificaçêo: pilar curto, médio ou esbelto
 3. Efeitos de 2ª ordem (se λ > 35)
 4. Armadura simétrica
 5. Cobrimento para CA-II

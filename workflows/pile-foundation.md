@@ -1,4 +1,4 @@
-# Workflow: Capacidade de Carga de Fundação em Estacas (por SPT)
+# Workflow: Capacidade de Carga de Fundaçêo em Estacas (por SPT)
 
 ## Gatilho
 
@@ -8,7 +8,7 @@ Usuário solicita a capacidade de carga de uma estaca a partir de sondagem SPT.
 
 Números só vêm do `calc-server` (MCP). A ferramenta `capacidade_estaca` roda os **dois
 métodos semiempíricos** (Aoki-Velloso e Décourt-Quaresma), valida ambos e compara o
-resultado — o agente nunca calcula à mão (princípio da abstenção).
+resultado — o agente nunca calcula à mêo (princípio da abstençêo).
 
 ## Fluxo real
 
@@ -46,15 +46,15 @@ capacidade_estaca(layers, pile_type="pre-moldada", diameter_m=0.30, fs=2.0, tol=
 Internamente (`lib.service.solve_pile_comparison` → `comparar_metodos_estaca`):
 - **Aoki-Velloso (1975):** Rp = (K·Np/F1)·Ap ; Rl = Σ (α·K·Nl/F2)·U·ΔL.
 - **Décourt-Quaresma (1978):** Rp = C·Np·Ap ; Rl = 10·(Ns/3 + 1)·U·L.
-- **Comparação:** divergência relativa de Rult; `convergem = divergência ≤ 20%`.
+- **Comparaçêo:** divergência relativa de Rult; `convergem = divergência ≤ 20%`.
 
-### Passo 4 — Validação automática
+### Passo 4 — Validaçêo automática
 
 A resposta traz `validacao` com as checagens de **ambos** os métodos (unidades, física,
 normativa, FS) e a checagem de **convergência**:
-- Se a divergência > 20%: a validação emite **aviso** e `convergem = false` — alertar o
+- Se a divergência > 20%: a validaçêo emite **aviso** e `convergem = false` — alertar o
   engenheiro e adotar o valor mais conservador (menor Radm).
-- `aprovado` reflete a validação dos dois métodos (a divergência entra como aviso).
+- `aprovado` reflete a validaçêo dos dois métodos (a divergência entra como aviso).
 
 ### Passo 5 — Apresentar
 
@@ -64,13 +64,13 @@ divergência) e o aviso de responsabilidade (`aviso`).
 ## Saída esperada
 
 1. Rult e Radm por cada método (Aoki-Velloso e Décourt-Quaresma).
-2. Divergência relativa e situação de convergência (≤ 20%).
+2. Divergência relativa e situaçêo de convergência (≤ 20%).
 3. Comprimento e geometria da estaca consideradas.
 4. Memorial de cálculo comparativo completo.
 5. Alerta de divergência (se houver) e o aviso de responsabilidade técnica.
 
 ## Fora do escopo (abster-se)
 
-Definição do número de estacas e arranjo, dimensionamento do bloco de coroamento
-(biela-tirante), recalque do grupo, atrito negativo e prova de carga — não há ferramenta:
-avisar o usuário. A escolha do método de execução e do FS é do engenheiro.
+Definiçêo do número de estacas e arranjo, dimensionamento do bloco de coroamento
+(biela-tirante), recalque do grupo, atrito negativo e prova de carga — nêo há ferramenta:
+avisar o usuário. A escolha do método de execuçêo e do FS é do engenheiro.

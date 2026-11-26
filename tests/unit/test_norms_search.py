@@ -2,8 +2,8 @@
 
 Cobre: (1) busca contra os JSON reais em ``normas/`` (W250 acha perfis; aoki acha
 coeficientes); (2) isolamento e insensibilidade a acento/caixa via ``tmp_path``;
-(3) abstenção (termo sem correspondência => lista vazia) e ausência de efeitos
-colaterais (a busca não escreve nada).
+(3) abstençêo (termo sem correspondência => lista vazia) e ausência de efeitos
+colaterais (a busca nêo escreve nada).
 """
 
 import json
@@ -20,7 +20,7 @@ def test_buscar_w250_acha_perfis():
     assert hits, "deveria achar perfis W250*"
     assert all(h["chave"].startswith("W250") for h in hits)
     assert all(h["norma"] == "NBR8800" for h in hits)
-    # os dados trazem propriedades geométricas reais (área da seção)
+    # os dados trazem propriedades geométricas reais (área da seçêo)
     assert all("area_cm2" in h["dados"] for h in hits)
 
 
@@ -52,8 +52,8 @@ def _fixture_norma(base: pathlib.Path) -> None:
             {
                 "meta": {"norma": "NBR XXXX", "fonte": "fonte de teste"},
                 "coeficientes": {
-                    "coesão alta": {"valor": 1.5},
-                    "coesão baixa": {"valor": 0.5},
+                    "coesêo alta": {"valor": 1.5},
+                    "coesêo baixa": {"valor": 0.5},
                 },
             }
         ),
@@ -63,10 +63,10 @@ def _fixture_norma(base: pathlib.Path) -> None:
 
 def test_busca_sem_acento_e_caixa(tmp_path):
     _fixture_norma(tmp_path)
-    # "coesao" (sem acento, minúsculo) deve casar com "coesão alta/baixa"
+    # "coesao" (sem acento, minúsculo) deve casar com "coesêo alta/baixa"
     hits = buscar_tabela("COESAO", base_dir=tmp_path)
     assert len(hits) == 2
-    assert {h["chave"] for h in hits} == {"coesão alta", "coesão baixa"}
+    assert {h["chave"] for h in hits} == {"coesêo alta", "coesêo baixa"}
     assert all(h["norma"] == "NBRXXXX" for h in hits)
 
 

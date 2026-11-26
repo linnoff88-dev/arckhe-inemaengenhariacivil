@@ -8,16 +8,16 @@
       "checks": [
         {"id": "DE01", "descricao": "fck definido e dentro dos limites (20-90 MPa)", "obrigatorio": true},
         {"id": "DE02", "descricao": "Cargas com valores e unidades corretos", "obrigatorio": true},
-        {"id": "DE03", "descricao": "Vão de cálculo definido (luz teórica)", "obrigatorio": true},
-        {"id": "DE04", "descricao": "Seção transversal definida (b x h)", "obrigatorio": true}
+        {"id": "DE03", "descricao": "Vêo de cálculo definido (luz teórica)", "obrigatorio": true},
+        {"id": "DE04", "descricao": "Seçêo transversal definida (b x h)", "obrigatorio": true}
       ]
     },
     {
       "grupo": "Verificações ELU",
       "checks": [
-        {"id": "ELU01", "descricao": "Flexão: As_calc >= As_min (Tab. 17.3)", "obrigatorio": true},
+        {"id": "ELU01", "descricao": "Flexêo: As_calc >= As_min (Tab. 17.3)", "obrigatorio": true},
         {"id": "ELU02", "descricao": "Cisalhamento verificado (§17.4)", "obrigatorio": true},
-        {"id": "ELU03", "descricao": "Domínio de deformação: 2 ou 3 (x/d <= 0.628)", "obrigatorio": true}
+        {"id": "ELU03", "descricao": "Domínio de deformaçêo: 2 ou 3 (x/d <= 0.628)", "obrigatorio": true}
       ]
     },
     {

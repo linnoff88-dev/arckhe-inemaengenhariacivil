@@ -1,6 +1,6 @@
 """Testes da tabela de perfis laminados W (NBR 8800:2008 / catálogo Gerdau).
 
-Verifica carregamento, busca com abstenção (KeyError) e consistência interna:
+Verifica carregamento, busca com abstençêo (KeyError) e consistência interna:
 rx = sqrt(Ix/A) e ry = sqrt(Iy/A) (geometria do perfil).
 """
 
@@ -46,7 +46,7 @@ def test_get_profile_known():
 
 
 def test_get_profile_missing_raises_keyerror_with_list():
-    # abstenção: perfil inexistente -> KeyError listando as designações disponíveis
+    # abstençêo: perfil inexistente -> KeyError listando as designações disponíveis
     base = load_profiles(DEFAULT_TABLE)
     with pytest.raises(KeyError) as exc:
         get_profile("W999x99,9", base)

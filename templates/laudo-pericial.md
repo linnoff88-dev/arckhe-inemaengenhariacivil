@@ -3,20 +3,20 @@
 **Número:** LP-[ANO]-[SEQ]
 **Processo:** [Número do Processo / Referência]
 **Perito:** [Nome / CREA]
-**Data de Elaboração:** [Data]
+**Data de Elaboraçêo:** [Data]
 **Data de Vistoria:** [Data]
 
 ---
 
 ## 1. Objeto da Perícia
 
-[Descrição clara do objeto periciado e das questões a serem respondidas]
+[Descriçêo clara do objeto periciado e das questões a serem respondidas]
 
 ---
 
 ## 2. Finalidade
 
-[Destinação do laudo: judicial, extrajudicial, administrativo]
+[Destinaçêo do laudo: judicial, extrajudicial, administrativo]
 
 ---
 
@@ -36,17 +36,17 @@
 
 ### 4.2 Presentes
 
-[Relação de pessoas presentes durante a vistoria]
+[Relaçêo de pessoas presentes durante a vistoria]
 
-### 4.3 Descrição do Local
+### 4.3 Descriçêo do Local
 
-[Descrição técnica do elemento vistoriado]
+[Descriçêo técnica do elemento vistoriado]
 
 ---
 
 ## 5. Metodologia
 
-[Métodos de inspeção, ensaios realizados, normas aplicadas]
+[Métodos de inspeçêo, ensaios realizados, normas aplicadas]
 
 ---
 
@@ -64,7 +64,7 @@
 
 ## 8. Valor dos Danos (se aplicável)
 
-| Item | Descrição | Valor (R$) |
+| Item | Descriçêo | Valor (R$) |
 |------|-----------|-----------|
 | — | — | — |
 | **TOTAL** | — | **—** |
@@ -82,4 +82,4 @@ Este laudo é composto de [N] laudas, assinadas pelo perito abaixo.
 
 ---
 
-> ⚠️ Este laudo foi elaborado com assistência de ferramentas de inteligência artificial. Toda a análise, julgamentos técnicos e conclusões são de responsabilidade exclusiva do perito signatário habilitado, conforme a Lei 5.194/66.
+> ⚠️ Este laudo foi elaborado com assistência de ferramentas de inteligência artificial. Toda a análise, julgamentos técnicos e conclusões sêo de responsabilidade exclusiva do perito signatário habilitado, conforme a Lei 5.194/66.

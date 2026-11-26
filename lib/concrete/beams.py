@@ -1,14 +1,14 @@
-"""Flexão simples — viga retangular de concreto armado (NBR 6118:2014, ELU).
+"""Flexêo simples — viga retangular de concreto armado (NBR 6118:2014, ELU).
 
 Toda a aritmética vive aqui (camada Python determinística). O LLM apenas interpreta o
 problema, chama estas funções via MCP e explica o resultado.
 
 Hipóteses:
 - Bloco retangular de tensões; concreto fck <= 50 MPa -> lambda = 0.8, alpha_c = 0.85.
-- Coeficientes de ponderação: gamma_c = 1.4, gamma_s = 1.15.
-- Combinação última normal com gamma_g = gamma_q = 1.4 (ações desfavoráveis).
+- Coeficientes de ponderaçêo: gamma_c = 1.4, gamma_s = 1.15.
+- Combinaçêo última normal com gamma_g = gamma_q = 1.4 (ações desfavoráveis).
 - Viga biapoiada com carga uniformemente distribuída: Md = p_d * L^2 / 8.
-- Seção retangular, armadura simples (sem armadura de compressão).
+- Seçêo retangular, armadura simples (sem armadura de compressêo).
 """
 
 from __future__ import annotations
@@ -19,24 +19,24 @@ from pydantic import BaseModel
 
 # --- constantes normativas (NBR 6118:2014) ----------------------------------
 LAMBDA = 0.8          # altura do bloco retangular / linha neutra (fck <= 50 MPa)
-ALPHA_C = 0.85        # redução de resistência do concreto à compressão
-GAMMA_C = 1.4         # ponderação do concreto
-GAMMA_S = 1.15        # ponderação do aço
-GAMMA_G = 1.4         # ponderação de ações permanentes (desfavorável)
-GAMMA_Q = 1.4         # ponderação de ações variáveis (desfavorável)
+ALPHA_C = 0.85        # reduçêo de resistência do concreto à compressêo
+GAMMA_C = 1.4         # ponderaçêo do concreto
+GAMMA_S = 1.15        # ponderaçêo do aço
+GAMMA_G = 1.4         # ponderaçêo de ações permanentes (desfavorável)
+GAMMA_Q = 1.4         # ponderaçêo de ações variáveis (desfavorável)
 PESO_CONCRETO_ARMADO = 25.0   # kN/m^3 (NBR 6120)
-X_D_DUCTIL_MAX = 0.45         # limite de ductilidade x/d (sem redistribuição, fck<=50)
+X_D_DUCTIL_MAX = 0.45         # limite de ductilidade x/d (sem redistribuiçêo, fck<=50)
 
 # Diâmetros comerciais de barras (mm)
 DIAMETROS_MM = (6.3, 8.0, 10.0, 12.5, 16.0, 20.0, 25.0)
 
-# Taxa de armadura mínima rho_min (%) — NBR 6118:2014 Tabela 17.3 (seção retangular)
+# Taxa de armadura mínima rho_min (%) — NBR 6118:2014 Tabela 17.3 (seçêo retangular)
 _RHO_MIN_PCT = {20: 0.150, 25: 0.150, 30: 0.150, 35: 0.164,
                 40: 0.179, 45: 0.194, 50: 0.208}
 
 
 class FlexureCore(BaseModel):
-    """Resultado do núcleo de flexão (momento dado)."""
+    """Resultado do núcleo de flexêo (momento dado)."""
     as_calc_cm2: float
     x_cm: float
     x_over_d: float
@@ -53,7 +53,7 @@ class BarChoice(BaseModel):
 
 
 class BeamFlexureResult(BaseModel):
-    """Resultado completo do dimensionamento à flexão de viga retangular."""
+    """Resultado completo do dimensionamento à flexêo de viga retangular."""
     # entrada (eco)
     b_cm: float
     h_cm: float
@@ -70,7 +70,7 @@ class BeamFlexureResult(BaseModel):
     # materiais
     fcd_mpa: float
     fyd_mpa: float
-    # flexão
+    # flexêo
     x_cm: float
     x_over_d: float
     z_cm: float
@@ -92,13 +92,13 @@ def _check_material(fck_mpa: float, fyk_mpa: float) -> None:
         raise ValueError(f"fck={fck_mpa} MPa fora da faixa física [10, 100].")
     if fck_mpa > 50.0:
         raise ValueError("fck > 50 MPa exige o domínio de concretos do Grupo II "
-                         "(lambda/alpha_c variáveis), ainda não implementado.")
+                         "(lambda/alpha_c variáveis), ainda nêo implementado.")
     if not (250.0 <= fyk_mpa <= 600.0):
         raise ValueError(f"fyk={fyk_mpa} MPa fora da faixa de aços comerciais [250, 600].")
 
 
 def rho_min_pct(fck_mpa: float) -> float:
-    """Taxa de armadura mínima (%) por interpolação linear da Tabela 17.3."""
+    """Taxa de armadura mínima (%) por interpolaçêo linear da Tabela 17.3."""
     if fck_mpa <= 30.0:
         return _RHO_MIN_PCT[30]
     if fck_mpa >= 50.0:
@@ -117,10 +117,10 @@ def _area_barra_cm2(phi_mm: float) -> float:
 
 def flexure_design(md_knm: float, b_cm: float, d_cm: float,
                    fck_mpa: float, fyk_mpa: float) -> FlexureCore:
-    """Dimensiona a armadura de tração para o momento de cálculo ``md_knm``.
+    """Dimensiona a armadura de traçêo para o momento de cálculo ``md_knm``.
 
-    Resolve o equilíbrio da seção (bloco retangular) e devolve As de cálculo, a
-    posição da linha neutra ``x`` e o braço de alavanca ``z``. Não aplica As_min.
+    Resolve o equilíbrio da seçêo (bloco retangular) e devolve As de cálculo, a
+    posiçêo da linha neutra ``x`` e o braço de alavanca ``z``. Nêo aplica As_min.
     """
     _check_material(fck_mpa, fyk_mpa)
 
@@ -128,12 +128,12 @@ def flexure_design(md_knm: float, b_cm: float, d_cm: float,
     fyd_k = (fyk_mpa / GAMMA_S) * 0.1
     md_kncm = md_knm * 100.0            # kN.m -> kN.cm
 
-    k1 = ALPHA_C * LAMBDA * fcd_k * b_cm          # resultante de compressão por cm de x
+    k1 = ALPHA_C * LAMBDA * fcd_k * b_cm          # resultante de compressêo por cm de x
     a = k1 * (LAMBDA / 2.0)
     disc = (k1 * d_cm) ** 2 - 4.0 * a * md_kncm
     if disc < 0:
-        raise ValueError("Momento excede a capacidade da seção com armadura simples; "
-                         "requer armadura dupla ou seção maior (fora do escopo da Fase 1).")
+        raise ValueError("Momento excede a capacidade da seçêo com armadura simples; "
+                         "requer armadura dupla ou seçêo maior (fora do escopo da Fase 1).")
     x = (k1 * d_cm - math.sqrt(disc)) / (2.0 * a)
     z = d_cm - (LAMBDA / 2.0) * x
     as_calc = (k1 * x) / fyd_k
@@ -166,7 +166,7 @@ def select_bars(as_req_cm2: float, n_min: int = 2, n_max: int = 8) -> BarChoice:
                 best_key = key
                 best = BarChoice(n_bars=n, phi_mm=phi, as_ef_cm2=as_ef)
     if best is None:
-        raise ValueError(f"Nenhuma combinação até {n_max} barras cobre As={as_req_cm2:.2f} cm².")
+        raise ValueError(f"Nenhuma combinaçêo até {n_max} barras cobre As={as_req_cm2:.2f} cm².")
     return best
 
 
@@ -184,10 +184,10 @@ def design_rectangular_beam(
     peso_concreto: float = PESO_CONCRETO_ARMADO,
     d_cm: float | None = None,
 ) -> BeamFlexureResult:
-    """Dimensionamento completo de viga retangular biapoiada à flexão (ELU).
+    """Dimensionamento completo de viga retangular biapoiada à flexêo (ELU).
 
     Cargas ``g_knm`` (permanente, exclui peso próprio) e ``q_knm`` (variável) em kN/m.
-    Se ``d_cm`` não for informado, é estimado a partir do cobrimento e dos diâmetros.
+    Se ``d_cm`` nêo for informado, é estimado a partir do cobrimento e dos diâmetros.
     """
     _check_material(fck_mpa, fyk_mpa)
 
@@ -215,12 +215,12 @@ def design_rectangular_beam(
     if core.x_over_d > X_D_DUCTIL_MAX:
         warnings.append(
             f"x/d = {core.x_over_d:.3f} > {X_D_DUCTIL_MAX} (ductilidade): "
-            "considerar armadura dupla ou aumentar a seção (NBR 6118 14.6.4.3)."
+            "considerar armadura dupla ou aumentar a seçêo (NBR 6118 14.6.4.3)."
         )
     if as_adopted > as_max:
         warnings.append(
             f"As = {as_adopted:.2f} cm² > As_max = {as_max:.2f} cm² "
-            "(4% da seção, NBR 6118 17.3.5.2.4)."
+            "(4% da seçêo, NBR 6118 17.3.5.2.4)."
         )
 
     bars = select_bars(as_adopted)

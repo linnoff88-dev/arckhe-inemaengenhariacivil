@@ -1,8 +1,8 @@
 """Testes de canal aberto (Manning).
 
-Valores de referência calculados à mão.
+Valores de referência calculados à mêo.
 
-Fonte: equação de Manning (SI), Q = (1/n)·A·R^(2/3)·S^(1/2), R = A/P
+Fonte: equaçêo de Manning (SI), Q = (1/n)·A·R^(2/3)·S^(1/2), R = A/P
 (Chow, "Open-Channel Hydraulics", 1959; Azevedo Netto, "Manual de Hidráulica").
 """
 
@@ -71,7 +71,7 @@ def test_normal_depth_trapezoidal_roundtrip():
 # ------------------------------------------------------------------ circular
 
 def test_manning_circular_half_full_hand_calc():
-    # D=1,0 m, y=0,5 m (meia seção), n=0,013, S=0,001
+    # D=1,0 m, y=0,5 m (meia seçêo), n=0,013, S=0,001
     # θ=π ; A=π/8=0,39270 ; P=π/2=1,57080 ; R=0,25
     # Q=(1/0,013)·0,39270·0,25^(2/3)·0,031623 = 0,3791 m³/s
     r = manning_circular(D_m=1.0, y_m=0.5, n=0.013, S=0.001)
@@ -87,7 +87,7 @@ def test_normal_depth_circular_roundtrip():
     assert y == pytest.approx(0.5, abs=0.01)
 
 
-# ----------------------------------------------------------------- abstenção
+# ----------------------------------------------------------------- abstençêo
 
 def test_manning_rectangular_rejects_nonpositive_depth():
     with pytest.raises(ValueError):
@@ -99,7 +99,7 @@ def test_manning_circular_rejects_depth_above_diameter():
         manning_circular(D_m=1.0, y_m=1.5, n=0.013, S=0.001)
 
 
-# ------------------------------------------------------------------- validação
+# ------------------------------------------------------------------- validaçêo
 
 def test_validate_open_channel_ok():
     r = manning_rectangular(b_m=2.0, y_m=1.0, n=0.015, S=0.001)

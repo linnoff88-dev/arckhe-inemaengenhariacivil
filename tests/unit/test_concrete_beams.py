@@ -1,6 +1,6 @@
-"""Testes de flexão simples — viga retangular de concreto armado (NBR 6118:2014, ELU).
+"""Testes de flexêo simples — viga retangular de concreto armado (NBR 6118:2014, ELU).
 
-Valores de referência calculados à mão (bloco retangular de tensões, fck <= 50 MPa:
+Valores de referência calculados à mêo (bloco retangular de tensões, fck <= 50 MPa:
 lambda=0.8, alpha_c=0.85; gamma_c=1.4, gamma_s=1.15).
 """
 
@@ -29,7 +29,7 @@ def test_flexure_design_low_moment_gives_small_steel():
 # ------------------------------------------------------------------- select_bars
 
 def test_select_bars_minimizes_excess_area():
-    # As=8.94 cm2 -> 3 phi 20mm (As_ef = 9.42 cm2) é a opção de menor excesso
+    # As=8.94 cm2 -> 3 phi 20mm (As_ef = 9.42 cm2) é a opçêo de menor excesso
     choice = select_bars(8.94)
     assert choice.n_bars == 3
     assert choice.phi_mm == 20.0

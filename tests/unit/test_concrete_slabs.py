@@ -1,7 +1,7 @@
 """Testes de laje maciça de concreto armado (NBR 6118:2014).
 
-Valores de referência calculados à mão (a conta está nos comentários).
-- Laje 1 direção: faixa de 1 m como viga, Md = p_d*lx^2/8 por metro.
+Valores de referência calculados à mêo (a conta está nos comentários).
+- Laje 1 direçêo: faixa de 1 m como viga, Md = p_d*lx^2/8 por metro.
 - Laje 2 direções (apoiada nos 4 lados): método das faixas de Grashof-Rankine
   (igualdade de flechas centrais), px = p*ly^4/(lx^4+ly^4), py = p*lx^4/(lx^4+ly^4),
   Mx = px*lx^2/8, My = py*ly^2/8.
@@ -17,7 +17,7 @@ from lib.concrete.slabs import (
 )
 
 
-# ----------------------------------------------------------- laje em 1 direção
+# ----------------------------------------------------------- laje em 1 direçêo
 
 def test_one_way_slab_known_case():
     # lx=4, g=1.5, q=2.0, h=10, C25, CA-50
@@ -34,7 +34,7 @@ def test_one_way_slab_known_case():
     assert r.as_x_cm2_m == pytest.approx(6.344, abs=0.02)
     assert r.as_min_x_cm2_m == pytest.approx(1.5, abs=1e-3)
     assert r.as_x_cm2_m >= r.as_min_x_cm2_m
-    assert r.as_y_cm2_m > 0  # armadura de distribuição
+    assert r.as_y_cm2_m > 0  # armadura de distribuiçêo
     assert r.ly_m is None and r.my_knm is None
 
 
@@ -63,11 +63,11 @@ def test_two_way_slab_known_case():
     assert r.my_knm == pytest.approx(10.170, abs=0.02)
     assert r.as_x_cm2_m == pytest.approx(4.364, abs=0.02)
     assert r.as_y_cm2_m == pytest.approx(3.096, abs=0.02)
-    assert r.mx_knm > r.my_knm  # direção curta carrega mais
+    assert r.mx_knm > r.my_knm  # direçêo curta carrega mais
 
 
 def test_two_way_slab_warns_when_ratio_above_two():
-    # λ=ly/lx=2.5 > 2 -> recomendar laje em uma direção
+    # λ=ly/lx=2.5 > 2 -> recomendar laje em uma direçêo
     r = design_two_way_slab(lx_m=2.0, ly_m=5.0, g_knm2=2.0, q_knm2=2.0, h_cm=10.0,
                             fck_mpa=25.0, fyk_mpa=500.0)
     assert any("uma dire" in w.lower() or "λ" in w or "2" in w for w in r.warnings)

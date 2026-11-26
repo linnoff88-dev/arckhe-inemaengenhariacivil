@@ -1,6 +1,6 @@
 """Testes de perdas de carga localizadas (método dos coeficientes K).
 
-Valores de referência calculados à mão.
+Valores de referência calculados à mêo.
 
 Fonte: h_loc = K·V²/(2g), com K por singularidade (método direto / dos
 comprimentos, coeficientes usuais — Azevedo Netto, "Manual de Hidráulica").
@@ -67,7 +67,7 @@ def test_total_head_loss_unknown_singularity_raises():
         total_head_loss(hf_distribuida_m=1.0, singularidades={"buraco_negro": 1}, V_ms=2.0)
 
 
-# ------------------------------------------------------------------- validação
+# ------------------------------------------------------------------- validaçêo
 
 def test_validate_head_loss_ok():
     r = total_head_loss(

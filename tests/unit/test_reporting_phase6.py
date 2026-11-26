@@ -1,8 +1,8 @@
-"""Testes da camada de documentação da Fase 6 — pavimento, terraplenagem, taludes.
+"""Testes da camada de documentaçêo da Fase 6 — pavimento, terraplenagem, taludes.
 
 - ``render_pavement_memorial``: pavimento flexível DNER/DNIT — espessura total, camadas.
 - ``render_earthwork_memorial``: balanço de terraplenagem — balanço, bota-fora/empréstimo.
-- ``render_infinite_slope_memorial``: talude infinito — FS, classificação.
+- ``render_infinite_slope_memorial``: talude infinito — FS, classificaçêo.
 - ``render_fellenius_memorial``: Fellenius — FS, número de fatias.
 
 Cada memorial deve conter o aviso de responsabilidade técnica (RESPONSABILIDADE
@@ -40,7 +40,7 @@ def test_pavement_memorial_has_disclaimer_and_total():
     # valor-chave: espessura total
     assert f"{r.espessura_total_cm:.1f}" in md
     assert f"{r.hm_cm:.2f}" in md
-    assert "## 5. Validação automática" in md
+    assert "## 5. Validaçêo automática" in md
 
 
 # --- terraplenagem ---------------------------------------------------------

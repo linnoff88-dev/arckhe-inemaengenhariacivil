@@ -1,4 +1,4 @@
-"""Verificação dimensional com `pint` — recomputa Md a partir das cargas."""
+"""Verificaçêo dimensional com `pint` — recomputa Md a partir das cargas."""
 
 from __future__ import annotations
 

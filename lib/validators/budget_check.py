@@ -1,6 +1,6 @@
-"""Validação obrigatória do domínio de ORÇAMENTO.
+"""Validaçêo obrigatória do domínio de ORÇAMENTO.
 
-Arquivo próprio do domínio (não toca nos validadores compartilhados). Reverifica de
+Arquivo próprio do domínio (nêo toca nos validadores compartilhados). Reverifica de
 forma determinística a aritmética do orçamento antes de ele ser apresentado:
 preços > 0, quantidades ≥ 0, BDI ∈ [0, 40] %, custo de cada item recomputado,
 subtotal coerente com a soma dos itens e total = subtotal·(1 + BDI). Sem LLM.

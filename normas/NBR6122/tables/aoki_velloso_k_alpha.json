@@ -1,7 +1,7 @@
 {
   "fonte": "Aoki, N.; Velloso, D.A. (1975) — coeficientes K e α por tipo de solo",
   "norma": "NBR 6122",
-  "unidades": {"K": "kPa", "alpha": "adimensional (fração)"},
+  "unidades": {"K": "kPa", "alpha": "adimensional (fraçêo)"},
   "nota": "Valores espelham lib/geotechnical/piles.py (AOKI_SOLO). qp = K·Np/F1; rl = α·K·Nl/F2.",
   "solos": {
     "areia": {"K_kpa": 1000.0, "alpha": 0.014},

@@ -1,20 +1,20 @@
-# Plano de Implementação em Fases
+# Plano de Implementaçêo em Fases
 
-> **Estado: CONCLUÍDO — v1.0.0.** As Fases 1 a 6 estão implementadas, testadas
+> **Estado: CONCLUÍDO — v1.0.0.** As Fases 1 a 6 estêo implementadas, testadas
 > (suíte unitária + E2E verde) e documentadas. Os checkboxes abaixo registram as
 > entregas concretizadas. Para a lista operacional de cálculos disponíveis, ver
 > [`14-catalogo-calculos.md`](14-catalogo-calculos.md); para contribuir com novos
 > cálculos, ver [`../CONTRIBUTING.md`](../CONTRIBUTING.md).
 
-## Fase 1 — Fundação (Semanas 1-2)
+## Fase 1 — Fundaçêo (Semanas 1-2)
 
 **Objetivo:** Sistema funcionando ponta a ponta para um caso simples.
 
 ### Entregas
 
 - [x] Estrutura de diretórios criada
-- [x] `lib/units/converter.py` com `pint` (verificação dimensional)
-- [x] `lib/concrete/beams.py` — flexão simples (seção retangular)
+- [x] `lib/units/converter.py` com `pint` (verificaçêo dimensional)
+- [x] `lib/concrete/beams.py` — flexêo simples (seçêo retangular)
 - [x] `lib/validators/units_check.py`
 - [x] `lib/validators/physical_check.py`
 - [x] MCP server `calc-server` com 3 ferramentas básicas
@@ -24,14 +24,14 @@
 - [x] Testes unitários: `tests/unit/test_concrete_beams.py`
 - [x] Exemplo completo: `examples/viga-simples/`
 
-### Critério de Conclusão
+### Critério de Conclusêo
 
-Usuário digita: *"Dimensione uma viga 25x50cm de concreto C30, vão 5m, carga 20kN/m"*
+Usuário digita: *"Dimensione uma viga 25x50cm de concreto C30, vêo 5m, carga 20kN/m"*
 
 Sistema entrega:
 1. Cálculo completo com todas as etapas explicadas
 2. Memorial de cálculo em Markdown
-3. Checklist de revisão preenchido
+3. Checklist de revisêo preenchido
 4. Aviso de responsabilidade técnica
 
 ---
@@ -50,8 +50,8 @@ Sistema entrega:
 - [x] `lib/reporting/excel_export.py`
 - [x] `lib/reporting/pdf_export.py`
 - [x] Agentes: `foundations`, `loads`
-- [x] Agente `review` para revisão cruzada
-- [x] Testes de integração com fixtures de referência
+- [x] Agente `review` para revisêo cruzada
+- [x] Testes de integraçêo com fixtures de referência
 - [x] Exemplos: `examples/pilar-esbelto/`, `examples/sapata-isolada/`
 
 ---
@@ -75,14 +75,14 @@ Sistema entrega:
 
 ---
 
-## Fase 4 — Orçamento + Documentação (Semanas 9-10)
+## Fase 4 — Orçamento + Documentaçêo (Semanas 9-10)
 
-**Objetivo:** Orçamentação e geração profissional de documentos.
+**Objetivo:** Orçamentaçêo e geraçêo profissional de documentos.
 
 ### Entregas
 
-- [x] Agente `budget` com integração SINAPI (CSV local)
-- [x] `lib/reporting/memorial.py` — geração automática de memorial
+- [x] Agente `budget` com integraçêo SINAPI (CSV local)
+- [x] `lib/reporting/memorial.py` — geraçêo automática de memorial
 - [x] Agente `report` com templates profissionais
 - [x] Sistema de memória por projeto (`memory/projects/`)
 - [x] Agente `orchestrator` completo
@@ -107,22 +107,22 @@ Sistema entrega:
 
 ## Fase 6 — Polimento e Estradas (Semanas 13-14)
 
-**Objetivo:** Completude, qualidade e documentação final.
+**Objetivo:** Completude, qualidade e documentaçêo final.
 
 ### Entregas
 
 - [x] Agentes: `pavement`, `earthwork`, `slope-stability`
 - [x] Suite completa de testes E2E
-- [x] Documentação `docs/` completa
-- [x] Guia de contribuição
+- [x] Documentaçêo `docs/` completa
+- [x] Guia de contribuiçêo
 - [x] Exemplos completos por domínio (um por agente)
 - [x] `pytest` passando 100%
 
 ---
 
-## Marcos de Versão
+## Marcos de Versêo
 
-| Versão | Fase | Capacidade Principal | Status |
+| Versêo | Fase | Capacidade Principal | Status |
 |--------|------|---------------------|--------|
 | v0.1.0 | Fase 1 | Viga de concreto simples | ✅ concluída |
 | v0.2.0 | Fase 2 | Concreto armado completo | ✅ concluída |

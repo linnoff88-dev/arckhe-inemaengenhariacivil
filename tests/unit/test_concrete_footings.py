@@ -1,6 +1,6 @@
 """Testes de sapata isolada quadrada rígida (NBR 6122 + NBR 6118:2014 22.6).
 
-Valores de referência calculados à mão (a conta está nos comentários).
+Valores de referência calculados à mêo (a conta está nos comentários).
 Método das bielas (NBR 6118 22.6.4.1): As = Nd·(L − a_pilar) / (8·d·fyd), Nd = 1.4·Nk.
 """
 
@@ -65,7 +65,7 @@ def test_design_square_footing_soil_overstress_warns():
 
 
 def test_design_square_footing_rectangular_column_differs_per_direction():
-    # pilar 50x20: As maior na direção do menor lado do pilar (maior balanço)
+    # pilar 50x20: As maior na direçêo do menor lado do pilar (maior balanço)
     r = design_square_footing(
         nk_kn=800.0, sigma_adm_kpa=300.0,
         pilar_a_cm=50.0, pilar_b_cm=20.0,

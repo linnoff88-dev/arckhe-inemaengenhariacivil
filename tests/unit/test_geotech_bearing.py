@@ -1,6 +1,6 @@
-"""Testes de capacidade de carga de fundação rasa — método de Vesic (forma fechada).
+"""Testes de capacidade de carga de fundaçêo rasa — método de Vesic (forma fechada).
 
-Valores de referência calculados à mão (a conta está nos comentários).
+Valores de referência calculados à mêo (a conta está nos comentários).
 Fonte: Vesic (1973/1975), "Bearing Capacity of Shallow Foundations".
 
 Fatores (forma fechada):
@@ -31,7 +31,7 @@ def test_vesic_factors_phi_30():
 
 
 def test_vesic_factors_phi_zero():
-    # φ=0 (caso não drenado): Nq=1, Nc=π+2≈5.14, Nγ=0
+    # φ=0 (caso nêo drenado): Nq=1, Nc=π+2≈5.14, Nγ=0
     nc, nq, ng = vesic_bearing_factors(0.0)
     assert nq == pytest.approx(1.0, abs=1e-9)
     assert nc == pytest.approx(5.14, abs=0.01)
@@ -101,7 +101,7 @@ def test_validate_bearing_passes():
 
 
 def test_validate_bearing_low_fs_warns():
-    # FS=2 < 3 -> normativa em warning, mas ainda passa (não é fail)
+    # FS=2 < 3 -> normativa em warning, mas ainda passa (nêo é fail)
     r = design_bearing_capacity(
         c_kpa=10.0, phi_deg=30.0, gamma_kn_m3=18.0,
         b_m=2.0, depth_df_m=1.0, shape="quadrada", fs=2.0,

@@ -1,7 +1,7 @@
 > **Nota de escopo (gerado pela engine `lib.service.solve_earth_pressure_rankine`).**
-> Empuxo de terra ativo/passivo por Rankine, solo não coesivo, por metro de muro.
-> Empuxo de água, sobrecargas, coesão e a estabilidade do muro (deslizamento,
-> tombamento, capacidade da base) estão fora do escopo — princípio da abstenção.
+> Empuxo de terra ativo/passivo por Rankine, solo nêo coesivo, por metro de muro.
+> Empuxo de água, sobrecargas, coesêo e a estabilidade do muro (deslizamento,
+> tombamento, capacidade da base) estêo fora do escopo — princípio da abstençêo.
 
 # Memorial de Cálculo — Empuxo de Terra (Rankine)
 
@@ -25,20 +25,20 @@
 
 - **Empuxo ativo: Ea = 48.00 kN/m**
 - Empuxo passivo: Ep = 432.00 kN/m
-- Ponto de aplicação: z = H/3 = 1.333 m da base (distribuição triangular)
+- Ponto de aplicaçêo: z = H/3 = 1.333 m da base (distribuiçêo triangular)
 
-## 4. Validação automática
+## 4. Validaçêo automática
 
-| Verificação | Status | Detalhe |
+| Verificaçêo | Status | Detalhe |
 |-------------|--------|---------|
 | units | ✓ | Ea=48.00 kN/m (dimensional ✓) |
 | physical | ✓ | phi=ok; gamma=ok; coeficientes=ok |
 | normative | ✓ | Ka_lt_Kp=ok; ponto_aplicacao=ok |
 
-**Resultado da validação:** APROVADO
+**Resultado da validaçêo:** APROVADO
 
 ---
 
 ⚠️ RESPONSABILIDADE TÉCNICA
 
-Este cálculo é uma ferramenta de suporte à decisão de engenharia. A responsabilidade técnica e legal é exclusiva do engenheiro responsável pelo projeto, formalizada via ART (Anotação de Responsabilidade Técnica), conforme a Lei 6.496/77, a Lei 5.194/66 e a Resolução CONFEA/CREA vigente.
+Este cálculo é uma ferramenta de suporte à decisêo de engenharia. A responsabilidade técnica e legal é exclusiva do engenheiro responsável pelo projeto, formalizada via ART (Anotaçêo de Responsabilidade Técnica), conforme a Lei 6.496/77, a Lei 5.194/66 e a Resoluçêo CONFEA/CREA vigente.

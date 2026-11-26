@@ -3,7 +3,7 @@
 ## Problema
 
 Calcular o empuxo de terra ativo e passivo sobre um muro de arrimo, pela teoria de
-Rankine (tardoz vertical liso, terrapleno horizontal, solo não coesivo):
+Rankine (tardoz vertical liso, terrapleno horizontal, solo nêo coesivo):
 
 - **Peso específico do solo:** γ = 18 kN/m³
 - **Altura do muro:** H = 4,0 m
@@ -13,14 +13,14 @@ Rankine (tardoz vertical liso, terrapleno horizontal, solo não coesivo):
 
 1. Coeficientes Ka = tan²(45 − φ/2) e Kp = tan²(45 + φ/2).
 2. Empuxo ativo Ea = 0,5·γ·H²·Ka e passivo Ep = 0,5·γ·H²·Kp (por metro de muro).
-3. Ponto de aplicação a H/3 da base (distribuição triangular).
+3. Ponto de aplicaçêo a H/3 da base (distribuiçêo triangular).
 
-## Fora do escopo (abstenção)
+## Fora do escopo (abstençêo)
 
-Empuxo de água, sobrecargas, coesão e a estabilidade do muro (deslizamento, tombamento,
-capacidade da base) não são tratados — são de responsabilidade do engenheiro.
+Empuxo de água, sobrecargas, coesêo e a estabilidade do muro (deslizamento, tombamento,
+capacidade da base) nêo sêo tratados — sêo de responsabilidade do engenheiro.
 
-## Geração
+## Geraçêo
 
 `solution.md` é gerado pela engine `lib.service.solve_earth_pressure_rankine`.
 

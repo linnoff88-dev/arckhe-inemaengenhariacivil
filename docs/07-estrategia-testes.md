@@ -4,11 +4,11 @@
 
 ### Camada 1 — Testes Unitários Python (gratuitos, < 5s)
 
-**O que testam:** cada função de cálculo individualmente.
+**O que testam:** cada funçêo de cálculo individualmente.
 
 **Como:** resultado calculado vs. referência de livro-texto com tolerância numérica de 0.1%.
 
-**Localização:** `tests/unit/`
+**Localizaçêo:** `tests/unit/`
 
 ```python
 # Exemplo: tests/unit/test_concrete_beams.py
@@ -29,17 +29,17 @@ def test_beam_flexure_simple_case():
 - Resultados baseados em Fusco (2010), Montoya (2010), Chaves (2016)
 - Arquivo JSON por caso: entrada + saída esperada + fonte bibliográfica
 
-### Camada 2 — Testes de Integração Python (gratuitos, < 30s)
+### Camada 2 — Testes de Integraçêo Python (gratuitos, < 30s)
 
 **O que testam:** fluxo completo via Python sem LLM.
-Entrada estruturada → cálculo → validação → saída estruturada.
+Entrada estruturada → cálculo → validaçêo → saída estruturada.
 
 **Como:** pipeline completo mas sem chamar Claude.
 
 ```python
 # Exemplo: tests/integration/test_footing_pipeline.py
 def test_footing_full_pipeline():
-    """Sapata isolada: entrada → cálculo → validação → saída"""
+    """Sapata isolada: entrada → cálculo → validaçêo → saída"""
     input_data = FootingInput(Nd=800, Msdx=30, Msdy=0, sigma_solo=150)
     result = run_footing_pipeline(input_data)
 
@@ -52,9 +52,9 @@ def test_footing_full_pipeline():
 
 **O que testam:** que o agente interpreta corretamente o problema e chama as ferramentas certas.
 
-**Não testam:** os números (isso é responsabilidade das camadas 1 e 2).
+**Nêo testam:** os números (isso é responsabilidade das camadas 1 e 2).
 
-**Como:** sessão real com `claude -p`, verifica ferramentas chamadas e estrutura da saída.
+**Como:** sessêo real com `claude -p`, verifica ferramentas chamadas e estrutura da saída.
 
 ---
 
@@ -65,7 +65,7 @@ Cada fixture em `tests/fixtures/` segue o formato:
 ```json
 {
   "id": "concrete_beam_rectangular_001",
-  "description": "Viga retangular sob flexão simples",
+  "description": "Viga retangular sob flexêo simples",
   "source": "Fusco, P.B. (2010). Técnica de armar as estruturas de concreto. p.142",
   "input": {
     "fck_mpa": 25.0,
@@ -103,7 +103,7 @@ Cada fixture em `tests/fixtures/` segue o formato:
 # Testes unitários (rápidos)
 pytest tests/unit/ -v
 
-# Testes de integração
+# Testes de integraçêo
 pytest tests/integration/ -v
 
 # Todos os testes com cobertura

@@ -21,16 +21,16 @@ A ponta fica na base da 2ª camada; o comprimento é L = 10,0 m.
 
 1. **Aoki-Velloso (1975):** Rp = (K·Np/F1)·Ap ; Rl = Σ (α·K·Nl/F2)·U·ΔL.
 2. **Décourt-Quaresma (1978):** Rp = C·Np·Ap ; Rl = 10·(Ns/3 + 1)·U·L.
-3. **Comparação:** divergência relativa de Rult; convergem se ≤ 20%.
+3. **Comparaçêo:** divergência relativa de Rult; convergem se ≤ 20%.
 
 Os coeficientes vêm de `normas/NBR6122/tables/` (espelham `lib/geotechnical/piles.py`).
 
-## Fora do escopo (abstenção)
+## Fora do escopo (abstençêo)
 
 Número de estacas, bloco de coroamento, recalque do grupo, atrito negativo e prova de
-carga não são tratados — são de responsabilidade do engenheiro.
+carga nêo sêo tratados — sêo de responsabilidade do engenheiro.
 
-## Geração
+## Geraçêo
 
 `solution.md` é gerado pela engine `lib.service.solve_pile_comparison`.
 

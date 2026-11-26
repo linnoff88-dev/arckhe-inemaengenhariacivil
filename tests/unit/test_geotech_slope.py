@@ -1,6 +1,6 @@
 """Testes de estabilidade de taludes — talude infinito e Fellenius.
 
-Valores de referência calculados à mão (a conta está nos comentários).
+Valores de referência calculados à mêo (a conta está nos comentários).
 Fontes:
   - Talude infinito: Das, "Fundamentos de Engenharia Geotécnica".
   - Fellenius (1936): método ordinário das fatias, ruptura circular.
@@ -26,7 +26,7 @@ from lib.validators.slope_check import validate_slope
 # --- talude infinito --------------------------------------------------------
 def test_infinite_slope_frictional_anchor():
     # c=0, u=0 -> FS = (γ·z·cos²β·tanφ)/(γ·z·sinβ·cosβ) = tanφ/tanβ
-    # φ=30°, β=20° -> FS = tan30/tan20 = 1.58631 ; classificação "estável"
+    # φ=30°, β=20° -> FS = tan30/tan20 = 1.58631 ; classificaçêo "estável"
     r = infinite_slope_fs(c_kpa=0.0, phi_deg=30.0, gamma_kn_m3=18.0,
                           z_m=4.0, beta_deg=20.0)
     assert isinstance(r, InfiniteSlopeResult)
@@ -51,7 +51,7 @@ def test_infinite_slope_with_cohesion():
 
 
 def test_infinite_slope_with_seepage_reduces_fs():
-    # mesmo caso, agora com poro-pressão u=20 kPa
+    # mesmo caso, agora com poro-pressêo u=20 kPa
     # num = 10 + (50.382686 − 20)·tan25 = 10 + 30.382686·0.4663077 = 10 + 14.16769 = 24.16769
     # FS = 24.16769/13.5 = 1.79020 (< 2.48103 sem água)
     dry = infinite_slope_fs(c_kpa=10.0, phi_deg=25.0, gamma_kn_m3=18.0,
@@ -160,7 +160,7 @@ def test_fellenius_rejects_invalid():
                      c_kpa=10.0, phi_deg=20.0)
 
 
-# --- validação --------------------------------------------------------------
+# --- validaçêo --------------------------------------------------------------
 def test_validate_slope_infinite_stable():
     r = infinite_slope_fs(c_kpa=10.0, phi_deg=25.0, gamma_kn_m3=18.0,
                           z_m=3.0, beta_deg=15.0)

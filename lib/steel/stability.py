@@ -1,12 +1,12 @@
-"""Barra comprimida — flambagem por flexão (NBR 8800:2008 §5.3).
+"""Barra comprimida — flambagem por flexêo (NBR 8800:2008 §5.3).
 
 Toda a aritmética vive aqui (camada Python determinística). O LLM apenas
 interpreta o problema, chama estas funções via MCP e explica o resultado.
 
 Hipóteses:
-- Flambagem global por flexão; ``Q = 1`` (seção compacta, sem flambagem local).
+- Flambagem global por flexêo; ``Q = 1`` (seçêo compacta, sem flambagem local).
 - A barra comprimida flamba no eixo de **menor inércia** -> ``Ne`` usa ``Iy``.
-- Coeficiente de ponderação da resistência ``γa1 = 1,1`` (NBR 8800 Tabela 3).
+- Coeficiente de ponderaçêo da resistência ``γa1 = 1,1`` (NBR 8800 Tabela 3).
 
 Conversões de unidade (cuidado no contorno):
 - ``E`` em kN/cm² = ``E[MPa]·0,1`` (200000 MPa -> 20000 kN/cm²).
@@ -23,7 +23,7 @@ from pydantic import BaseModel
 from lib.steel.profiles import ProfileProperties, get_profile
 
 # --- constantes normativas (NBR 8800:2008) ----------------------------------
-GAMMA_A1 = 1.10          # ponderação da resistência ao escoamento (Tabela 3)
+GAMMA_A1 = 1.10          # ponderaçêo da resistência ao escoamento (Tabela 3)
 LAMBDA0_TRANSITION = 1.5  # fronteira das curvas de χ (§5.3.3)
 MPA_TO_KN_CM2 = 0.1      # 1 MPa = 0,1 kN/cm²
 
@@ -47,7 +47,7 @@ class CompressionResult(BaseModel):
     # resultados intermediários
     ne_kn: float          # carga de flambagem elástica (Euler)
     lambda_0: float       # índice de esbeltez reduzido
-    chi: float            # fator de redução por flambagem
+    chi: float            # fator de reduçêo por flambagem
     # capacidade resistente de cálculo
     nc_rd_kn: float       # Nc,Rd
     # metadados
@@ -78,7 +78,7 @@ def lambda_0(q: float, area_cm2: float, fy_mpa: float, ne_kn: float) -> float:
 
 
 def chi_factor(lambda_0: float) -> float:
-    """Fator de redução por flambagem ``χ`` (NBR 8800:2008 §5.3.3).
+    """Fator de reduçêo por flambagem ``χ`` (NBR 8800:2008 §5.3.3).
 
     - ``λ0 ≤ 1,5`` -> ``χ = 0,658^(λ0²)``
     - ``λ0 > 1,5`` -> ``χ = 0,877/λ0²``
@@ -99,10 +99,10 @@ def design_compression(
 ) -> CompressionResult:
     """Dimensiona barra comprimida a partir de um perfil da tabela (NBR 8800 §5.3).
 
-    A flambagem por flexão governa no eixo de menor inércia, portanto ``Ne`` é
+    A flambagem por flexêo governa no eixo de menor inércia, portanto ``Ne`` é
     calculado com ``Iy`` do perfil. ``Nc,Rd = χ·Q·A·fy/γa1``.
 
-    Abstenção: perfil inexistente propaga ``KeyError`` (de :func:`get_profile`).
+    Abstençêo: perfil inexistente propaga ``KeyError`` (de :func:`get_profile`).
     """
     prof = get_profile(designacao, base)
     i_cm4 = prof.iy_cm4                      # eixo fraco governa a flambagem
@@ -118,7 +118,7 @@ def design_compression(
     if lam > 3.0:
         warnings.append(
             f"λ0 = {lam:.2f} > 3,0: barra muito esbelta — rever travamentos ou "
-            "aumentar a seção (NBR 8800 §5.3)."
+            "aumentar a seçêo (NBR 8800 §5.3)."
         )
 
     return CompressionResult(

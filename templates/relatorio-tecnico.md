@@ -5,13 +5,13 @@
 **Assunto:** [Assunto do Relatório]
 **Elaborado por:** [Nome / CREA]
 **Data:** [Data]
-**Revisão:** [0]
+**Revisêo:** [0]
 
 ---
 
-## 1. Introdução
+## 1. Introduçêo
 
-[Contextualização do problema e objetivo do relatório]
+[Contextualizaçêo do problema e objetivo do relatório]
 
 ---
 
@@ -23,7 +23,7 @@
 
 ## 3. Documentos de Referência
 
-| Documento | Revisão | Data |
+| Documento | Revisêo | Data |
 |-----------|---------|------|
 | — | — | — |
 
@@ -31,7 +31,7 @@
 
 ## 4. Metodologia
 
-[Descrição dos métodos e ferramentas utilizados]
+[Descriçêo dos métodos e ferramentas utilizados]
 
 ---
 
@@ -43,7 +43,7 @@
 
 ## 6. Resultados
 
-[Apresentação dos resultados obtidos]
+[Apresentaçêo dos resultados obtidos]
 
 ---
 
@@ -55,7 +55,7 @@
 
 ## 8. Responsabilidade Técnica
 
-> Este relatório foi elaborado com assistência de ferramentas de inteligência artificial. A responsabilidade técnica e legal é exclusiva do profissional habilitado signatário, conforme a Lei 5.194/66 e Resolução CONFEA/CREA vigente.
+> Este relatório foi elaborado com assistência de ferramentas de inteligência artificial. A responsabilidade técnica e legal é exclusiva do profissional habilitado signatário, conforme a Lei 5.194/66 e Resoluçêo CONFEA/CREA vigente.
 
 **Responsável Técnico:** ___________________________
 **CREA:** ___________________________

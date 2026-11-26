@@ -13,21 +13,21 @@ aterro e avaliando o material excedente a transportar:
 
 1. Volume de corte solto (transporte): V_solto = corte·Fe.
 2. Balanço = corte − aterro (positivo = excesso/bota-fora; negativo = déficit/empréstimo).
-3. Situação (excesso, déficit ou equilíbrio) e os volumes de empréstimo e bota-fora
+3. Situaçêo (excesso, déficit ou equilíbrio) e os volumes de empréstimo e bota-fora
    (este também em volume solto).
 
-## Fora do escopo (abstenção)
+## Fora do escopo (abstençêo)
 
-Diagrama de massas (Brückner), distância média de transporte (DMT), seleção de
-equipamentos, custo de movimentação e compactação no campo (Proctor/GC) não são tratados
-— princípio da abstenção. Fe deve ser aferido em laboratório.
+Diagrama de massas (Brückner), distância média de transporte (DMT), seleçêo de
+equipamentos, custo de movimentaçêo e compactaçêo no campo (Proctor/GC) nêo sêo tratados
+— princípio da abstençêo. Fe deve ser aferido em laboratório.
 
-## Geração
+## Geraçêo
 
 `solution.md` é gerado pela engine `lib.service.solve_earthwork`.
 
 ## Referência
 
-DNIT, Manual de Implantação Básica de Rodovia (método das áreas médias). Para corte =
+DNIT, Manual de Implantaçêo Básica de Rodovia (método das áreas médias). Para corte =
 5000 m³, aterro = 3000 m³ e Fe = 1,25: balanço = +2000 m³ (excesso/bota-fora); volume
 solto a transportar = 6250 m³.

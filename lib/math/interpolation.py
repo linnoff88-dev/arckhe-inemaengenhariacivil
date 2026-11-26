@@ -1,15 +1,15 @@
-"""Interpolação de tabelas de norma (Fase 5).
+"""Interpolaçêo de tabelas de norma (Fase 5).
 
 Funções puras e sem estado para consultar tabelas normativas (ex.: coeficientes
-tabelados em função de um ou dois parâmetros). Toda a aritmética vive aqui; o LLM
+tabelados em funçêo de um ou dois parâmetros). Toda a aritmética vive aqui; o LLM
 apenas chama estas funções via MCP e interpreta o resultado.
 
-Princípio da abstenção
+Princípio da abstençêo
 -----------------------
-Não se extrapola fora do domínio tabelado: um ponto fora dos limites levanta
+Nêo se extrapola fora do domínio tabelado: um ponto fora dos limites levanta
 ``ValueError`` em vez de devolver um número possivelmente inseguro. ``nearest`` é a
-exceção consciente — devolve sempre um valor já existente na tabela (o nó mais
-próximo), nunca um valor calculado por extrapolação.
+exceçêo consciente — devolve sempre um valor já existente na tabela (o nó mais
+próximo), nunca um valor calculado por extrapolaçêo.
 
 Convenções
 ----------
@@ -31,20 +31,20 @@ def _check_axis(xs: Sequence[float], nome: str = "xs") -> None:
         if not (b > a):
             raise ValueError(
                 f"{nome} deve ser estritamente crescente; "
-                f"violação em {a!r} -> {b!r}."
+                f"violaçêo em {a!r} -> {b!r}."
             )
 
 
 def linear_interp(x: float, xs: Sequence[float], ys: Sequence[float]) -> float:
-    """Interpolação linear de ``y(x)`` numa tabela 1D.
+    """Interpolaçêo linear de ``y(x)`` numa tabela 1D.
 
     ``xs`` deve ser estritamente crescente e ``ys`` ter o mesmo comprimento.
     Um ``x`` exatamente igual a um nó devolve o próprio ``y``. Fora do intervalo
-    ``[xs[0], xs[-1]]`` levanta ``ValueError`` (sem extrapolação — princípio da
-    abstenção).
+    ``[xs[0], xs[-1]]`` levanta ``ValueError`` (sem extrapolaçêo — princípio da
+    abstençêo).
 
     Raises:
-        ValueError: comprimentos diferentes, ``xs`` não monotônico/curto, ou ``x``
+        ValueError: comprimentos diferentes, ``xs`` nêo monotônico/curto, ou ``x``
             fora do domínio tabelado.
     """
     if len(xs) != len(ys):
@@ -56,7 +56,7 @@ def linear_interp(x: float, xs: Sequence[float], ys: Sequence[float]) -> float:
     if x < xs[0] or x > xs[-1]:
         raise ValueError(
             f"x={x} fora do domínio tabelado [{xs[0]}, {xs[-1]}]; "
-            "extrapolação proibida (princípio da abstenção)."
+            "extrapolaçêo proibida (princípio da abstençêo)."
         )
 
     # localiza o intervalo [xs[i], xs[i+1]] que contém x
@@ -79,12 +79,12 @@ def bilinear_interp(
     ys: Sequence[float],
     grid: Sequence[Sequence[float]],
 ) -> float:
-    """Interpolação bilinear de ``z(x, y)`` numa grade tabelada.
+    """Interpolaçêo bilinear de ``z(x, y)`` numa grade tabelada.
 
     ``grid[i][j]`` é o valor no nó ``(xs[i], ys[j])``; ``xs`` e ``ys`` devem ser
     estritamente crescentes. No centro de uma célula o resultado é a média dos
     quatro cantos; nos nós devolve o próprio valor. Fora dos limites em ``x`` ou
-    ``y`` levanta ``ValueError`` (sem extrapolação).
+    ``y`` levanta ``ValueError`` (sem extrapolaçêo).
 
     Raises:
         ValueError: ``xs``/``ys`` inválidos, ``grid`` com dimensões incompatíveis,
@@ -106,12 +106,12 @@ def bilinear_interp(
     if x < xs[0] or x > xs[-1]:
         raise ValueError(
             f"x={x} fora do domínio tabelado [{xs[0]}, {xs[-1]}]; "
-            "extrapolação proibida (princípio da abstenção)."
+            "extrapolaçêo proibida (princípio da abstençêo)."
         )
     if y < ys[0] or y > ys[-1]:
         raise ValueError(
             f"y={y} fora do domínio tabelado [{ys[0]}, {ys[-1]}]; "
-            "extrapolação proibida (princípio da abstenção)."
+            "extrapolaçêo proibida (princípio da abstençêo)."
         )
 
     i = min(bisect.bisect_right(xs, x) - 1, len(xs) - 2)
@@ -138,7 +138,7 @@ def bilinear_interp(
 def nearest(x: float, xs: Sequence[float], ys: Sequence[float]) -> float:
     """Vizinho mais próximo: devolve o ``y`` do nó cujo ``xs`` está mais perto de ``x``.
 
-    Não interpola nem extrapola — devolve sempre um valor já tabelado, o que o
+    Nêo interpola nem extrapola — devolve sempre um valor já tabelado, o que o
     torna seguro mesmo para ``x`` fora do intervalo (clampa ao nó extremo). Em
     caso de empate, escolhe o menor índice.
 

@@ -1,7 +1,7 @@
 """Testes dos orquestradores de alto nível da Fase 2 (pilar, sapata, lajes).
 
 Cada ``solve_*`` deve devolver o mesmo pacote serializável da viga: resultado,
-validação, memorial, aviso (com a Lei 6.496/77) e o flag ``aprovado`` coerente.
+validaçêo, memorial, aviso (com a Lei 6.496/77) e o flag ``aprovado`` coerente.
 """
 
 from lib.service import (
@@ -18,7 +18,7 @@ def _assert_bundle(bundle: dict) -> None:
     assert set(bundle) >= _KEYS
     assert "6.496/77" in bundle["aviso"]
     assert "RESPONSABILIDADE TÉCNICA" in bundle["memorial_markdown"]
-    # coerência: aprovado reflete a validação embutida
+    # coerência: aprovado reflete a validaçêo embutida
     assert bundle["aprovado"] == bundle["validacao"]["passed"]
 
 
@@ -44,7 +44,7 @@ def test_solve_footing_bundle_approved():
 
 
 def test_solve_footing_bundle_overstressed_rejected():
-    # σ_solo ligeiramente acima de σ_adm => a validação deve reprovar (coerência).
+    # σ_solo ligeiramente acima de σ_adm => a validaçêo deve reprovar (coerência).
     bundle = solve_square_footing(
         nk_kn=600.0, sigma_adm_kpa=150.0, pilar_a_cm=30.0, pilar_b_cm=30.0,
         fck_mpa=25.0, fyk_mpa=500.0,

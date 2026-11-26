@@ -2,13 +2,13 @@
 
 Toda a aritmética vive aqui (camada Python determinística). O LLM apenas interpreta
 o problema, chama estas funções via MCP e explica o resultado. O aviso de
-responsabilidade técnica NÃO é inserido aqui (entra na camada de integração).
+responsabilidade técnica NêO é inserido aqui (entra na camada de integraçêo).
 
 Fonte do método
 ---------------
 DNER (1981), "Método de Projeto de Pavimentos Flexíveis" (Eng. Murillo Lopes de
-Souza), reproduzido no DNIT (2006) "Manual de Pavimentação". O dimensionamento é
-empírico, baseado no CBR do subleito e no número N de solicitações do eixo padrão
+Souza), reproduzido no DNIT (2006) "Manual de Pavimentaçêo". O dimensionamento é
+empírico, baseado no CBR do subleito e no número N de solicitações do eixo padrêo
 de 8,2 tf.
 
 Hipóteses adotadas
@@ -18,23 +18,23 @@ Hipóteses adotadas
 
        H = 77,67 · N^0,0482 · CBR^-0,598   [cm]
 
-   (curva de ajuste largamente citada na literatura de pavimentação brasileira —
-   aproximação do nomograma; documentada explicitamente como hipótese).
+   (curva de ajuste largamente citada na literatura de pavimentaçêo brasileira —
+   aproximaçêo do nomograma; documentada explicitamente como hipótese).
 2. Coeficientes de equivalência estrutural K (DNER): revestimento em concreto
    asfáltico K_R = 2,0; base granular K_B = 1,0; sub-base granular K_S = 1,0;
-   reforço do subleito K_ref = 1,0. São parametrizáveis na função.
-3. Verificação por inequações de equivalência estrutural (DNER):
+   reforço do subleito K_ref = 1,0. Sêo parametrizáveis na funçêo.
+3. Verificaçêo por inequações de equivalência estrutural (DNER):
        R·K_R + B·K_B                         >= H20   (espessura sobre a sub-base)
        R·K_R + B·K_B + S·K_S                 >= Hn    (sobre o reforço, se houver)
        R·K_R + B·K_B + S·K_S + Ref·K_ref     >= Hm    (sobre o subleito)
    onde H20 usa CBR = 20 (mínimo exigido para a sub-base), Hn usa o CBR do reforço
    e Hm usa o CBR do subleito.
-4. Espessura mínima do revestimento betuminoso pela tabela do DNER em função de N.
+4. Espessura mínima do revestimento betuminoso pela tabela do DNER em funçêo de N.
 5. Espessuras das camadas granulares adotadas em cm inteiros (arredondamento para
-   cima) e respeitando mínimos construtivos/de compactação.
+   cima) e respeitando mínimos construtivos/de compactaçêo.
 
 O método é válido para subleito com 2% <= CBR <= 20% (acima disso a espessura é
-governada por mínimos construtivos) e expansão <= 2% (não verificada aqui).
+governada por mínimos construtivos) e expansêo <= 2% (nêo verificada aqui).
 """
 
 from __future__ import annotations
@@ -43,7 +43,7 @@ import math
 
 from pydantic import BaseModel
 
-# --- faixas de validade (abstenção fora delas) ------------------------------
+# --- faixas de validade (abstençêo fora delas) ------------------------------
 CBR_MIN = 2.0          # % — abaixo, subleito impróprio para o método empírico
 CBR_MAX = 20.0         # % — acima, espessura governada por mínimos construtivos
 N_MIN = 1.0e4          # número N — limite inferior razoável do método
@@ -56,7 +56,7 @@ K_BASE_PADRAO = 1.0    # base granular (brita graduada / estabilizada)
 K_SUBBASE_PADRAO = 1.0  # sub-base granular
 K_REFORCO_PADRAO = 1.0  # reforço do subleito
 
-# --- coeficiente da equação de ajuste do ábaco DNER -------------------------
+# --- coeficiente da equaçêo de ajuste do ábaco DNER -------------------------
 _A_COEF = 77.67
 _N_EXP = 0.0482
 _CBR_EXP = -0.598
@@ -70,7 +70,7 @@ TOL = 1e-6
 
 
 class PavementInequality(BaseModel):
-    """Inequação de equivalência estrutural verificada (DNER)."""
+    """Inequaçêo de equivalência estrutural verificada (DNER)."""
     nome: str
     esquerda_cm: float   # Σ espessura·K acumulada (material granular equivalente)
     direita_cm: float    # espessura H exigida sobre a camada (CBR de referência)
@@ -98,7 +98,7 @@ class PavementResult(BaseModel):
     reforco_cm: float | None     # reforço do subleito (se houver)
     r_min_cm: float              # revestimento mínimo (tabela DNER)
     espessura_total_cm: float
-    # verificação
+    # verificaçêo
     inequacoes: list[PavementInequality]
     # metadados
     metodo: str = "DNER/DNIT empírico (CBR / número N)"
@@ -128,7 +128,7 @@ def numero_n(
     fator_regional: float = 1.0,
     taxa_crescimento: float = 0.0,
 ) -> float:
-    """Número N de solicitações do eixo padrão (8,2 tf) no período de projeto.
+    """Número N de solicitações do eixo padrêo (8,2 tf) no período de projeto.
 
     Fórmula adotada (DNER): ``N = 365 · Vt · FV · FR``, onde ``Vt`` é o volume
     total de veículos comerciais no sentido de projeto ao longo do período.
@@ -144,14 +144,14 @@ def numero_n(
 
     Volume acumulado:
       - t = 0:  Vt = 365 · Vm · P
-      - t > 0:  Vt = 365 · Vm · ((1+t)^P − 1) / t   (progressão geométrica)
+      - t > 0:  Vt = 365 · Vm · ((1+t)^P − 1) / t   (progressêo geométrica)
     """
     if volume_medio_diario < 0 or periodo_anos <= 0:
         raise ValueError("Vm deve ser >= 0 e o período de projeto > 0.")
     if fator_veiculo <= 0 or fator_regional <= 0:
         raise ValueError("Fatores FV e FR devem ser positivos.")
     if taxa_crescimento < 0:
-        raise ValueError("Taxa de crescimento não pode ser negativa.")
+        raise ValueError("Taxa de crescimento nêo pode ser negativa.")
 
     if taxa_crescimento == 0.0:
         vt = 365.0 * volume_medio_diario * periodo_anos
@@ -217,7 +217,7 @@ def design_flexible_pavement(
     ``r_cm`` permite fixar a espessura do revestimento; se omitido, usa-se o
     mínimo da tabela do DNER.
 
-    Devolve as espessuras adotadas por camada e a verificação das inequações de
+    Devolve as espessuras adotadas por camada e a verificaçêo das inequações de
     equivalência estrutural. Abstém-se (``ValueError``) para CBR fora de
     ``[2, 20]%`` ou N fora de ``[1e4, 1e8]``.
     """
@@ -229,7 +229,7 @@ def design_flexible_pavement(
     warnings: list[str] = []
     if cbr_reforco is not None and cbr_reforco <= cbr_subleito:
         warnings.append(
-            f"CBR do reforço ({cbr_reforco}%) não supera o do subleito "
+            f"CBR do reforço ({cbr_reforco}%) nêo supera o do subleito "
             f"({cbr_subleito}%): camada de reforço pouco eficaz."
         )
 

@@ -1,8 +1,8 @@
-# Estratégia de Evolução Futura
+# Estratégia de Evoluçêo Futura
 
 ## Princípio de Extensibilidade
 
-O sistema foi projetado para crescer sem reescrita. Cada ponto de extensão é isolado e não afeta os componentes existentes.
+O sistema foi projetado para crescer sem reescrita. Cada ponto de extensêo é isolado e nêo afeta os componentes existentes.
 
 ## Como Adicionar Novos Componentes
 
@@ -15,7 +15,7 @@ O sistema foi projetado para crescer sem reescrita. Cada ponto de extensão é i
 
 ### Adicionar um Novo Cálculo
 
-1. Adicionar função em `lib/<domínio>/arquivo.py`
+1. Adicionar funçêo em `lib/<domínio>/arquivo.py`
 2. Tipar input/output com Pydantic
 3. Adicionar testes em `tests/unit/`
 4. Registrar ferramenta no MCP server
@@ -63,7 +63,7 @@ Cada tabela normativa tem metadados:
 
 Quando uma norma for atualizada:
 1. Criar nova pasta `normas/NBR6118-2025/tables/`
-2. O sistema verifica `data_vigencia` e avisa se o cálculo usou versão anterior
+2. O sistema verifica `data_vigencia` e avisa se o cálculo usou versêo anterior
 
 ---
 
@@ -72,9 +72,9 @@ Quando uma norma for atualizada:
 | Etapa | Capacidade |
 |-------|-----------|
 | v1.0 | Plataforma completa (todas as 6 fases) |
-| v1.5 | Integração BIM (IFC, Revit API) |
+| v1.5 | Integraçêo BIM (IFC, Revit API) |
 | v2.0 | MEF completo (OpenSees, CalculiX via MCP) |
-| v2.5 | Integração AutoCAD/Revit para exportar detalhamento |
+| v2.5 | Integraçêo AutoCAD/Revit para exportar detalhamento |
 | v3.0 | Multi-projeto com base de dados central (PostgreSQL) |
 
 ---
@@ -83,7 +83,7 @@ Quando uma norma for atualizada:
 
 - **Clean Code:** funções com responsabilidade única
 - **SOLID:** especialmente SRP e OCP (aberto/fechado)
-- **DRY:** sem duplicação de lógica de cálculo
+- **DRY:** sem duplicaçêo de lógica de cálculo
 - **Tipos:** 100% tipado com mypy
-- **Testes:** toda função nova tem teste unitário
+- **Testes:** toda funçêo nova tem teste unitário
 - **Cobertura:** mínimo 90% nos módulos de cálculo

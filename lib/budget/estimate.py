@@ -11,8 +11,8 @@ Modelo:
 
 O BDI (Benefícios e Despesas Indiretas) é aplicado de forma simplificada como um
 percentual único sobre o custo direto. A faixa aceita é [0, 40] % (referência usual de
-obras de edificação, Acórdão TCU 2622/2013). A composição detalhada do BDI e o
-enquadramento da obra são responsabilidade do engenheiro/orçamentista.
+obras de edificaçêo, Acórdêo TCU 2622/2013). A composiçêo detalhada do BDI e o
+enquadramento da obra sêo responsabilidade do engenheiro/orçamentista.
 """
 
 from __future__ import annotations
@@ -21,7 +21,7 @@ from pydantic import BaseModel
 
 from lib.budget.sinapi import SinapiItem, lookup
 
-BDI_MIN_PCT = 0.0     # BDI não negativo
+BDI_MIN_PCT = 0.0     # BDI nêo negativo
 BDI_MAX_PCT = 40.0    # teto da faixa aceita pelo método simplificado
 
 
@@ -65,7 +65,7 @@ def montar_orcamento(
     Para cada item, consulta o preço na ``base`` (tipo SINAPI), calcula
     custo = quantidade × preço unitário, soma o subtotal e aplica o BDI.
 
-    Abstenção / validação de entrada:
+    Abstençêo / validaçêo de entrada:
     - código inexistente na base -> ``KeyError`` (propagado de :func:`lookup`);
     - quantidade negativa -> ``ValueError``;
     - BDI fora de [0, 40] % -> ``ValueError``;

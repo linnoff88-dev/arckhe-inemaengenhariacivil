@@ -1,8 +1,8 @@
-# Exemplo: Ligação Parafusada (cortante)
+# Exemplo: Ligaçêo Parafusada (cortante)
 
 ## Problema
 
-Dimensionar o número de parafusos de uma ligação solicitada ao cortante:
+Dimensionar o número de parafusos de uma ligaçêo solicitada ao cortante:
 
 - **Força solicitante de cálculo:** 200 kN
 - **Parafuso:** M20 (db = 20 mm), fub = 800 MPa (ASTM A325 / classe 8.8)
@@ -13,16 +13,16 @@ Dimensionar o número de parafusos de uma ligação solicitada ao cortante:
 ## Verificações Necessárias
 
 1. Resistência ao cortante por parafuso Fv,Rd (§6.3.3.2)
-2. Resistência à pressão de contato / esmagamento Fc,Rd (§6.3.3.3)
+2. Resistência à pressêo de contato / esmagamento Fc,Rd (§6.3.3.3)
 3. Resistência governante = mínimo(Fv,Rd, Fc,Rd)
-4. Número de parafusos n = ⌈força/Rd⌉ e capacidade total da ligação
+4. Número de parafusos n = ⌈força/Rd⌉ e capacidade total da ligaçêo
 
-## Fora do escopo (abstenção)
+## Fora do escopo (abstençêo)
 
 Espaçamentos e distâncias às bordas, ruptura por rasgamento / colapso de bloco,
-ligações por atrito (protensão), tração nos parafusos — de responsabilidade do
+ligações por atrito (protensêo), traçêo nos parafusos — de responsabilidade do
 engenheiro no detalhamento. Assume-se que os espaçamentos/bordas mínimos da
-NBR 8800 são atendidos (parcela 1,2·lf não governa o esmagamento).
+NBR 8800 sêo atendidos (parcela 1,2·lf nêo governa o esmagamento).
 
 ## Referência
 

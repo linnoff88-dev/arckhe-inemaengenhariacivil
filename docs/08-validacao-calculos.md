@@ -1,10 +1,10 @@
-# Estratégia de Validação dos Cálculos
+# Estratégia de Validaçêo dos Cálculos
 
 ## Princípio
 
 **Todo cálculo passa por no mínimo quatro verificações independentes antes de ser apresentado ao usuário.**
 
-## Pipeline de Validação
+## Pipeline de Validaçêo
 
 ```python
 def validate_calculation(result: CalculationResult) -> ValidationReport:
@@ -25,7 +25,7 @@ def validate_calculation(result: CalculationResult) -> ValidationReport:
 
 ## Verificações Detalhadas
 
-### 1. Verificação Dimensional (units_check.py)
+### 1. Verificaçêo Dimensional (units_check.py)
 
 Usa `pint` para garantir consistência dimensional.
 
@@ -33,7 +33,7 @@ Usa `pint` para garantir consistência dimensional.
 # Exemplo
 Md = 50 * ureg.kilonewton * ureg.meter
 b = 20 * ureg.centimeter
-# Qualquer operação com unidades inconsistentes lança DimensionalityError
+# Qualquer operaçêo com unidades inconsistentes lança DimensionalityError
 ```
 
 **Casos detectados:**
@@ -41,7 +41,7 @@ b = 20 * ureg.centimeter
 - cm² retornado onde esperado cm
 - Adimensional onde esperado unidade de força
 
-### 2. Verificação Física (physical_check.py)
+### 2. Verificaçêo Física (physical_check.py)
 
 Limites físicos razoáveis para cada grandeza:
 
@@ -53,7 +53,7 @@ Limites físicos razoáveis para cada grandeza:
 | x/d | 0 | 0.628 | Domínio 2/3 |
 | σ_solo | 50 kPa | 1000 kPa | Solos comuns |
 
-### 3. Verificação Normativa (normative_check.py)
+### 3. Verificaçêo Normativa (normative_check.py)
 
 Verifica limites prescritos nas normas:
 
@@ -66,17 +66,17 @@ assert As >= As_min, f"As={As:.2f} < As_min={As_min:.2f} (NBR 6118 Tab.17.3)"
 assert cobrimento >= cobrimento_min[classe_agressividade], "Cobrimento insuficiente"
 ```
 
-### 4. Verificação de Equilíbrio (equilibrium_check.py)
+### 4. Verificaçêo de Equilíbrio (equilibrium_check.py)
 
 Para estruturas: soma de forças e momentos = 0.
 
 ```python
-# Verificação de equilíbrio de seção
+# Verificaçêo de equilíbrio de seçêo
 soma_forcas = compressao_concreto + compressao_aco - tracao_aco
-assert abs(soma_forcas) < 0.01 * Nd, "Equilíbrio de forças não satisfeito"
+assert abs(soma_forcas) < 0.01 * Nd, "Equilíbrio de forças nêo satisfeito"
 ```
 
-### 5. Comparação de Métodos (para cálculos críticos)
+### 5. Comparaçêo de Métodos (para cálculos críticos)
 
 Para estacas: Aoki-Velloso vs Décourt-Quaresma.
 
@@ -86,10 +86,10 @@ R_decourt = decourt_quaresma(spt_data, pile_type, diameter)
 
 divergence = abs(R_aoki - R_decourt) / max(R_aoki, R_decourt)
 if divergence > 0.20:
-    warn(f"Divergência de {divergence:.0%} entre métodos. Revisão recomendada.")
+    warn(f"Divergência de {divergence:.0%} entre métodos. Revisêo recomendada.")
 ```
 
-## Saída da Validação
+## Saída da Validaçêo
 
 ```json
 {
@@ -112,10 +112,10 @@ if divergence > 0.20:
 ```
 ⚠️ RESPONSABILIDADE TÉCNICA
 
-Este cálculo é uma ferramenta de suporte à decisão de engenharia.
+Este cálculo é uma ferramenta de suporte à decisêo de engenharia.
 A responsabilidade técnica e legal é exclusiva do engenheiro responsável
-pelo projeto, formalizada via ART (Anotação de Responsabilidade Técnica),
-conforme a Lei 6.496/77, a Lei 5.194/66 e a Resolução CONFEA/CREA vigente.
+pelo projeto, formalizada via ART (Anotaçêo de Responsabilidade Técnica),
+conforme a Lei 6.496/77, a Lei 5.194/66 e a Resoluçêo CONFEA/CREA vigente.
 
 Hipóteses adotadas: [listadas acima]
 Limitações: [listadas acima]

@@ -1,12 +1,12 @@
 """Base local de preços de insumos/serviços tipo SINAPI — tabela consultável.
 
 Camada de dados determinística: lê um CSV local (amostra) e devolve preços unitários
-para que o agente nunca invente um custo (princípio da abstenção). Um código que não
-existe na base levanta ``KeyError`` — o agente deve então abster-se.
+para que o agente nunca invente um custo (princípio da abstençêo). Um código que nêo
+existe na base levanta ``KeyError`` — o agente deve entêo abster-se.
 
-ATENÇÃO: os valores do CSV de amostra (``data/sinapi_amostra.csv``) são ILUSTRATIVOS,
-apenas para demonstração/teste. Em uso real, substitua pela tabela SINAPI vigente e
-regional (desonerada/não desonerada, mês de referência e UF aplicáveis ao projeto).
+ATENÇêO: os valores do CSV de amostra (``data/sinapi_amostra.csv``) sêo ILUSTRATIVOS,
+apenas para demonstraçêo/teste. Em uso real, substitua pela tabela SINAPI vigente e
+regional (desonerada/nêo desonerada, mês de referência e UF aplicáveis ao projeto).
 
 Colunas esperadas no CSV: ``codigo,descricao,unidade,preco_unitario``.
 """
@@ -22,7 +22,7 @@ COLUNAS_OBRIGATORIAS = ("codigo", "descricao", "unidade", "preco_unitario")
 
 
 class SinapiItem(BaseModel):
-    """Item de preço da base: código, descrição, unidade e preço unitário (R$)."""
+    """Item de preço da base: código, descriçêo, unidade e preço unitário (R$)."""
 
     codigo: str
     descricao: str
@@ -35,11 +35,11 @@ def load_sinapi(csv_path: str | Path) -> dict[str, SinapiItem]:
 
     Usa pandas para ler o arquivo. O código é sempre tratado como string (chave
     estável, evita perder zeros à esquerda). Levanta ``FileNotFoundError`` se o
-    arquivo não existir, ``ValueError`` se faltar coluna ou se houver código duplicado.
+    arquivo nêo existir, ``ValueError`` se faltar coluna ou se houver código duplicado.
     """
     caminho = Path(csv_path)
     if not caminho.exists():
-        raise FileNotFoundError(f"Base de preços não encontrada: {caminho}")
+        raise FileNotFoundError(f"Base de preços nêo encontrada: {caminho}")
 
     df = pd.read_csv(caminho, dtype={"codigo": str})
     faltando = [c for c in COLUNAS_OBRIGATORIAS if c not in df.columns]
@@ -65,13 +65,13 @@ def load_sinapi(csv_path: str | Path) -> dict[str, SinapiItem]:
 def lookup(codigo: str, base: dict[str, SinapiItem]) -> SinapiItem:
     """Consulta um item por ``codigo`` na ``base`` carregada.
 
-    Levanta ``KeyError`` (com dica) se o código não estiver tabelado — o agente deve
+    Levanta ``KeyError`` (com dica) se o código nêo estiver tabelado — o agente deve
     abster-se em vez de inventar um preço.
     """
     chave = str(codigo).strip()
     if chave not in base:
         raise KeyError(
-            f"Código '{codigo}' não consta na base de preços (amostra com "
+            f"Código '{codigo}' nêo consta na base de preços (amostra com "
             f"{len(base)} itens). Verifique a tabela SINAPI vigente/regional."
         )
     return base[chave]

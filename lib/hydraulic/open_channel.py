@@ -12,10 +12,10 @@ Fonte: Chow, "Open-Channel Hydraulics" (1959); Azevedo Netto, "Manual de Hidráu
 Geometrias suportadas:
 - Retangular: largura de fundo ``b`` e tirante ``y``.
 - Trapezoidal: fundo ``b``, tirante ``y`` e talude ``z`` (z = horizontal/vertical).
-- Circular (seção parcialmente cheia): diâmetro ``D`` e tirante ``y``,
+- Circular (seçêo parcialmente cheia): diâmetro ``D`` e tirante ``y``,
   com ângulo θ = 2·arccos(1 − 2y/D), A = (D²/8)(θ − sen θ), P = (D/2)·θ.
 
-O tirante normal (dado Q) é resolvido numericamente por bisseção (scipy.optimize.brentq).
+O tirante normal (dado Q) é resolvido numericamente por bisseçêo (scipy.optimize.brentq).
 """
 
 from __future__ import annotations
@@ -32,7 +32,7 @@ class OpenChannelResult(BaseModel):
     """Resultado do escoamento uniforme (Manning) em canal aberto.
 
     ``b_m`` e ``z`` valem para seções retangular/trapezoidal; ``diametro_m`` para a
-    circular. Os demais campos são sempre preenchidos.
+    circular. Os demais campos sêo sempre preenchidos.
     """
     geometria: str
     n: float
@@ -56,7 +56,7 @@ def _check_manning(n: float, S: float) -> None:
 
 
 def manning_discharge(A_m2: float, P_m: float, n: float, S: float) -> float:
-    """Vazão de Manning Q = (1/n)·A·R^(2/3)·S^(1/2) [m³/s], com R = A/P."""
+    """Vazêo de Manning Q = (1/n)·A·R^(2/3)·S^(1/2) [m³/s], com R = A/P."""
     _check_manning(n, S)
     if A_m2 <= 0 or P_m <= 0:
         raise ValueError(f"Área A={A_m2} e perímetro P={P_m} devem ser positivos.")
@@ -80,7 +80,7 @@ def _trap_area_perimeter(b_m: float, y_m: float, z: float) -> tuple[float, float
     if y_m <= 0:
         raise ValueError(f"Tirante y={y_m} m deve ser positivo.")
     if z < 0:
-        raise ValueError(f"Talude z={z} (H:V) não pode ser negativo.")
+        raise ValueError(f"Talude z={z} (H:V) nêo pode ser negativo.")
     area = (b_m + z * y_m) * y_m
     perim = b_m + 2.0 * y_m * math.sqrt(1.0 + z**2)
     return area, perim
@@ -97,10 +97,10 @@ def _circ_area_perimeter(D_m: float, y_m: float) -> tuple[float, float]:
     return area, perim
 
 
-# ----------------------------------------------------------- vazão dado o tirante
+# ----------------------------------------------------------- vazêo dado o tirante
 
 def manning_rectangular(b_m: float, y_m: float, n: float, S: float) -> OpenChannelResult:
-    """Vazão em canal retangular pela fórmula de Manning."""
+    """Vazêo em canal retangular pela fórmula de Manning."""
     _check_manning(n, S)
     A, P = _rect_area_perimeter(b_m, y_m)
     Q = manning_discharge(A, P, n, S)
@@ -111,7 +111,7 @@ def manning_rectangular(b_m: float, y_m: float, n: float, S: float) -> OpenChann
 
 
 def manning_trapezoidal(b_m: float, y_m: float, z: float, n: float, S: float) -> OpenChannelResult:
-    """Vazão em canal trapezoidal pela fórmula de Manning (talude z = H:V)."""
+    """Vazêo em canal trapezoidal pela fórmula de Manning (talude z = H:V)."""
     _check_manning(n, S)
     A, P = _trap_area_perimeter(b_m, y_m, z)
     Q = manning_discharge(A, P, n, S)
@@ -122,7 +122,7 @@ def manning_trapezoidal(b_m: float, y_m: float, z: float, n: float, S: float) ->
 
 
 def manning_circular(D_m: float, y_m: float, n: float, S: float) -> OpenChannelResult:
-    """Vazão em conduto circular parcialmente cheio pela fórmula de Manning."""
+    """Vazêo em conduto circular parcialmente cheio pela fórmula de Manning."""
     _check_manning(n, S)
     A, P = _circ_area_perimeter(D_m, y_m)
     Q = manning_discharge(A, P, n, S)
@@ -135,10 +135,10 @@ def manning_circular(D_m: float, y_m: float, n: float, S: float) -> OpenChannelR
 # --------------------------------------------------------- tirante normal (dado Q)
 
 def normal_depth_rectangular(Q_m3s: float, b_m: float, n: float, S: float) -> float:
-    """Tirante normal y [m] num canal retangular para a vazão ``Q_m3s`` (brentq)."""
+    """Tirante normal y [m] num canal retangular para a vazêo ``Q_m3s`` (brentq)."""
     _check_manning(n, S)
     if Q_m3s <= 0:
-        raise ValueError(f"Vazão Q={Q_m3s} m³/s deve ser positiva.")
+        raise ValueError(f"Vazêo Q={Q_m3s} m³/s deve ser positiva.")
 
     def f(y: float) -> float:
         A, P = _rect_area_perimeter(b_m, y)
@@ -148,10 +148,10 @@ def normal_depth_rectangular(Q_m3s: float, b_m: float, n: float, S: float) -> fl
 
 
 def normal_depth_trapezoidal(Q_m3s: float, b_m: float, z: float, n: float, S: float) -> float:
-    """Tirante normal y [m] num canal trapezoidal para a vazão ``Q_m3s`` (brentq)."""
+    """Tirante normal y [m] num canal trapezoidal para a vazêo ``Q_m3s`` (brentq)."""
     _check_manning(n, S)
     if Q_m3s <= 0:
-        raise ValueError(f"Vazão Q={Q_m3s} m³/s deve ser positiva.")
+        raise ValueError(f"Vazêo Q={Q_m3s} m³/s deve ser positiva.")
 
     def f(y: float) -> float:
         A, P = _trap_area_perimeter(b_m, y, z)
@@ -161,13 +161,13 @@ def normal_depth_trapezoidal(Q_m3s: float, b_m: float, z: float, n: float, S: fl
 
 
 def normal_depth_circular(Q_m3s: float, D_m: float, n: float, S: float) -> float:
-    """Tirante normal y [m] num conduto circular para a vazão ``Q_m3s`` (brentq).
+    """Tirante normal y [m] num conduto circular para a vazêo ``Q_m3s`` (brentq).
 
-    A busca fica no intervalo (0, D); se a vazão exceder a do conduto pleno, abstém-se.
+    A busca fica no intervalo (0, D); se a vazêo exceder a do conduto pleno, abstém-se.
     """
     _check_manning(n, S)
     if Q_m3s <= 0:
-        raise ValueError(f"Vazão Q={Q_m3s} m³/s deve ser positiva.")
+        raise ValueError(f"Vazêo Q={Q_m3s} m³/s deve ser positiva.")
 
     def f(y: float) -> float:
         A, P = _circ_area_perimeter(D_m, y)
@@ -175,7 +175,7 @@ def normal_depth_circular(Q_m3s: float, D_m: float, n: float, S: float) -> float
 
     if f(D_m * (1.0 - 1e-9)) < 0:
         raise ValueError(
-            f"Vazão Q={Q_m3s} m³/s excede a capacidade do conduto circular "
-            f"D={D_m} m a plena seção (S={S}, n={n})."
+            f"Vazêo Q={Q_m3s} m³/s excede a capacidade do conduto circular "
+            f"D={D_m} m a plena seçêo (S={S}, n={n})."
         )
     return brentq(f, 1e-6, D_m * (1.0 - 1e-9))

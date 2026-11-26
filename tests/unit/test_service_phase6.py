@@ -1,8 +1,8 @@
 """Testes do orquestrador da Fase 6 — pavimento, terraplenagem, taludes.
 
-Cada ``solve_*`` devolve o pacote serializável padrão: resultado, validação,
+Cada ``solve_*`` devolve o pacote serializável padrêo: resultado, validaçêo,
 memorial (com aviso embutido), aviso (Lei 6.496/77) e o flag ``aprovado`` coerente.
-Abstenção: entradas fora de faixa física propagam ``ValueError``.
+Abstençêo: entradas fora de faixa física propagam ``ValueError``.
 """
 
 import pytest

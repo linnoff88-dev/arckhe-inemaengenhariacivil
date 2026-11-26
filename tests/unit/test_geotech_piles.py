@@ -1,6 +1,6 @@
 """Testes de capacidade de estaca por SPT — Aoki-Velloso e Décourt-Quaresma.
 
-Valores de referência calculados à mão (a conta está nos comentários).
+Valores de referência calculados à mêo (a conta está nos comentários).
 Fontes:
   - Aoki, N. & Velloso, D.A. (1975). Coeficientes K, α por solo; F1, F2 por estaca.
   - Décourt, L. & Quaresma, A.R. (1978). Coeficiente C por solo; rl = 10·(N/3+1).
@@ -103,9 +103,9 @@ def test_piles_reject_invalid():
                      pile_type="pre-moldada", diameter_m=0.30)  # N>50
     with pytest.raises(ValueError):
         aoki_velloso([SoilLayer(n_spt=10, soil_type="rocha", thickness_m=3.0)],
-                     pile_type="pre-moldada", diameter_m=0.30)  # solo não tabelado
+                     pile_type="pre-moldada", diameter_m=0.30)  # solo nêo tabelado
     with pytest.raises(ValueError):
-        aoki_velloso(PERFIL_A, pile_type="helice", diameter_m=0.30)  # estaca não tabelada
+        aoki_velloso(PERFIL_A, pile_type="helice", diameter_m=0.30)  # estaca nêo tabelada
     with pytest.raises(ValueError):
         aoki_velloso(PERFIL_A, pile_type="pre-moldada", diameter_m=0.0)  # D<=0
     with pytest.raises(ValueError):

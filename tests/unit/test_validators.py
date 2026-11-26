@@ -1,4 +1,4 @@
-"""Testes da camada de validação obrigatória dos cálculos."""
+"""Testes da camada de validaçêo obrigatória dos cálculos."""
 
 from lib.concrete.beams import design_rectangular_beam
 from lib.concrete.columns import design_rectangular_column
@@ -109,7 +109,7 @@ def test_validate_column_flags_below_as_min():
 
 
 def test_validate_column_flags_capacity_shortfall():
-    # As insuficiente para o momento total -> capacidade < solicitação
+    # As insuficiente para o momento total -> capacidade < solicitaçêo
     r = _good_column().model_copy(
         update={"as_adopted_cm2": 0.10, "as_min_cm2": 0.05})
     rep = validate_column(r)

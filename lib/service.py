@@ -114,7 +114,7 @@ def solve_rectangular_beam(
 
 
 def _bundle(r, rep, memorial: str) -> dict:
-    """Empacota resultado + validação + memorial + aviso obrigatório (formato único)."""
+    """Empacota resultado + validaçêo + memorial + aviso obrigatório (formato único)."""
     return {
         "resultado": r.model_dump(),
         "validacao": rep.model_dump(),
@@ -186,7 +186,7 @@ def solve_one_way_slab(
     cobrimento_cm: float = 2.5,
     phi_mm: float = 10.0,
 ) -> dict:
-    """Resolve uma laje maciça armada em UMA direção e devolve o pacote completo."""
+    """Resolve uma laje maciça armada em UMA direçêo e devolve o pacote completo."""
     r = design_one_way_slab(
         lx_m=lx_m, g_knm2=g_knm2, q_knm2=q_knm2, h_cm=h_cm,
         fck_mpa=fck_mpa, fyk_mpa=fyk_mpa,
@@ -232,7 +232,7 @@ def solve_bearing_capacity(
     l_m: float | None = None,
     fs: float = 3.0,
 ) -> dict:
-    """Resolve a capacidade de carga de fundação rasa (Vesic) — pacote completo."""
+    """Resolve a capacidade de carga de fundaçêo rasa (Vesic) — pacote completo."""
     r = design_bearing_capacity(
         c_kpa=c_kpa, phi_deg=phi_deg, gamma_kn_m3=gamma_kn_m3, b_m=b_m,
         depth_df_m=depth_df_m, shape=shape, l_m=l_m, fs=fs,
@@ -358,7 +358,7 @@ def solve_pipe_flow(
         r = pipe_flow_darcy_weisbach(Q_m3s=Q_m3s, D_m=D_m, L_m=L_m, eps_m=eps_m, nu_m2s=nu_m2s)
     else:
         raise ValueError(
-            f"Método '{metodo}' não suportado; use 'hazen-williams' ou 'darcy-weisbach'."
+            f"Método '{metodo}' nêo suportado; use 'hazen-williams' ou 'darcy-weisbach'."
         )
     rep = validate_pipe_flow(r)
     memorial = render_pipe_flow_memorial(r, rep)
@@ -390,7 +390,7 @@ def solve_open_channel(
         r = manning_circular(D_m=D_m, y_m=y_m, n=n, S=S)
     else:
         raise ValueError(
-            f"Geometria '{geometria}' não suportada; use "
+            f"Geometria '{geometria}' nêo suportada; use "
             "'retangular', 'trapezoidal' ou 'circular'."
         )
     rep = validate_open_channel(r)
@@ -423,7 +423,7 @@ def solve_orcamento(
     """Monta um orçamento (custo direto + BDI) e devolve o pacote completo.
 
     ``itens`` é a lista de quantitativos ``{codigo, quantidade}``; os preços vêm da
-    base tipo SINAPI em ``csv_path`` (amostra ILUSTRATIVA por padrão). Carrega a base,
+    base tipo SINAPI em ``csv_path`` (amostra ILUSTRATIVA por padrêo). Carrega a base,
     monta o orçamento, valida a aritmética e gera o memorial. Propaga as abstenções dos
     núcleos (código inexistente, BDI fora de [0,40] %, quantidade negativa, lista vazia).
     """
@@ -448,8 +448,8 @@ def solve_compression(
 ) -> dict:
     """Resolve uma barra comprimida de aço (NBR 8800 §5.3) — pacote completo.
 
-    Carrega a tabela de perfis W (``DEFAULT_TABLE`` por padrão), dimensiona à flambagem
-    por flexão, valida e gera o memorial. Abstenção: perfil inexistente propaga
+    Carrega a tabela de perfis W (``DEFAULT_TABLE`` por padrêo), dimensiona à flambagem
+    por flexêo, valida e gera o memorial. Abstençêo: perfil inexistente propaga
     ``KeyError`` (de :func:`lib.steel.profiles.get_profile`).
     """
     base = load_profiles(json_path if json_path is not None else DEFAULT_TABLE)
@@ -472,7 +472,7 @@ def solve_bolted_connection(
     rosca_no_plano: bool = True,
     gamma_a2: float = 1.35,
 ) -> dict:
-    """Resolve uma ligação parafusada à cortante (NBR 8800 §6.3) — pacote completo."""
+    """Resolve uma ligaçêo parafusada à cortante (NBR 8800 §6.3) — pacote completo."""
     r = design_bolted_connection(
         forca_kn=forca_kn, db_mm=db_mm, fub_mpa=fub_mpa, t_mm=t_mm, fu_mpa=fu_mpa,
         planos=planos, rosca_no_plano=rosca_no_plano, gamma_a2=gamma_a2,
@@ -556,7 +556,7 @@ def solve_infinite_slope(
     """Resolve a estabilidade de talude infinito (FS) — pacote completo.
 
     FS = [c + (γ·z·cos²β − u)·tanφ] / (γ·z·sinβ·cosβ). Entradas fora de faixa
-    física levantam ``ValueError`` (abstenção).
+    física levantam ``ValueError`` (abstençêo).
     """
     r = infinite_slope_fs(
         c_kpa=c_kpa, phi_deg=phi_deg, gamma_kn_m3=gamma_kn_m3, z_m=z_m,
@@ -576,7 +576,7 @@ def solve_fellenius(
 
     ``slices`` aceita ``Slice`` ou ``dict`` ``{w_kn, alpha_deg, dl_m, u_kpa?}``.
     FS = Σ[c·ΔL + (W·cosα − u·ΔL)·tanφ] / Σ(W·sinα). Entradas inválidas levantam
-    ``ValueError`` (abstenção).
+    ``ValueError`` (abstençêo).
     """
     parsed = [s if isinstance(s, Slice) else Slice(**s) for s in slices]
     r = fellenius_fs(parsed, c_kpa=c_kpa, phi_deg=phi_deg)

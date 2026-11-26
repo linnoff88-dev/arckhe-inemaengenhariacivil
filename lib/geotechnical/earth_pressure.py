@@ -1,16 +1,16 @@
-"""Empuxo de terra sobre estruturas de contenção — Rankine e Coulomb.
+"""Empuxo de terra sobre estruturas de contençêo — Rankine e Coulomb.
 
 Toda a aritmética vive aqui (camada Python determinística). O LLM apenas interpreta
 o problema, chama estas funções via MCP e explica o resultado.
 
 Métodos e hipóteses
 -------------------
-Rankine (1857) — tardoz vertical liso, terrapleno horizontal, solo não coesivo:
+Rankine (1857) — tardoz vertical liso, terrapleno horizontal, solo nêo coesivo:
     Ka = tan²(45 − φ/2)        Kp = tan²(45 + φ/2)
     E  = 0,5·γ·H²·K            (empuxo por metro de muro, kN/m)
-    Ponto de aplicação a H/3 da base (distribuição triangular).
+    Ponto de aplicaçêo a H/3 da base (distribuiçêo triangular).
 
-Coulomb (1776) — atrito solo-muro δ, inclinação do tardoz β (da vertical) e do
+Coulomb (1776) — atrito solo-muro δ, inclinaçêo do tardoz β (da vertical) e do
 terrapleno α (da horizontal). Coeficiente ativo:
 
     Ka = cos²(φ−β) / [ cos²β · cos(δ+β) ·
@@ -24,8 +24,8 @@ Coeficiente passivo:
 Cross-check: com δ=β=α=0, Coulomb reduz a Rankine (Ka=cos²φ/(1+sinφ)²).
 Âncora φ=30°: Ka=1/3, Kp=3.
 
-Abstenção: entradas fora de faixa física (φ∉[0,50]°, γ∉[10,25] kN/m³, H≤0, δ∉[0,φ],
-α≥φ) levantam ``ValueError``. Empuxo de água, sobrecargas e coesão são tratados à
+Abstençêo: entradas fora de faixa física (φ∉[0,50]°, γ∉[10,25] kN/m³, H≤0, δ∉[0,φ],
+α≥φ) levantam ``ValueError``. Empuxo de água, sobrecargas e coesêo sêo tratados à
 parte pelo engenheiro.
 """
 
@@ -53,7 +53,7 @@ class RankineEarthPressureResult(BaseModel):
     # empuxos (kN/m)
     ea_active_kn_m: float
     ep_passive_kn_m: float
-    # ponto de aplicação (m da base)
+    # ponto de aplicaçêo (m da base)
     point_of_application_m: float
     # metadados
     metodo: str = "Rankine"
@@ -77,7 +77,7 @@ class CoulombEarthPressureResult(BaseModel):
     # empuxos (kN/m)
     ea_active_kn_m: float
     ep_passive_kn_m: float
-    # ponto de aplicação (m da base)
+    # ponto de aplicaçêo (m da base)
     point_of_application_m: float
     # metadados
     metodo: str = "Coulomb"
@@ -102,7 +102,7 @@ def rankine_earth_pressure(
 ) -> RankineEarthPressureResult:
     """Empuxo de Rankine: Ka=tan²(45−φ/2), Kp=tan²(45+φ/2), E=0,5·γ·H²·K.
 
-    Entradas fora de faixa física levantam ``ValueError`` (abstenção).
+    Entradas fora de faixa física levantam ``ValueError`` (abstençêo).
     """
     _check_common(gamma_kn_m3, h_m, phi_deg)
     phi = math.radians(phi_deg)
@@ -128,9 +128,9 @@ def coulomb_earth_pressure(
 ) -> CoulombEarthPressureResult:
     """Empuxo de Coulomb com atrito do muro δ, tardoz β e terrapleno α.
 
-    Convenção: β = inclinação do tardoz em relação à vertical; α = inclinação do
-    terrapleno em relação à horizontal; δ = ângulo de atrito solo-muro.
-    Entradas fora de faixa física levantam ``ValueError`` (abstenção).
+    Convençêo: β = inclinaçêo do tardoz em relaçêo à vertical; α = inclinaçêo do
+    terrapleno em relaçêo à horizontal; δ = ângulo de atrito solo-muro.
+    Entradas fora de faixa física levantam ``ValueError`` (abstençêo).
     """
     _check_common(gamma_kn_m3, h_m, phi_deg)
     if not (0.0 <= delta_deg <= phi_deg):

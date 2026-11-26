@@ -6,18 +6,18 @@ Consulta por palavra-chave/substring sobre os arquivos JSON em
 Natureza da busca
 -----------------
 É uma busca **LÉXICA**: casamento por substring, sem acento e case-insensitive
-(normalização Unicode NFKD). **Não** usa embeddings nem qualquer semântica — não
+(normalizaçêo Unicode NFKD). **Nêo** usa embeddings nem qualquer semântica — nêo
 "entende" sinônimos, só encontra o que está escrito nas tabelas.
 
-Princípio da abstenção
+Princípio da abstençêo
 ----------------------
-Devolve somente as entradas que estão nas tabelas; nunca inventa valores de
-norma. Um termo sem correspondência resulta em lista vazia (o agente deve então
+Devolve somente as entradas que estêo nas tabelas; nunca inventa valores de
+norma. Um termo sem correspondência resulta em lista vazia (o agente deve entêo
 abster-se em vez de chutar um valor).
 
 Sem efeitos colaterais
 ----------------------
-As funções apenas leem os arquivos e devolvem dados; não escrevem nada.
+As funções apenas leem os arquivos e devolvem dados; nêo escrevem nada.
 """
 
 from __future__ import annotations
@@ -29,17 +29,17 @@ from typing import Any
 
 
 def _normalize(s: object) -> str:
-    """Minúsculas + remoção de acentos (casamento robusto, sem acento)."""
+    """Minúsculas + remoçêo de acentos (casamento robusto, sem acento)."""
     nfkd = unicodedata.normalize("NFKD", str(s))
     sem_acento = "".join(c for c in nfkd if not unicodedata.combining(c))
     return sem_acento.lower().strip()
 
 
 def _is_catalog(value: Any) -> bool:
-    """True se ``value`` é um dicionário-catálogo (dict não vazio cujos valores são dicts).
+    """True se ``value`` é um dicionário-catálogo (dict nêo vazio cujos valores sêo dicts).
 
     Identifica os contêineres de linhas (``perfis``, ``solos``, ``estacas``…) e
-    descarta metadados como ``meta``/``unidades`` (cujos valores não são todos dicts).
+    descarta metadados como ``meta``/``unidades`` (cujos valores nêo sêo todos dicts).
     """
     return (
         isinstance(value, dict)
@@ -99,11 +99,11 @@ def buscar_tabela(termo: str, base_dir: str | Path = "normas") -> list[dict]:
 
     Args:
         termo: palavra-chave/substring a procurar (ex.: ``"W250"``, ``"aoki"``).
-        base_dir: raiz das normas (``"normas"`` por padrão).
+        base_dir: raiz das normas (``"normas"`` por padrêo).
 
     Returns:
         Lista de hits ``{"norma": str, "arquivo": str, "chave": str, "dados": dict}``.
-        Lista **vazia** quando nada casa (princípio da abstenção — não inventa valores).
+        Lista **vazia** quando nada casa (princípio da abstençêo — nêo inventa valores).
     """
     alvo = _normalize(termo)
     hits: list[dict] = []

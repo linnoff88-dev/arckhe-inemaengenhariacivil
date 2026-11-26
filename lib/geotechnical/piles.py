@@ -6,7 +6,7 @@ o problema, chama estas funções via MCP e explica o resultado.
 Métodos, hipóteses e tabelas
 ----------------------------
 Capacidade última = resistência de ponta (Rp) + atrito lateral (Rl). A resistência
-admissível é ``Radm = Rult / FS`` (FS = 2,0 por padrão, valor global usual da
+admissível é ``Radm = Rult / FS`` (FS = 2,0 por padrêo, valor global usual da
 NBR 6122 para métodos semiempíricos).
 
 Geometria da estaca: Ap = π·D²/4 (área de ponta), U = π·D (perímetro).
@@ -27,13 +27,13 @@ na base da última camada e o comprimento L é a soma das espessuras.
   C (kPa) por tipo de solo: argila=120 ; silte argiloso=200 ; silte arenoso=250 ;
   areia=400 (extrapolado às variações por predominância textural). Np = N na cota da
   ponta; Ns = média dos N ao longo do fuste (cada N limitado a [3,50]). Os fatores
-  α,β de Décourt-Quaresma (1996) por tipo de estaca/solo são adotados =1,0 (estaca
-  cravada/pré-moldada) — refinamento a cargo do engenheiro (abstenção).
+  α,β de Décourt-Quaresma (1996) por tipo de estaca/solo sêo adotados =1,0 (estaca
+  cravada/pré-moldada) — refinamento a cargo do engenheiro (abstençêo).
 
-Comparação (docs/08-validacao-calculos.md): roda os dois métodos e emite aviso se a
+Comparaçêo (docs/08-validacao-calculos.md): roda os dois métodos e emite aviso se a
 divergência relativa de Rult exceder 20%.
 
-Abstenção: N fora de [0,50], tipo de solo ou de estaca não tabelado, D≤0, perfil
+Abstençêo: N fora de [0,50], tipo de solo ou de estaca nêo tabelado, D≤0, perfil
 vazio → ``ValueError``.
 """
 
@@ -49,7 +49,7 @@ DIVERGENCIA_LIMITE = 0.20  # aviso de divergência entre métodos (>20%)
 N_SPT_MIN, N_SPT_MAX = 0, 50
 NS_MIN_DECOURT, NS_MAX_DECOURT = 3.0, 50.0   # limites do N do fuste (Décourt)
 
-# Aoki-Velloso (1975): K em kPa, α adimensional (fração) por tipo de solo.
+# Aoki-Velloso (1975): K em kPa, α adimensional (fraçêo) por tipo de solo.
 AOKI_SOLO: dict[str, tuple[float, float]] = {
     "areia": (1000.0, 0.014),
     "areia siltosa": (800.0, 0.020),
@@ -123,9 +123,9 @@ class PileCapacityResult(BaseModel):
     rl_kn: float
     rult_kn: float
     radm_kn: float
-    # transparência / verificação dimensional
+    # transparência / verificaçêo dimensional
     qp_kpa: float      # resistência unitária de ponta
-    # faixa de SPT do perfil (verificação física)
+    # faixa de SPT do perfil (verificaçêo física)
     n_spt_min: int
     n_spt_max: int
     # metadados
@@ -134,13 +134,13 @@ class PileCapacityResult(BaseModel):
 
 
 class PileComparisonResult(BaseModel):
-    """Comparação Aoki-Velloso × Décourt-Quaresma (validação por 2º método)."""
+    """Comparaçêo Aoki-Velloso × Décourt-Quaresma (validaçêo por 2º método)."""
 
     aoki: PileCapacityResult
     decourt: PileCapacityResult
     rult_aoki_kn: float
     rult_decourt_kn: float
-    divergencia: float       # fração relativa |Δ|/max
+    divergencia: float       # fraçêo relativa |Δ|/max
     divergencia_pct: float
     convergem: bool
     warnings: list[str] = []
@@ -159,7 +159,7 @@ def _check_profile(layers: list[SoilLayer], pile_type: str,
     if not layers:
         raise ValueError("Perfil de sondagem vazio.")
     if pile_type not in AOKI_F1F2:
-        raise ValueError(f"Tipo de estaca '{pile_type}' não tabelado; "
+        raise ValueError(f"Tipo de estaca '{pile_type}' nêo tabelado; "
                          f"use uma de {PILE_TYPES}.")
     for ly in layers:
         if not (N_SPT_MIN <= ly.n_spt <= N_SPT_MAX):
@@ -168,9 +168,9 @@ def _check_profile(layers: list[SoilLayer], pile_type: str,
         if ly.thickness_m <= 0.0:
             raise ValueError(f"Espessura={ly.thickness_m} m deve ser positiva.")
         if ly.soil_type not in AOKI_SOLO:
-            raise ValueError(f"Solo '{ly.soil_type}' não tabelado (Aoki-Velloso).")
+            raise ValueError(f"Solo '{ly.soil_type}' nêo tabelado (Aoki-Velloso).")
         if c_table is not None and ly.soil_type not in c_table:
-            raise ValueError(f"Solo '{ly.soil_type}' não tabelado (Décourt-Quaresma).")
+            raise ValueError(f"Solo '{ly.soil_type}' nêo tabelado (Décourt-Quaresma).")
 
 
 def _spt_range(layers: list[SoilLayer]) -> tuple[int, int]:
@@ -186,8 +186,8 @@ def aoki_velloso(
 ) -> PileCapacityResult:
     """Capacidade de estaca pelo método de Aoki-Velloso (1975).
 
-    Entradas inválidas (N∉[0,50], solo/estaca não tabelado, D≤0, perfil vazio)
-    levantam ``ValueError`` (abstenção).
+    Entradas inválidas (N∉[0,50], solo/estaca nêo tabelado, D≤0, perfil vazio)
+    levantam ``ValueError`` (abstençêo).
     """
     if fs < 1.0:
         raise ValueError(f"FS={fs} deve ser ≥ 1.")
@@ -228,8 +228,8 @@ def decourt_quaresma(
 ) -> PileCapacityResult:
     """Capacidade de estaca pelo método de Décourt-Quaresma (1978).
 
-    Entradas inválidas (N∉[0,50], solo/estaca não tabelado, D≤0, perfil vazio)
-    levantam ``ValueError`` (abstenção).
+    Entradas inválidas (N∉[0,50], solo/estaca nêo tabelado, D≤0, perfil vazio)
+    levantam ``ValueError`` (abstençêo).
     """
     if fs < 1.0:
         raise ValueError(f"FS={fs} deve ser ≥ 1.")
@@ -267,10 +267,10 @@ def comparar_metodos_estaca(
     fs: float = FS_DEFAULT,
     tol: float = DIVERGENCIA_LIMITE,
 ) -> PileComparisonResult:
-    """Roda Aoki-Velloso e Décourt-Quaresma e compara Rult (validação por 2º método).
+    """Roda Aoki-Velloso e Décourt-Quaresma e compara Rult (validaçêo por 2º método).
 
     Emite aviso (e ``convergem=False``) se a divergência relativa exceder ``tol``
-    (20% por padrão, conforme docs/08-validacao-calculos.md).
+    (20% por padrêo, conforme docs/08-validacao-calculos.md).
     """
     aoki = aoki_velloso(layers, pile_type, diameter_m, fs)
     decourt = decourt_quaresma(layers, pile_type, diameter_m, fs)
@@ -282,7 +282,7 @@ def comparar_metodos_estaca(
         warnings.append(
             f"Divergência de {divergencia:.0%} entre Aoki-Velloso "
             f"(Rult={ra:.0f} kN) e Décourt-Quaresma (Rult={rd:.0f} kN) "
-            f"> {tol:.0%}: revisão recomendada (docs/08-validacao-calculos.md)."
+            f"> {tol:.0%}: revisêo recomendada (docs/08-validacao-calculos.md)."
         )
     return PileComparisonResult(
         aoki=aoki, decourt=decourt,

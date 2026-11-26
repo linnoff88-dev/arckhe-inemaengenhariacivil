@@ -5,12 +5,12 @@
 ```
 inemaengenhariacivil/
 │
-├── CLAUDE.md                        # Configuração Claude Code
-├── README.md                        # Introdução ao projeto
+├── CLAUDE.md                        # Configuraçêo Claude Code
+├── README.md                        # Introduçêo ao projeto
 ├── pyproject.toml                   # Dependências Python
 ├── .gitignore
 │
-├── docs/                            # Documentação (esta pasta)
+├── docs/                            # Documentaçêo (esta pasta)
 │   ├── 00-visao-geral.md
 │   ├── 01-arquitetura.md
 │   ├── 02-estrutura-diretorios.md
@@ -179,7 +179,7 @@ inemaengenhariacivil/
 
 ## Convenções de Nomenclatura
 
-| Componente | Convenção | Exemplo |
+| Componente | Convençêo | Exemplo |
 |------------|-----------|---------|
 | Agentes | kebab-case | `concrete-beam` |
 | Módulos Python | snake_case | `bearing_capacity.py` |

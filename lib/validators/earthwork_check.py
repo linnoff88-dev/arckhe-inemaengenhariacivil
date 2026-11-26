@@ -1,6 +1,6 @@
-"""Validação obrigatória do domínio de TERRAPLENAGEM (balanço corte/aterro).
+"""Validaçêo obrigatória do domínio de TERRAPLENAGEM (balanço corte/aterro).
 
-Validador próprio do domínio (não toca nos validadores compartilhados). Cada
+Validador próprio do domínio (nêo toca nos validadores compartilhados). Cada
 cálculo passa por unidades (pint), física (faixas razoáveis) e normativa
 (consistência do balanço) antes de ser apresentado. Determinístico, sem LLM.
 
@@ -42,7 +42,7 @@ def _assemble(units: Check, phys: list[Check], norm: list[Check],
 def validate_earthwork(r: EarthworkResult) -> ValidationReport:
     """Valida o balanço de terraplenagem (unidades, física, normativa)."""
     if not isinstance(r, EarthworkResult):
-        raise TypeError(f"Tipo não suportado: {type(r).__name__}")
+        raise TypeError(f"Tipo nêo suportado: {type(r).__name__}")
 
     # --- unidades: volume solto = corte·Fe -> m³ (dimensional) ---------------
     solto_q = Q_(r.volume_corte_m3, "meter**3") * r.fator_empolamento
@@ -78,7 +78,7 @@ def validate_earthwork(r: EarthworkResult) -> ValidationReport:
                 "deficit" if balanco_rec < -1e-9 else "equilibrio")
     ok = r.situacao == esperado
     norm.append(Check(name="situacao_consistente", status="ok" if ok else "fail",
-                      detail=f"situação={r.situacao} (esperado {esperado})"))
+                      detail=f"situaçêo={r.situacao} (esperado {esperado})"))
     ok = (abs(r.volume_bota_fora_m3 - max(balanco_rec, 0.0)) <= TOL * ref
           and abs(r.volume_emprestimo_m3 - max(-balanco_rec, 0.0)) <= TOL * ref)
     norm.append(Check(name="bota_fora_emprestimo", status="ok" if ok else "fail",

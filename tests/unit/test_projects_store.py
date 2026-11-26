@@ -1,7 +1,7 @@
 """Testes do sistema de memória por projeto (Fase 4).
 
-TDD: usar ``tmp_path`` como base_dir para não tocar em ``memory/projects/`` real.
-Timestamps são sempre fornecidos pelo chamador (valores fixos), nunca lidos do relógio.
+TDD: usar ``tmp_path`` como base_dir para nêo tocar em ``memory/projects/`` real.
+Timestamps sêo sempre fornecidos pelo chamador (valores fixos), nunca lidos do relógio.
 """
 
 import json
@@ -124,7 +124,7 @@ def test_add_calculo_missing_project_raises(tmp_path):
         add_calculo("inexistente", {"tipo": "viga"}, base_dir=str(tmp_path))
 
 
-# --- erros / abstenção -----------------------------------------------------
+# --- erros / abstençêo -----------------------------------------------------
 def test_load_missing_raises(tmp_path):
     with pytest.raises(FileNotFoundError):
         load_project("nao-existe", base_dir=str(tmp_path))

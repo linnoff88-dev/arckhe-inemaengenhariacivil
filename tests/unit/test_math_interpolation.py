@@ -1,6 +1,6 @@
-"""Testes do utilitário de interpolação de tabelas de norma (Fase 5).
+"""Testes do utilitário de interpolaçêo de tabelas de norma (Fase 5).
 
-Valores de referência calculados à mão (TDD). Princípio da abstenção:
+Valores de referência calculados à mêo (TDD). Princípio da abstençêo:
 fora do domínio tabelado -> ValueError (sem extrapolar).
 """
 
@@ -35,7 +35,7 @@ def test_linear_interp_dois_pontos():
     assert linear_interp(1.5, [1.0, 2.0], [0.0, 10.0]) == pytest.approx(5.0)
 
 
-# --- linear_interp: erros (princípio da abstenção) --------------------------
+# --- linear_interp: erros (princípio da abstençêo) --------------------------
 def test_linear_interp_abaixo_do_dominio_levanta():
     with pytest.raises(ValueError):
         linear_interp(0.5, [1, 2, 3, 4], [10, 20, 30, 40])

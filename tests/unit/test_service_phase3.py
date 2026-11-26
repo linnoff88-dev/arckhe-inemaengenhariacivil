@@ -1,6 +1,6 @@
 """Testes dos orquestradores de alto nível da Fase 3 (geotecnia + hidráulica).
 
-Cada ``solve_*`` devolve o pacote serializável padrão: resultado, validação,
+Cada ``solve_*`` devolve o pacote serializável padrêo: resultado, validaçêo,
 memorial (com aviso embutido), aviso (Lei 6.496/77) e o flag ``aprovado`` coerente.
 """
 

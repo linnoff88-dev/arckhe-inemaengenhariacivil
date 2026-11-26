@@ -1,4 +1,4 @@
-"""Orquestrador da validação obrigatória de um dimensionamento de viga.
+"""Orquestrador da validaçêo obrigatória de um dimensionamento de viga.
 
 Todo cálculo passa por aqui antes de ser apresentado: unidades, física, normativa e
 equilíbrio. Determinístico, sem LLM.
@@ -32,7 +32,7 @@ from lib.validators.units_check import (
 
 
 def check_equilibrium_beam(r: BeamFlexureResult) -> Check:
-    """Equilíbrio da seção: resultante de compressão ≈ tração na armadura de cálculo."""
+    """Equilíbrio da seçêo: resultante de compressêo ≈ traçêo na armadura de cálculo."""
     fcd_k = (r.fcd_mpa) * 0.1            # MPa -> kN/cm^2
     fyd_k = (r.fyd_mpa) * 0.1
     rcc = ALPHA_C * LAMBDA * fcd_k * r.b_cm * r.x_cm     # kN
@@ -71,7 +71,7 @@ def validate_beam(r: BeamFlexureResult) -> ValidationReport:
 
 
 def validate_footing(r: FootingResult) -> ValidationReport:
-    """Validação obrigatória de uma sapata: unidades, física e normativa (NBR 6122/6118)."""
+    """Validaçêo obrigatória de uma sapata: unidades, física e normativa (NBR 6122/6118)."""
     phys = check_physical_footing(r)
     norm = check_normative_footing(r)
     units = check_units_footing(r)
@@ -86,7 +86,7 @@ def validate_footing(r: FootingResult) -> ValidationReport:
 
 
 def check_capacity_column(r: ColumnResult) -> Check:
-    """Capacidade da seção em flexão composta ≥ solicitação (Nd, Md,tot)."""
+    """Capacidade da seçêo em flexêo composta ≥ solicitaçêo (Nd, Md,tot)."""
     mrd = column_moment_capacity(r.nd_kn, r.as_adopted_cm2, r.b_cm, r.h_cm,
                                  r.d_linha_cm, r.fck_mpa, r.fyk_mpa)
     ok = mrd >= r.md_tot_knm - 1e-2 * max(abs(r.md_tot_knm), 1.0)
@@ -95,7 +95,7 @@ def check_capacity_column(r: ColumnResult) -> Check:
 
 
 def validate_column(r: ColumnResult) -> ValidationReport:
-    """Validação obrigatória de um pilar: unidades, física, normativa e capacidade."""
+    """Validaçêo obrigatória de um pilar: unidades, física, normativa e capacidade."""
     phys = check_physical_column(r)
     norm = check_normative_column(r)
     units = check_units_column(r)
@@ -111,7 +111,7 @@ def validate_column(r: ColumnResult) -> ValidationReport:
 
 
 def validate_slab(r: SlabResult) -> ValidationReport:
-    """Validação obrigatória de uma laje: unidades, física e normativa (NBR 6118)."""
+    """Validaçêo obrigatória de uma laje: unidades, física e normativa (NBR 6118)."""
     phys = check_physical_slab(r)
     norm = check_normative_slab(r)
     units = check_units_slab(r)

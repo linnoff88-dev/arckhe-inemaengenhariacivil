@@ -1,6 +1,6 @@
 """Testes de escoamento em conduto forçado (Hazen-Williams e Darcy-Weisbach).
 
-Valores de referência calculados à mão.
+Valores de referência calculados à mêo.
 
 Fontes:
 - Hazen-Williams (SI): hf = 10,67·Q^1,852·L / (C^1,852·D^4,87)
@@ -94,7 +94,7 @@ def test_pipe_flow_darcy_weisbach_result():
     assert r.coef_C is None
 
 
-# ------------------------------------------------------------------- validação
+# ------------------------------------------------------------------- validaçêo
 
 def test_validate_pipe_flow_ok():
     r = pipe_flow_hazen_williams(Q_m3s=0.05, D_m=0.3, L_m=1000.0, C=130.0)
@@ -110,7 +110,7 @@ def test_validate_pipe_flow_bad_C_fails():
 
 
 def test_validate_pipe_flow_high_velocity_warns():
-    # V alta (> 3 m/s) gera alerta, mas não reprova
+    # V alta (> 3 m/s) gera alerta, mas nêo reprova
     r = pipe_flow_hazen_williams(Q_m3s=0.3, D_m=0.3, L_m=1000.0, C=130.0)
     rep = validate_pipe_flow(r)
     assert r.V_ms > 3.0

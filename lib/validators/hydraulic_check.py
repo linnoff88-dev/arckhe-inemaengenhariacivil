@@ -1,18 +1,18 @@
-"""Validação obrigatória do domínio de hidráulica.
+"""Validaçêo obrigatória do domínio de hidráulica.
 
 Todo cálculo hidráulico passa por aqui antes de ser apresentado: faixas físicas dos
-coeficientes, geometria positiva, plausibilidade de velocidade e verificação
+coeficientes, geometria positiva, plausibilidade de velocidade e verificaçêo
 dimensional (``pint``). Determinístico, sem LLM.
 
-Arquivo próprio do domínio de hidráulica — não toca nos validadores compartilhados.
+Arquivo próprio do domínio de hidráulica — nêo toca nos validadores compartilhados.
 Importa apenas ``Check`` / ``ValidationReport`` (estáveis) de :mod:`lib.validators.report`.
 
 Faixas e limites adotados:
 - Coeficiente de Hazen-Williams C ∈ [80, 150] (tubos comerciais usuais).
 - Coeficiente de Manning n ∈ [0,009 ; 0,1] (do metal liso ao canal natural vegetado).
 - Diâmetro/geometria estritamente positivos; declividade S > 0.
-- Velocidade "razoável": alerta se V > 3 m/s (risco de erosão/transiente hidráulico)
-  ou se V < 0,5 m/s (risco de sedimentação — crítico em redes de esgoto).
+- Velocidade "razoável": alerta se V > 3 m/s (risco de erosêo/transiente hidráulico)
+  ou se V < 0,5 m/s (risco de sedimentaçêo — crítico em redes de esgoto).
 """
 
 from __future__ import annotations
@@ -28,8 +28,8 @@ from lib.validators.report import Check, ValidationReport
 # --- faixas físicas / limites de plausibilidade -------------------------------
 C_HW_MIN, C_HW_MAX = 80.0, 150.0
 N_MANNING_MIN, N_MANNING_MAX = 0.009, 0.1
-V_MAX_RAZOAVEL = 3.0     # m/s — acima: erosão/golpe de aríete
-V_MIN_AUTOLIMP = 0.5     # m/s — abaixo: sedimentação (esgoto)
+V_MAX_RAZOAVEL = 3.0     # m/s — acima: erosêo/golpe de aríete
+V_MIN_AUTOLIMP = 0.5     # m/s — abaixo: sedimentaçêo (esgoto)
 
 
 def _fold(name: str, subs: list[Check]) -> Check:
@@ -49,11 +49,11 @@ def _velocity_checks(v_ms: float) -> tuple[Check, list[str]]:
     if v_ms > V_MAX_RAZOAVEL:
         st = "warning"
         warnings.append(f"Velocidade V={v_ms:.2f} m/s > {V_MAX_RAZOAVEL:.1f} m/s "
-                        "(risco de erosão/transiente hidráulico).")
+                        "(risco de erosêo/transiente hidráulico).")
     elif v_ms < V_MIN_AUTOLIMP:
         st = "warning"
         warnings.append(f"Velocidade V={v_ms:.2f} m/s < {V_MIN_AUTOLIMP:.1f} m/s "
-                        "(risco de sedimentação — verificar autolimpeza em esgoto).")
+                        "(risco de sedimentaçêo — verificar autolimpeza em esgoto).")
     else:
         st = "ok"
     return (Check(name="velocidade", status=st,
@@ -146,7 +146,7 @@ def validate_open_channel(r: OpenChannelResult) -> ValidationReport:
 # --------------------------------------------------------------------- head loss
 
 def validate_head_loss(r: HeadLossResult) -> ValidationReport:
-    """Valida a composição de perdas distribuída + localizadas."""
+    """Valida a composiçêo de perdas distribuída + localizadas."""
     phys: list[Check] = []
 
     ok = r.hf_distribuida_m >= 0 and r.hf_localizada_m >= 0 and r.hf_total_m >= 0

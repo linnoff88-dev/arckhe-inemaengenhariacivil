@@ -12,23 +12,23 @@ Métodos e hipóteses normativas:
 - Parafusos — cortante (NBR 8800:2008 §6.3.3.2):
   Fv,Rd = c · Ab · fub / γa2, por plano de corte, com c = 0,4 quando o plano de
   corte passa pela parte **rosqueada** do parafuso e c = 0,5 quando passa pela parte
-  **não rosqueada** (fuste). Ab = π·db²/4 (área bruta da seção do parafuso). Para
+  **nêo rosqueada** (fuste). Ab = π·db²/4 (área bruta da seçêo do parafuso). Para
   corte duplo (n planos) multiplica-se por ``planos``. γa2 = 1,35.
 
-- Parafusos — pressão de contato / esmagamento da chapa (NBR 8800:2008 §6.3.3.3):
-  a expressão completa é Fc,Rd = 1,2·lf·t·fu/γa2 ≤ 2,4·db·t·fu/γa2, sendo lf a
-  distância livre, na direção da força, entre a borda do furo e a borda do furo
+- Parafusos — pressêo de contato / esmagamento da chapa (NBR 8800:2008 §6.3.3.3):
+  a expressêo completa é Fc,Rd = 1,2·lf·t·fu/γa2 ≤ 2,4·db·t·fu/γa2, sendo lf a
+  distância livre, na direçêo da força, entre a borda do furo e a borda do furo
   adjacente ou da peça. Aqui adota-se o **limite superior** usual
   Fc,Rd = 2,4·db·t·fu/γa2, ou seja, assume-se que os espaçamentos e distâncias às
-  bordas atendem aos mínimos da NBR 8800 (a parcela 1,2·lf não governa). Essa
+  bordas atendem aos mínimos da NBR 8800 (a parcela 1,2·lf nêo governa). Essa
   hipótese deve ser confirmada no detalhamento pelo engenheiro responsável
-  (princípio da abstenção). γa2 = 1,35.
+  (princípio da abstençêo). γa2 = 1,35.
 
 - Solda de filete (NBR 8800:2008 §6.2.6):
   resistência por unidade de comprimento Rd = 0,6·fw·aw/γa2, com garganta efetiva
   aw = 0,7·perna (filete de pernas iguais) e 0,6·fw como resistência ao cisalhamento
   do metal da solda. fw é a resistência à ruptura do metal da solda (eletrodo E70 →
-  fw = 485 MPa). Considera-se o metal da solda governante (não o metal-base) e
+  fw = 485 MPa). Considera-se o metal da solda governante (nêo o metal-base) e
   esforço paralelo ao eixo do filete (sem o fator 1 + 0,5·sen^1,5θ). γa2 = 1,35.
 
 O detalhamento completo (espaçamentos, distâncias às bordas, ruptura por
@@ -43,7 +43,7 @@ import math
 from pydantic import BaseModel
 
 # --- constantes normativas (NBR 8800:2008) -----------------------------------
-GAMMA_A2 = 1.35           # ponderação da resistência (ruptura) — NBR 8800 Tabela 3
+GAMMA_A2 = 1.35           # ponderaçêo da resistência (ruptura) — NBR 8800 Tabela 3
 COEF_ROSCA = 0.4          # plano de corte na parte rosqueada — §6.3.3.2
 COEF_FUSTE = 0.5          # plano de corte fora da rosca (fuste) — §6.3.3.2
 COEF_CISALH_SOLDA = 0.6   # 0,6·fw = cisalhamento do metal da solda — §6.2.6
@@ -61,7 +61,7 @@ _MPA_TO_KNCM2 = 0.1       # 1 MPa = 0,1 kN/cm²
 
 
 class BoltedConnectionResult(BaseModel):
-    """Resultado do dimensionamento de uma ligação parafusada à cortante."""
+    """Resultado do dimensionamento de uma ligaçêo parafusada à cortante."""
     # entrada (eco)
     forca_kn: float
     db_mm: float
@@ -75,9 +75,9 @@ class BoltedConnectionResult(BaseModel):
     ab_cm2: float
     # resistências por parafuso
     fv_rd_kn: float          # cortante
-    fc_rd_kn: float          # pressão de contato (esmagamento)
+    fc_rd_kn: float          # pressêo de contato (esmagamento)
     rd_bolt_kn: float        # governante (mínimo)
-    governante: str          # "cortante" | "pressão de contato"
+    governante: str          # "cortante" | "pressêo de contato"
     # dimensionamento
     n_parafusos: int
     capacidade_total_kn: float
@@ -103,7 +103,7 @@ class WeldResult(BaseModel):
 
 
 def _require_positive(**valores: float) -> None:
-    """Abstenção: rejeita entradas não positivas com mensagem clara."""
+    """Abstençêo: rejeita entradas nêo positivas com mensagem clara."""
     for nome, v in valores.items():
         if v <= 0:
             raise ValueError(f"{nome}={v} inválido: deve ser > 0.")
@@ -147,7 +147,7 @@ def bolt_bearing_resistance(
     fu_mpa: float,
     gamma_a2: float = GAMMA_A2,
 ) -> float:
-    """Resistência ao esmagamento (pressão de contato), em kN (NBR 8800 §6.3.3.3).
+    """Resistência ao esmagamento (pressêo de contato), em kN (NBR 8800 §6.3.3.3).
 
     Adota o limite superior Fc,Rd = 2,4·db·t·fu/γa2 (espaçamentos/bordas mínimos
     atendidos — ver hipóteses no docstring do módulo).
@@ -170,11 +170,11 @@ def design_bolted_connection(
     rosca_no_plano: bool = True,
     gamma_a2: float = GAMMA_A2,
 ) -> BoltedConnectionResult:
-    """Dimensiona o número de parafusos de uma ligação solicitada à cortante.
+    """Dimensiona o número de parafusos de uma ligaçêo solicitada à cortante.
 
-    Calcula a resistência por parafuso como o mínimo entre cortante e pressão de
+    Calcula a resistência por parafuso como o mínimo entre cortante e pressêo de
     contato e adota ``n = ceil(forca / Rd_parafuso)``. Reporta a resistência de cada
-    modo, o modo governante e a capacidade total da ligação.
+    modo, o modo governante e a capacidade total da ligaçêo.
     """
     _require_positive(forca_kn=forca_kn, db_mm=db_mm, fub_mpa=fub_mpa,
                       t_mm=t_mm, fu_mpa=fu_mpa, gamma_a2=gamma_a2)
@@ -186,7 +186,7 @@ def design_bolted_connection(
 
     if fc_rd < fv_rd:
         rd_bolt = fc_rd
-        governante = "pressão de contato"
+        governante = "pressêo de contato"
     else:
         rd_bolt = fv_rd
         governante = "cortante"

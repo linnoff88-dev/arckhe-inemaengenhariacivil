@@ -1,6 +1,6 @@
 """Testes de ligações metálicas — parafusos e solda de filete (NBR 8800:2008 §6).
 
-Valores de referência calculados à mão (a conta está nos comentários).
+Valores de referência calculados à mêo (a conta está nos comentários).
 Unidades internas: cm, kN, kN/cm² (1 MPa = 0,1 kN/cm²); db/t/perna entram em mm.
 """
 
@@ -48,7 +48,7 @@ def test_bolt_shear_area_matches_circle():
     assert r.ab_cm2 == pytest.approx(math.pi * (2.0**2) / 4.0, abs=1e-6)
 
 
-# --- parafusos: pressão de contato / esmagamento (NBR 8800:2008 §6.3.3.3) -----
+# --- parafusos: pressêo de contato / esmagamento (NBR 8800:2008 §6.3.3.3) -----
 def test_bolt_bearing_resistance_upper_limit():
     # Fc,Rd = 2.4 * db * t * fu / gamma_a2 (limite superior)
     # db=2 cm, t=1 cm, fu=400 MPa=40 kN/cm²: 2.4*2*1*40/1.35 = 192/1.35 = 142.222 kN
@@ -60,7 +60,7 @@ def test_bolt_bearing_thin_plate():
     assert bolt_bearing_resistance(20.0, 3.0, 400.0) == pytest.approx(42.667, abs=0.01)
 
 
-# --- dimensionamento da ligação parafusada ------------------------------------
+# --- dimensionamento da ligaçêo parafusada ------------------------------------
 def test_design_bolted_shear_governs():
     # Fv=74.467, Fc=142.222 -> governa cortante; min=74.467
     # n = ceil(300 / 74.467) = ceil(4.029) = 5; cap = 5*74.467 = 372.34 kN
@@ -76,16 +76,16 @@ def test_design_bolted_shear_governs():
 
 
 def test_design_bolted_bearing_governs():
-    # chapa fina t=3 mm: Fc=42.667 < Fv=74.467 -> governa pressão de contato
+    # chapa fina t=3 mm: Fc=42.667 < Fv=74.467 -> governa pressêo de contato
     # n = ceil(200 / 42.667) = ceil(4.687) = 5
     r = design_bolted_connection(200.0, 20.0, 800.0, 3.0, 400.0)
-    assert r.governante == "pressão de contato"
+    assert r.governante == "pressêo de contato"
     assert r.rd_bolt_kn == pytest.approx(42.667, abs=0.01)
     assert r.n_parafusos == 5
 
 
 def test_design_bolted_exact_multiple_no_extra_bolt():
-    # se a força é múltiplo exato da resistência por parafuso, não soma parafuso extra
+    # se a força é múltiplo exato da resistência por parafuso, nêo soma parafuso extra
     fv = bolt_shear_resistance(20.0, 800.0)
     r = design_bolted_connection(fv * 3.0, 20.0, 800.0, 10.0, 400.0)
     assert r.n_parafusos == 3
@@ -100,7 +100,7 @@ def test_fillet_weld_resistance_per_cm():
 
 
 def test_fillet_weld_resistance_default_electrode_e70():
-    # fw padrão = 485 MPa (eletrodo E70) -> mesmo valor do teste anterior
+    # fw padrêo = 485 MPa (eletrodo E70) -> mesmo valor do teste anterior
     assert fillet_weld_resistance(5.0, fw_mpa=485.0) == pytest.approx(7.5444, abs=0.001)
 
 
@@ -113,7 +113,7 @@ def test_design_fillet_weld_length():
     assert r.aw_cm == pytest.approx(0.35, abs=1e-6)
 
 
-# --- abstenção: entradas física/dimensionalmente inválidas --------------------
+# --- abstençêo: entradas física/dimensionalmente inválidas --------------------
 def test_rejects_invalid_inputs():
     with pytest.raises(ValueError):
         bolt_shear_resistance(-20.0, 800.0)
@@ -131,7 +131,7 @@ def test_rejects_invalid_inputs():
         fillet_weld_resistance(5.0, fw_mpa=-1.0)
 
 
-# --- validação determinística (lib/validators/steel_connections_check.py) ------
+# --- validaçêo determinística (lib/validators/steel_connections_check.py) ------
 def test_validate_bolted_ok():
     r = design_bolted_connection(300.0, 20.0, 800.0, 10.0, 400.0)
     rep = validate_bolted(r)
@@ -140,7 +140,7 @@ def test_validate_bolted_ok():
 
 
 def test_validate_bolted_warns_unusual_bitola():
-    # db=30 mm fora da faixa usual [12.5, 25] -> alerta (warning), mas não falha
+    # db=30 mm fora da faixa usual [12.5, 25] -> alerta (warning), mas nêo falha
     r = design_bolted_connection(300.0, 30.0, 800.0, 10.0, 400.0)
     rep = validate_bolted(r)
     assert rep.passed is True
@@ -154,7 +154,7 @@ def test_validate_weld_ok():
 
 
 def test_validate_weld_fails_small_leg():
-    # perna = 2 mm < 3 mm (mínimo) -> reprova na validação dimensional
+    # perna = 2 mm < 3 mm (mínimo) -> reprova na validaçêo dimensional
     r = design_fillet_weld(150.0, 2.0)
     rep = validate_weld(r)
     assert rep.passed is False

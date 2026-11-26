@@ -2,12 +2,12 @@
 
 Toda a aritmética vive aqui (camada Python determinística). O LLM apenas interpreta
 o problema, chama estas funções via MCP e explica o resultado. O aviso de
-responsabilidade técnica NÃO é inserido aqui (entra na camada de integração).
+responsabilidade técnica NêO é inserido aqui (entra na camada de integraçêo).
 
 Fonte do método
 ---------------
-Método das áreas médias (average end area), padrão em topografia e terraplenagem
-rodoviária (DNIT, Manual de Implantação Básica de Rodovia):
+Método das áreas médias (average end area), padrêo em topografia e terraplenagem
+rodoviária (DNIT, Manual de Implantaçêo Básica de Rodovia):
 
     V = (A1 + A2) / 2 · L
 
@@ -15,12 +15,12 @@ Estados de volume de solo (terraplenagem):
     1. Corte / banco (in situ): volume geométrico natural.
     2. Solto (transporte): V_solto = V_corte · Fe, Fe = fator de empolamento >= 1
        (swell — o material expande ao ser escavado/desagregado).
-    3. Compactado (aterro): V_comp = V_solto · Fc, Fc = fator de compactação < 1
+    3. Compactado (aterro): V_comp = V_solto · Fc, Fc = fator de compactaçêo < 1
        (o material solto é adensado no aterro).
     Logo V_comp = V_corte · Fe · Fc.
 
 Valores típicos documentados (referência; o usuário deve aferir em laboratório):
-    - Fe (empolamento): solo comum ~1,25; argila ~1,30; rocha sã ~1,50.
+    - Fe (empolamento): solo comum ~1,25; argila ~1,30; rocha sê ~1,50.
     - Fc (solto -> compactado): ~0,72, de modo que V_comp ≈ 0,90·V_corte.
 """
 
@@ -28,11 +28,11 @@ from __future__ import annotations
 
 from pydantic import BaseModel
 
-# --- faixas de validade (abstenção fora delas) ------------------------------
+# --- faixas de validade (abstençêo fora delas) ------------------------------
 FE_MIN = 1.0   # fator de empolamento — material no mínimo conserva o volume
 FE_MAX = 1.5   # fator de empolamento — acima disso, fora da faixa usual de solos
 
-# --- valores padrão documentados --------------------------------------------
+# --- valores padrêo documentados --------------------------------------------
 FE_PADRAO = 1.25   # empolamento típico de solo comum
 FC_PADRAO = 0.72   # fator solto -> compactado (resulta em ~0,90·V_corte)
 
@@ -71,10 +71,10 @@ def volume_total(areas: list[float], distancias: list[float]) -> float:
     consecutivas. V = Σ (A_i + A_{i+1})/2 · d_i.
     """
     if len(areas) < 2:
-        raise ValueError("São necessárias ao menos 2 seções.")
+        raise ValueError("Sêo necessárias ao menos 2 seções.")
     if len(distancias) != len(areas) - 1:
         raise ValueError(
-            f"São necessárias {len(areas) - 1} distâncias para {len(areas)} seções; "
+            f"Sêo necessárias {len(areas) - 1} distâncias para {len(areas)} seções; "
             f"recebidas {len(distancias)}."
         )
     total = 0.0
@@ -89,7 +89,7 @@ def ajustar_empolamento(volume_corte_m3: float, fator_empolamento: float) -> flo
         raise ValueError("Volume de corte deve ser >= 0.")
     if fator_empolamento < FE_MIN:
         raise ValueError(
-            f"Fator de empolamento {fator_empolamento} < {FE_MIN} (o solo não "
+            f"Fator de empolamento {fator_empolamento} < {FE_MIN} (o solo nêo "
             "contrai ao ser escavado)."
         )
     return volume_corte_m3 * fator_empolamento
@@ -110,7 +110,7 @@ def volume_compactado(
         raise ValueError(f"Fator de empolamento {fator_empolamento} < {FE_MIN}.")
     if not (0.0 < fator_compactacao <= 1.0):
         raise ValueError(
-            f"Fator de compactação {fator_compactacao} deve estar em (0, 1]."
+            f"Fator de compactaçêo {fator_compactacao} deve estar em (0, 1]."
         )
     return volume_corte_m3 * fator_empolamento * fator_compactacao
 
@@ -149,7 +149,7 @@ def balanco_corte_aterro(
     warnings: list[str] = []
     if situacao == "deficit":
         warnings.append(
-            f"Déficit de {emprestimo:.1f} m³: prever empréstimo (importação de solo)."
+            f"Déficit de {emprestimo:.1f} m³: prever empréstimo (importaçêo de solo)."
         )
     elif situacao == "excesso":
         warnings.append(

@@ -4,17 +4,17 @@ Toda a aritmética vive aqui (camada Python determinística). O LLM apenas inter
 o problema, chama estas funções via MCP e explica o resultado.
 
 Método e hipóteses:
-- Área da base pela tensão admissível do solo (NBR 6122): Nk majorado por ~5% para
+- Área da base pela tensêo admissível do solo (NBR 6122): Nk majorado por ~5% para
   estimar o peso próprio da sapata -> A_nec = 1.05·Nk / σ_adm; lado L = √A_nec
   arredondado para cima a múltiplo de 5 cm e nunca menor que o pilar.
-- Verificação da tensão no solo com o peso próprio real adotado:
+- Verificaçêo da tensêo no solo com o peso próprio real adotado:
   σ_solo = (Nk + pp_sapata) / A_efetiva ≤ σ_adm, pp = γ_conc · A_ef · h, γ_conc=25 kN/m³.
-- Sapata RÍGIDA (NBR 6118:2014 22.6.1): h ≥ (L − a_pilar)/3 em cada direção.
-- Armadura de flexão pelo MÉTODO DAS BIELAS (NBR 6118:2014 22.6.4.1):
+- Sapata RÍGIDA (NBR 6118:2014 22.6.1): h ≥ (L − a_pilar)/3 em cada direçêo.
+- Armadura de flexêo pelo MÉTODO DAS BIELAS (NBR 6118:2014 22.6.4.1):
   As,dir = Nd·(L − a_pilar,dir) / (8·d·fyd), com Nd = γf·Nk (γf = 1.4).
   O detalhamento (espaçamento, ancoragem, As,mín da NBR 6118 19.3.3) deve ser
-  verificado pelo engenheiro — fora do escopo deste núcleo (princípio da abstenção).
-- d ≈ h − cobrimento − φ (aproximação para as duas camadas ortogonais de barras).
+  verificado pelo engenheiro — fora do escopo deste núcleo (princípio da abstençêo).
+- d ≈ h − cobrimento − φ (aproximaçêo para as duas camadas ortogonais de barras).
 """
 
 from __future__ import annotations
@@ -26,10 +26,10 @@ from pydantic import BaseModel
 from lib.concrete.beams import BarChoice, select_bars
 
 # --- constantes normativas ---------------------------------------------------
-GAMMA_F = 1.4         # ponderação da carga do pilar (Nd = γf·Nk) — NBR 6118 11.7
-GAMMA_S = 1.15        # ponderação do aço — NBR 6118
+GAMMA_F = 1.4         # ponderaçêo da carga do pilar (Nd = γf·Nk) — NBR 6118 11.7
+GAMMA_S = 1.15        # ponderaçêo do aço — NBR 6118
 PESO_CONCRETO = 25.0  # kN/m³ (NBR 6120:2019) — peso próprio da sapata
-FATOR_PESO_PROPRIO = 1.05   # majoração de Nk p/ pré-dimensionar a área (~5%)
+FATOR_PESO_PROPRIO = 1.05   # majoraçêo de Nk p/ pré-dimensionar a área (~5%)
 MODULO_CM = 5.0       # múltiplo de arredondamento do lado/altura (cm)
 SIGMA_ADM_MIN = 50.0    # kPa — faixa física aceita pelo método simplificado
 SIGMA_ADM_MAX = 1000.0  # kPa
@@ -70,7 +70,7 @@ class FootingResult(BaseModel):
 def _check_inputs(nk_kn: float, sigma_adm_kpa: float, pilar_a_cm: float,
                   pilar_b_cm: float, fck_mpa: float, fyk_mpa: float) -> None:
     if nk_kn <= 0:
-        raise ValueError(f"Nk={nk_kn} kN deve ser positivo (carga de compressão do pilar).")
+        raise ValueError(f"Nk={nk_kn} kN deve ser positivo (carga de compressêo do pilar).")
     if sigma_adm_kpa <= 0:
         raise ValueError(f"σ_adm={sigma_adm_kpa} kPa deve ser positivo.")
     if pilar_a_cm <= 0 or pilar_b_cm <= 0:
@@ -78,7 +78,7 @@ def _check_inputs(nk_kn: float, sigma_adm_kpa: float, pilar_a_cm: float,
     if not (10.0 <= fck_mpa <= 100.0):
         raise ValueError(f"fck={fck_mpa} MPa fora da faixa física [10, 100].")
     if fck_mpa > 50.0:
-        raise ValueError("fck > 50 MPa (Grupo II) ainda não implementado para sapatas.")
+        raise ValueError("fck > 50 MPa (Grupo II) ainda nêo implementado para sapatas.")
     if not (250.0 <= fyk_mpa <= 600.0):
         raise ValueError(f"fyk={fyk_mpa} MPa fora da faixa de aços comerciais [250, 600].")
 
@@ -108,12 +108,12 @@ def design_square_footing(
 ) -> FootingResult:
     """Dimensiona uma sapata isolada quadrada rígida sob carga centrada ``nk_kn``.
 
-    Sequência: área pela tensão admissível -> lado L (múltiplo de 5 cm, ≥ pilar) ->
-    altura rígida h ≥ (L−a)/3 -> verificação de σ_solo com peso próprio real ->
-    armadura por direção pelo método das bielas (NBR 6118 22.6.4.1).
+    Sequência: área pela tensêo admissível -> lado L (múltiplo de 5 cm, ≥ pilar) ->
+    altura rígida h ≥ (L−a)/3 -> verificaçêo de σ_solo com peso próprio real ->
+    armadura por direçêo pelo método das bielas (NBR 6118 22.6.4.1).
 
     Entradas inválidas (Nk≤0, σ_adm≤0, pilar≤0, fck>50, fyk fora de faixa) levantam
-    ``ValueError`` (abstenção). Se σ_solo exceder σ_adm, devolve o resultado com
+    ``ValueError`` (abstençêo). Se σ_solo exceder σ_adm, devolve o resultado com
     aviso — cabe ao engenheiro ampliar a sapata.
     """
     _check_inputs(nk_kn, sigma_adm_kpa, pilar_a_cm, pilar_b_cm, fck_mpa, fyk_mpa)
@@ -132,7 +132,7 @@ def design_square_footing(
     rigida = altura_h_cm >= h_min_rigida_cm - 1e-9
     d_cm = altura_h_cm - cobrimento_cm - (phi_long_mm / 10.0)
 
-    # 3) tensão no solo com peso próprio real -------------------------------
+    # 3) tensêo no solo com peso próprio real -------------------------------
     pp_sapata_kn = peso_concreto * area_efetiva_m2 * (altura_h_cm / 100.0)
     sigma_solo_kpa = (nk_kn + pp_sapata_kn) / area_efetiva_m2
 
@@ -149,13 +149,13 @@ def design_square_footing(
     warnings: list[str] = []
     if sigma_solo_kpa > sigma_adm_kpa + 1e-9:
         warnings.append(
-            f"Tensão no solo σ={sigma_solo_kpa:.1f} kPa > σ_adm={sigma_adm_kpa:.1f} kPa "
+            f"Tensêo no solo σ={sigma_solo_kpa:.1f} kPa > σ_adm={sigma_adm_kpa:.1f} kPa "
             "(peso próprio real superou a estimativa de 5%): ampliar o lado da sapata."
         )
     if not rigida:
         warnings.append(
-            f"Sapata não rígida: h={altura_h_cm:.0f} < (L−a)/3={h_min_rigida_cm:.1f} cm "
-            "(NBR 6118 22.6.1) — o método das bielas não se aplica."
+            f"Sapata nêo rígida: h={altura_h_cm:.0f} < (L−a)/3={h_min_rigida_cm:.1f} cm "
+            "(NBR 6118 22.6.1) — o método das bielas nêo se aplica."
         )
 
     return FootingResult(

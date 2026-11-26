@@ -1,8 +1,8 @@
-"""Testes do orquestrador da Fase 5 (metálicas): bundles de compressão e ligações.
+"""Testes do orquestrador da Fase 5 (metálicas): bundles de compressêo e ligações.
 
-Cada ``solve_*`` devolve o pacote serializável padrão: resultado, validação,
+Cada ``solve_*`` devolve o pacote serializável padrêo: resultado, validaçêo,
 memorial (com aviso embutido), aviso (Lei 6.496/77) e o flag ``aprovado`` coerente.
-Abstenção: perfil inexistente propaga ``KeyError``; entradas inválidas, ``ValueError``.
+Abstençêo: perfil inexistente propaga ``KeyError``; entradas inválidas, ``ValueError``.
 """
 
 import pytest
@@ -20,14 +20,14 @@ def _assert_bundle(bundle: dict) -> None:
     assert bundle["aprovado"] == bundle["validacao"]["passed"]
 
 
-# --- compressão ------------------------------------------------------------
+# --- compressêo ------------------------------------------------------------
 def test_solve_compression_bundle_approved():
     bundle = solve_compression(designacao="W250x22,3", kl_cm=300.0, fy_mpa=250.0)
     _assert_bundle(bundle)
     assert bundle["aprovado"] is True
     r = bundle["resultado"]
     assert r["designacao"] == "W250x22,3"
-    # Nc,Rd ≈ 213,33 kN (calculado à mão a partir do catálogo)
+    # Nc,Rd ≈ 213,33 kN (calculado à mêo a partir do catálogo)
     assert r["nc_rd_kn"] == pytest.approx(213.33, abs=0.1)
     assert r["i_cm4"] == pytest.approx(122.0)  # eixo fraco (Iy) governa
 
@@ -37,7 +37,7 @@ def test_solve_compression_unknown_profile_aborts():
         solve_compression(designacao="W999x99,9", kl_cm=300.0)
 
 
-# --- ligação parafusada ----------------------------------------------------
+# --- ligaçêo parafusada ----------------------------------------------------
 def test_solve_bolted_bundle_approved():
     bundle = solve_bolted_connection(
         forca_kn=200.0, db_mm=20.0, fub_mpa=800.0, t_mm=9.5, fu_mpa=400.0,
@@ -68,6 +68,6 @@ def test_solve_weld_bundle_approved():
 
 
 def test_solve_weld_below_min_leg_reproved():
-    # perna < 3 mm: a validação reprova (mínimo prático de filete)
+    # perna < 3 mm: a validaçêo reprova (mínimo prático de filete)
     bundle = solve_weld(forca_kn=50.0, perna_mm=2.0)
     assert bundle["aprovado"] is False

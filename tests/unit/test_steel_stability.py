@@ -1,6 +1,6 @@
 """Testes — barra comprimida (NBR 8800:2008 §5.3), assumindo Q=1 (sem flambagem local).
 
-Valores de referência calculados à mão. Conversões de unidade:
+Valores de referência calculados à mêo. Conversões de unidade:
 - E em kN/cm² = E[MPa]·0,1  (200000 MPa -> 20000 kN/cm²)
 - fy em kN/cm² = fy[MPa]·0,1 (250 MPa -> 25 kN/cm²)
 - Ne = π²·E·I/(KL)²  [kN]; λ0 = √(Q·A·fy/Ne); Nc,Rd = χ·Q·A·fy/γa1.
@@ -111,7 +111,7 @@ def test_design_compression_uses_minimum_inertia():
 
 
 def test_design_compression_missing_profile_raises():
-    # abstenção: perfil inexistente propaga KeyError
+    # abstençêo: perfil inexistente propaga KeyError
     base = load_profiles(DEFAULT_TABLE)
     with pytest.raises(KeyError):
         design_compression("W999x99,9", base, kl_cm=300.0)

@@ -3,7 +3,7 @@
 ## Metadados
 
 - **Código:** ABNT NBR 6118
-- **Edição:** 2014 (3ª edição)
+- **Ediçêo:** 2014 (3ª ediçêo)
 - **Título:** Projeto de estruturas de concreto — Procedimento
 - **Status:** Em vigor
 - **Substitui:** NBR 6118:2003
@@ -15,20 +15,20 @@
 | `tabela_6_1.json` | Tab. 6.1 | Classes de agressividade ambiental |
 | `tabela_7_2.json` | Tab. 7.2 | Correspondência entre classe de agressividade e cobrimento |
 | `tabela_17_3.json` | Tab. 17.3 | Taxas de armadura mínima de vigas |
-| `tabela_19_1.json` | Tab. 19.1 | Relações máximas vão/espessura de lajes |
+| `tabela_19_1.json` | Tab. 19.1 | Relações máximas vêo/espessura de lajes |
 
 ## Seções Mais Utilizadas
 
-| Seção | Assunto |
+| Seçêo | Assunto |
 |-------|---------|
 | §6 | Durabilidade |
 | §7 | Agressividade e cobrimento |
 | §11 | Resistência do concreto |
 | §15 | Instabilidade e efeitos de 2ª ordem |
-| §17 | Dimensionamento: flexão, cisalhamento, torção |
-| §18 | Punção |
+| §17 | Dimensionamento: flexêo, cisalhamento, torçêo |
+| §18 | Punçêo |
 | §19 | Lajes |
-| §22 | Elementos de fundação |
+| §22 | Elementos de fundaçêo |
 
 ## Uso no Código
 

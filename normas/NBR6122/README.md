@@ -1,10 +1,10 @@
-# NBR 6122:2010 — Projeto e Execução de Fundações
+# NBR 6122:2010 — Projeto e Execuçêo de Fundações
 
 ## Metadados
 
 - **Código:** ABNT NBR 6122
-- **Edição:** 2010 (3ª edição)
-- **Título:** Projeto e execução de fundações
+- **Ediçêo:** 2010 (3ª ediçêo)
+- **Título:** Projeto e execuçêo de fundações
 - **Status:** Em vigor
 
 ## Tabelas Disponíveis
@@ -16,7 +16,7 @@
 | `tables/decourt_c.json` | Coeficiente C (kPa) por tipo de solo (Décourt-Quaresma) |
 
 > As três tabelas espelham os valores hardcoded em `lib/geotechnical/piles.py`
-> (`AOKI_SOLO`, `AOKI_F1F2`, `DECOURT_C`) — servem como fonte de consulta e são
+> (`AOKI_SOLO`, `AOKI_F1F2`, `DECOURT_C`) — servem como fonte de consulta e sêo
 > verificadas em `tests/unit/test_service_phase3.py`.
 
 ## Métodos de Capacidade de Carga
@@ -27,12 +27,12 @@
 
 ### Fundações Diretas
 - **Terzaghi:** clássico, para solos homogêneos
-- **Meyerhof:** incorpora profundidade e inclinação de carga
+- **Meyerhof:** incorpora profundidade e inclinaçêo de carga
 
 ## Fatores de Segurança (NBR 6122)
 
 | Tipo | FS mínimo |
 |------|-----------|
-| Fundação direta (tensão admissível) | 3,0 |
+| Fundaçêo direta (tensêo admissível) | 3,0 |
 | Estaca (capacidade de carga) | 2,0 |
 | Estabilidade global de taludes | 1,5 |

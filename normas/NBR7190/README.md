@@ -3,9 +3,9 @@
 ## Metadados
 
 - **Código:** ABNT NBR 7190
-- **Edição:** 1997 (1ª edição)
+- **Ediçêo:** 1997 (1ª ediçêo)
 - **Título:** Projeto de estruturas de madeira
-- **Status:** Em revisão (nova edição prevista)
+- **Status:** Em revisêo (nova ediçêo prevista)
 
 ## Tabelas Disponíveis
 
@@ -27,7 +27,7 @@
 | D40 | 40 | 16000 |
 | D50 | 50 | 18000 |
 
-## Coeficientes de Modificação
+## Coeficientes de Modificaçêo
 
 - **kmod1:** classe de carregamento (0.6 a 1.1)
 - **kmod2:** classe de umidade (0.8 a 1.0)
@@ -36,7 +36,7 @@
 
 ## Coeficientes de Segurança
 
-| Situação | γf | γm |
+| Situaçêo | γf | γm |
 |----------|----|----|
 | ELU normal | 1.4 | 1.4 |
 | ELU excepcional | 1.0 | 1.4 |

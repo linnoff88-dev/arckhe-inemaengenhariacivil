@@ -1,16 +1,16 @@
-"""Capacidade de carga de fundação rasa — método de Vesic (NBR 6122).
+"""Capacidade de carga de fundaçêo rasa — método de Vesic (NBR 6122).
 
 Toda a aritmética vive aqui (camada Python determinística). O LLM apenas interpreta
 o problema, chama estas funções via MCP e explica o resultado.
 
 Método e hipóteses
 -------------------
-Equação geral de capacidade de carga (Terzaghi/Vesic):
+Equaçêo geral de capacidade de carga (Terzaghi/Vesic):
 
     q_ult = c·Nc·sc + q·Nq·sq + 0,5·γ·B·Nγ·sγ
 
 com a sobrecarga efetiva no nível da base ``q = γ·Df`` (Df = profundidade de
-assentamento). A tensão admissível é ``q_adm = q_ult / FS`` (FS = 3 por padrão,
+assentamento). A tensêo admissível é ``q_adm = q_ult / FS`` (FS = 3 por padrêo,
 faixa usual da NBR 6122 para fundações superficiais).
 
 Fatores de capacidade de carga — forma fechada de Vesic (1973):
@@ -20,7 +20,7 @@ Fatores de capacidade de carga — forma fechada de Vesic (1973):
 
 Âncora φ=30°: Nq≈18,40 ; Nc≈30,14 ; Nγ≈22,40.
 
-Fatores de forma de Vesic (função da razão B/L):
+Fatores de forma de Vesic (funçêo da razêo B/L):
     sc = 1 + (Nq/Nc)·(B/L)
     sq = 1 + (B/L)·tanφ
     sγ = 1 − 0,4·(B/L)
@@ -30,9 +30,9 @@ Por forma de sapata:
     - circular  : B/L = 1 (B = diâmetro), idem quadrada
     - retangular: B/L = b/l (0 < b ≤ l), informado pelo usuário
 
-Abstenção: entradas fora de faixa física (φ∉[0,50]°, γ∉[10,25] kN/m³, c<0, B≤0,
-Df<0, FS<1, forma não tabelada) levantam ``ValueError``. O fator de segurança e a
-verificação de recalques (ELS) são de responsabilidade do engenheiro.
+Abstençêo: entradas fora de faixa física (φ∉[0,50]°, γ∉[10,25] kN/m³, c<0, B≤0,
+Df<0, FS<1, forma nêo tabelada) levantam ``ValueError``. O fator de segurança e a
+verificaçêo de recalques (ELS) sêo de responsabilidade do engenheiro.
 """
 
 from __future__ import annotations
@@ -50,7 +50,7 @@ FORMAS = ("corrida", "quadrada", "retangular", "circular")
 
 
 class BearingCapacityResult(BaseModel):
-    """Resultado da capacidade de carga de uma fundação rasa (método de Vesic)."""
+    """Resultado da capacidade de carga de uma fundaçêo rasa (método de Vesic)."""
 
     # entrada (eco)
     c_kpa: float
@@ -71,7 +71,7 @@ class BearingCapacityResult(BaseModel):
     sc: float
     sq: float
     sgamma: float
-    # parcelas (kPa) — transparência e verificação dimensional
+    # parcelas (kPa) — transparência e verificaçêo dimensional
     term_cohesion_kpa: float
     term_surcharge_kpa: float
     term_weight_kpa: float
@@ -104,7 +104,7 @@ def vesic_bearing_factors(phi_deg: float) -> tuple[float, float, float]:
 
 def _shape_factors(shape: str, b_over_l: float, nc: float, nq: float,
                    phi_deg: float) -> tuple[float, float, float]:
-    """Fatores de forma de Vesic ``(sc, sq, sγ)`` a partir da razão B/L."""
+    """Fatores de forma de Vesic ``(sc, sq, sγ)`` a partir da razêo B/L."""
     phi = math.radians(phi_deg)
     sc = 1.0 + (nq / nc) * b_over_l
     sq = 1.0 + b_over_l * math.tan(phi)
@@ -113,7 +113,7 @@ def _shape_factors(shape: str, b_over_l: float, nc: float, nq: float,
 
 
 def _b_over_l(shape: str, b_m: float, l_m: float | None) -> tuple[float, float | None]:
-    """Razão B/L e comprimento efetivo conforme a forma da sapata."""
+    """Razêo B/L e comprimento efetivo conforme a forma da sapata."""
     if shape == "corrida":
         return 0.0, None
     if shape in ("quadrada", "circular"):
@@ -136,20 +136,20 @@ def design_bearing_capacity(
     l_m: float | None = None,
     fs: float = FS_DEFAULT,
 ) -> BearingCapacityResult:
-    """Capacidade de carga de fundação rasa pelo método de Vesic.
+    """Capacidade de carga de fundaçêo rasa pelo método de Vesic.
 
     Parâmetros
     ----------
-    c_kpa: coesão do solo (kPa).
+    c_kpa: coesêo do solo (kPa).
     phi_deg: ângulo de atrito interno (graus).
     gamma_kn_m3: peso específico do solo (kN/m³).
-    b_m: menor dimensão da base (largura) ou diâmetro, em metros.
+    b_m: menor dimensêo da base (largura) ou diâmetro, em metros.
     depth_df_m: profundidade de assentamento Df (m) → sobrecarga q = γ·Df.
     shape: "corrida" | "quadrada" | "retangular" | "circular".
     l_m: comprimento da base (m), obrigatório para "retangular".
     fs: fator de segurança global (≥1), default 3.
 
-    Entradas fora de faixa física levantam ``ValueError`` (abstenção).
+    Entradas fora de faixa física levantam ``ValueError`` (abstençêo).
     """
     if c_kpa < 0.0:
         raise ValueError(f"c={c_kpa} kPa deve ser ≥ 0.")
@@ -165,7 +165,7 @@ def design_bearing_capacity(
     if fs < 1.0:
         raise ValueError(f"FS={fs} deve ser ≥ 1.")
     if shape not in FORMAS:
-        raise ValueError(f"Forma '{shape}' não tabelada; use uma de {FORMAS}.")
+        raise ValueError(f"Forma '{shape}' nêo tabelada; use uma de {FORMAS}.")
 
     b_over_l, l_eff = _b_over_l(shape, b_m, l_m)
     nc, nq, ng = vesic_bearing_factors(phi_deg)

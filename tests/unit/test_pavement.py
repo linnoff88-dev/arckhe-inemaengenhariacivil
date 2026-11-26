@@ -1,10 +1,10 @@
 """Testes de pavimento flexível — método empírico DNER/DNIT (CBR / número N).
 
-Valores de referência calculados à mão (a conta está nos comentários).
+Valores de referência calculados à mêo (a conta está nos comentários).
 
 Fonte do método: DNER (1981) "Método de Projeto de Pavimentos Flexíveis"
-(Eng. Murillo Lopes de Souza) e DNIT (2006) "Manual de Pavimentação".
-Equação de ajuste do ábaco de dimensionamento (espessura de material granular
+(Eng. Murillo Lopes de Souza) e DNIT (2006) "Manual de Pavimentaçêo".
+Equaçêo de ajuste do ábaco de dimensionamento (espessura de material granular
 equivalente, em cm):  H = 77,67 · N^0,0482 · CBR^-0,598.
 """
 
@@ -146,7 +146,7 @@ def test_espessura_total_ceil_consistente():
     assert r.b_cm == math.ceil(r.b_cm)  # camadas granulares em cm inteiros
 
 
-# --------------------------------------------------------------- validação
+# --------------------------------------------------------------- validaçêo
 
 from lib.validators.pavement_check import validate_pavement  # noqa: E402
 
@@ -176,7 +176,7 @@ def test_validate_pavement_flags_n_out_of_range():
 
 
 def test_validate_pavement_flags_unsatisfied_inequality():
-    # base esmagada -> a inequação R·K_R + B·K_B >= H20 não fecha
+    # base esmagada -> a inequaçêo R·K_R + B·K_B >= H20 nêo fecha
     r = _good_pavement().model_copy(update={"b_cm": 1.0})
     rep = validate_pavement(r)
     assert rep.passed is False

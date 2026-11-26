@@ -1,7 +1,7 @@
-# CHECKLIST DE REVISÃO TÉCNICA
+# CHECKLIST DE REVISêO TÉCNICA
 
 **Projeto:** [Nome]
-**Elemento:** [Identificação]
+**Elemento:** [Identificaçêo]
 **Revisor:** [Nome / CREA]
 **Data:** [Data]
 
@@ -26,19 +26,19 @@
 - [ ] Estado limite último (ELU) verificado
 - [ ] Estado limite de serviço (ELS) verificado
 - [ ] Armadura mínima atendida (Tab. 17.3 NBR 6118)
-- [ ] Armadura máxima não excedida
+- [ ] Armadura máxima nêo excedida
 - [ ] Cobrimento mínimo atendido (Tab. 7.2 NBR 6118)
 - [ ] Espaçamento de armaduras verificado
 
 ## Dimensionamento
 
 - [ ] Cálculo de esforços correto
-- [ ] Armadura de flexão calculada e verificada
+- [ ] Armadura de flexêo calculada e verificada
 - [ ] Armadura de cisalhamento calculada (se necessário)
-- [ ] Deflexão verificada (ELS)
-- [ ] Fissuração verificada (ELS)
+- [ ] Deflexêo verificada (ELS)
+- [ ] Fissuraçêo verificada (ELS)
 
-## Documentação
+## Documentaçêo
 
 - [ ] Memorial de cálculo completo
 - [ ] Unidades coerentes em todo o memorial
@@ -50,6 +50,6 @@
 
 - [ ] **APROVADO** — cálculo correto e completo
 - [ ] **APROVADO COM RESSALVAS** — ver observações
-- [ ] **REPROVADO** — requer revisão (ver observações)
+- [ ] **REPROVADO** — requer revisêo (ver observações)
 
 **Observações:**

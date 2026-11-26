@@ -1,17 +1,17 @@
 """Combinações de ações — valores característicos -> valores de cálculo.
 
 NBR 8681:2003 (ações e segurança) + NBR 6118:2014 (tabela 11.x dos coeficientes
-de ponderação γ e dos fatores de combinação ψ). Camada Python determinística: o
+de ponderaçêo γ e dos fatores de combinaçêo ψ). Camada Python determinística: o
 LLM nunca soma cargas de cabeça; chama estas funções puras via MCP.
 
 Tipos cobertos:
-- ELU normal (combinação última normal, NBR 8681 4.3 / NBR 6118 11.8.2):
+- ELU normal (combinaçêo última normal, NBR 8681 4.3 / NBR 6118 11.8.2):
       Fd = γg·Gk + γq·(Qk_princ + Σ ψ0·Qk_sec)
-  A ação variável principal entra com valor pleno; as secundárias entram
-  reduzidas pelo fator de combinação ψ0.
+  A açêo variável principal entra com valor pleno; as secundárias entram
+  reduzidas pelo fator de combinaçêo ψ0.
 - ELS quase-permanente (NBR 8681 4.4 / NBR 6118 11.8.3.2):
       Fd,serv = Gk + Σ ψ2·Qk
-  Usada em verificações de deformação (flecha) de longa duração.
+  Usada em verificações de deformaçêo (flecha) de longa duraçêo.
 
 Coeficientes típicos (NBR 6118:2014 Tab.11.1 e 11.2; valores usuais de edifícios):
 - γg = 1.4 (permanente desfavorável), γq = 1.4 (variável desfavorável);
@@ -28,18 +28,18 @@ from collections.abc import Sequence
 from pydantic import BaseModel
 
 # --- coeficientes default (NBR 6118:2014) ------------------------------------
-GAMMA_G = 1.4   # ponderação de ações permanentes (desfavorável)
-GAMMA_Q = 1.4   # ponderação de ações variáveis (desfavorável)
-PSI0 = 0.5      # fator de combinação (ELU) — acidental usual de edifícios
+GAMMA_G = 1.4   # ponderaçêo de ações permanentes (desfavorável)
+GAMMA_Q = 1.4   # ponderaçêo de ações variáveis (desfavorável)
+PSI0 = 0.5      # fator de combinaçêo (ELU) — acidental usual de edifícios
 PSI2 = 0.3      # fator quase-permanente (ELS) — acidental residencial usual
 
 NORMA = "NBR 8681:2003 / NBR 6118:2014"
 
 
 class CombinationResult(BaseModel):
-    """Resultado de uma combinação de ações.
+    """Resultado de uma combinaçêo de ações.
 
-    ``fd`` é o valor de cálculo (ELU) ou de serviço (ELS) da ação combinada, na
+    ``fd`` é o valor de cálculo (ELU) ou de serviço (ELS) da açêo combinada, na
     mesma unidade das entradas (kN, kN/m, kN/m²…). ``parcela_permanente`` e
     ``parcela_variavel`` decompõem a soma para rastreabilidade do memorial.
     """
@@ -69,15 +69,15 @@ def combinar_elu_normal(
     gamma_q: float = GAMMA_Q,
     psi0: float = PSI0,
 ) -> CombinationResult:
-    """Combinação última normal (ELU): Fd = γg·Gk + γq·(Qk_princ + Σ ψ0·Qk_sec).
+    """Combinaçêo última normal (ELU): Fd = γg·Gk + γq·(Qk_princ + Σ ψ0·Qk_sec).
 
-    - ``gk``: ação permanente característica (Gk).
-    - ``qk_principal``: ação variável principal característica (valor pleno).
+    - ``gk``: açêo permanente característica (Gk).
+    - ``qk_principal``: açêo variável principal característica (valor pleno).
     - ``qk_secundarias``: demais ações variáveis (reduzidas por ψ0). Default: nenhuma.
-    - ``psi0``: fator de combinação das secundárias (NBR 6118 Tab.11.2; ~0.5 usual).
+    - ``psi0``: fator de combinaçêo das secundárias (NBR 6118 Tab.11.2; ~0.5 usual).
 
-    Entradas negativas levantam ``ValueError`` (princípio da abstenção: não se
-    presume ação favorável sem o engenheiro declarar). NBR 8681 4.3 / NBR 6118 11.8.2.
+    Entradas negativas levantam ``ValueError`` (princípio da abstençêo: nêo se
+    presume açêo favorável sem o engenheiro declarar). NBR 8681 4.3 / NBR 6118 11.8.2.
     """
     secundarias = list(qk_secundarias or [])
     _exigir_nao_negativo("Gk", gk)
@@ -85,7 +85,7 @@ def combinar_elu_normal(
     for i, q in enumerate(secundarias):
         _exigir_nao_negativo(f"Qk_secundaria[{i}]", q)
     if gamma_g < 0 or gamma_q < 0 or psi0 < 0:
-        raise ValueError("Coeficientes de ponderação/combinação devem ser ≥ 0.")
+        raise ValueError("Coeficientes de ponderaçêo/combinaçêo devem ser ≥ 0.")
 
     parcela_permanente = gamma_g * gk
     soma_variaveis = qk_principal + psi0 * sum(secundarias)
@@ -106,13 +106,13 @@ def combinar_els_quase_permanente(
     qks: Sequence[float],
     psi2: float = PSI2,
 ) -> CombinationResult:
-    """Combinação quase-permanente de serviço (ELS): Fd,serv = Gk + Σ ψ2·Qk.
+    """Combinaçêo quase-permanente de serviço (ELS): Fd,serv = Gk + Σ ψ2·Qk.
 
-    - ``gk``: ação permanente característica (Gk), valor pleno.
+    - ``gk``: açêo permanente característica (Gk), valor pleno.
     - ``qks``: ações variáveis características (todas reduzidas por ψ2).
     - ``psi2``: fator quase-permanente (NBR 6118 Tab.11.2; ~0.3 residencial usual).
 
-    Usada na verificação de flechas de longa duração. Entradas negativas levantam
+    Usada na verificaçêo de flechas de longa duraçêo. Entradas negativas levantam
     ``ValueError``. NBR 8681 4.4 / NBR 6118 11.8.3.2.
     """
     variaveis = list(qks or [])

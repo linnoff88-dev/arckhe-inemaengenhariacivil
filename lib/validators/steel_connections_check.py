@@ -1,13 +1,13 @@
-"""Validação obrigatória do domínio de LIGAÇÕES METÁLICAS (NBR 8800:2008 §6).
+"""Validaçêo obrigatória do domínio de LIGAÇÕES METÁLICAS (NBR 8800:2008 §6).
 
-Arquivo próprio do domínio (não toca nos validadores compartilhados). Reverifica de
-forma determinística, sem LLM, a coerência dimensional e aritmética de uma ligação
+Arquivo próprio do domínio (nêo toca nos validadores compartilhados). Reverifica de
+forma determinística, sem LLM, a coerência dimensional e aritmética de uma ligaçêo
 parafusada ou soldada antes de ela ser apresentada:
 
 - Parafusos: resistências por modo > 0; resistência governante = mínimo entre cortante
   e contato; capacidade total = n·Rd ≥ força solicitante; nº de parafusos ≥ 1; fub/fu
   positivos; bitola na faixa usual [12,5; 25] mm (alerta — warning — quando fora).
-- Solda: garganta aw = 0,7·perna; Rd = força/comprimento (reconstrução); fw > 0;
+- Solda: garganta aw = 0,7·perna; Rd = força/comprimento (reconstruçêo); fw > 0;
   perna ≥ 3 mm (mínimo prático — reprova quando abaixo).
 
 Importa apenas ``Check``/``ValidationReport`` de :mod:`lib.validators.report` (estável).

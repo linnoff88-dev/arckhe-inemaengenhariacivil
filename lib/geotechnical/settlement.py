@@ -1,4 +1,4 @@
-"""Recalques de fundação — elástico imediato e adensamento primário.
+"""Recalques de fundaçêo — elástico imediato e adensamento primário.
 
 Toda a aritmética vive aqui (camada Python determinística). O LLM apenas interpreta
 o problema, chama estas funções via MCP e explica o resultado.
@@ -9,21 +9,21 @@ Métodos e hipóteses
 
         s = q·B·(1−ν²)·Iw / Es
 
-    q = pressão aplicada (kPa); B = largura (m); ν = coeficiente de Poisson;
-    Iw = fator de influência (forma/rigidez da fundação); Es = módulo de
+    q = pressêo aplicada (kPa); B = largura (m); ν = coeficiente de Poisson;
+    Iw = fator de influência (forma/rigidez da fundaçêo); Es = módulo de
     elasticidade do solo (kPa). Resultado em metros.
 
 (b) Recalque por adensamento primário (Terzaghi, argila normalmente adensada):
 
         s = Cc/(1+e0)·H·log10((σ0+Δσ)/σ0)
 
-    Cc = índice de compressão; e0 = índice de vazios inicial; H = espessura da
-    camada compressível (m); σ0 = tensão efetiva inicial (kPa); Δσ = acréscimo
-    de tensão (kPa). Resultado em metros.
+    Cc = índice de compressêo; e0 = índice de vazios inicial; H = espessura da
+    camada compressível (m); σ0 = tensêo efetiva inicial (kPa); Δσ = acréscimo
+    de tensêo (kPa). Resultado em metros.
 
-Abstenção: entradas fora de faixa física (ν∉[0,0.5], e0∉[0,3], Es≤0, q≤0, σ0≤0,
+Abstençêo: entradas fora de faixa física (ν∉[0,0.5], e0∉[0,3], Es≤0, q≤0, σ0≤0,
 Cc≤0, H≤0, B≤0, Δσ<0) levantam ``ValueError``. A hipótese de argila normalmente
-adensada (sem trecho de recompressão Cs) é do engenheiro.
+adensada (sem trecho de recompressêo Cs) é do engenheiro.
 """
 
 from __future__ import annotations
@@ -38,7 +38,7 @@ E0_MIN, E0_MAX = 0.0, 3.0     # índice de vazios inicial
 
 
 class ElasticSettlementResult(BaseModel):
-    """Recalque elástico imediato de fundação."""
+    """Recalque elástico imediato de fundaçêo."""
 
     # entrada (eco)
     q_kpa: float
@@ -82,7 +82,7 @@ def elastic_settlement(
 ) -> ElasticSettlementResult:
     """Recalque elástico imediato ``s = q·B·(1−ν²)·Iw / Es`` (metros).
 
-    Entradas fora de faixa física levantam ``ValueError`` (abstenção).
+    Entradas fora de faixa física levantam ``ValueError`` (abstençêo).
     """
     if q_kpa <= 0.0:
         raise ValueError(f"q={q_kpa} kPa deve ser positivo.")
@@ -113,7 +113,7 @@ def consolidation_settlement(
     """Recalque por adensamento primário ``s = Cc/(1+e0)·H·log10((σ0+Δσ)/σ0)`` (m).
 
     Hipótese: argila normalmente adensada (σ0 ≥ σ'pré-adensamento). Entradas fora de
-    faixa física levantam ``ValueError`` (abstenção).
+    faixa física levantam ``ValueError`` (abstençêo).
     """
     if cc <= 0.0:
         raise ValueError(f"Cc={cc} deve ser positivo.")

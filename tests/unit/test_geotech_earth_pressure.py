@@ -1,6 +1,6 @@
 """Testes de empuxo de terra — Rankine e Coulomb.
 
-Valores de referência calculados à mão (a conta está nos comentários).
+Valores de referência calculados à mêo (a conta está nos comentários).
 Fontes: Rankine (1857) e Coulomb (1776), formulações clássicas de empuxo.
 
 Âncoras φ=30°: Ka=tan²(45−15)=tan²30=1/3 ; Kp=tan²(45+15)=tan²60=3.
@@ -29,7 +29,7 @@ def test_rankine_coefficients_phi_30():
 def test_rankine_thrust_and_point():
     # γ=18, H=4, φ=30 -> Ka=1/3
     # Ea = 0.5·γ·H²·Ka = 0.5·18·16·(1/3) = 144·(1/3) = 48 kN/m
-    # Ep = 0.5·18·16·3 = 432 kN/m ; ponto de aplicação = H/3 = 1.333 m
+    # Ep = 0.5·18·16·3 = 432 kN/m ; ponto de aplicaçêo = H/3 = 1.333 m
     r = rankine_earth_pressure(gamma_kn_m3=18.0, h_m=4.0, phi_deg=30.0)
     assert r.ea_active_kn_m == pytest.approx(48.0, abs=1e-6)
     assert r.ep_passive_kn_m == pytest.approx(432.0, abs=1e-6)

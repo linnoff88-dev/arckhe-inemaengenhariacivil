@@ -1,4 +1,4 @@
-"""Escoamento em conduto forçado (tubulações sob pressão).
+"""Escoamento em conduto forçado (tubulações sob pressêo).
 
 Toda a aritmética vive aqui (camada Python determinística). O LLM apenas interpreta o
 problema, chama estas funções via MCP e explica o resultado.
@@ -10,15 +10,15 @@ Métodos:
   Fonte: Azevedo Netto, "Manual de Hidráulica", 8ª ed. (forma SI usual).
 - **Darcy-Weisbach** (racional, válido para qualquer fluido/regime):
   hf = f · (L/D) · V²/(2g)
-  com o fator de atrito f obtido pela aproximação explícita de **Swamee-Jain (1976)**
+  com o fator de atrito f obtido pela aproximaçêo explícita de **Swamee-Jain (1976)**
   para o diagrama de Moody:
   f = 0,25 / [log10(ε/(3,7·D) + 5,74/Re^0,9)]²   (válida p/ 5e3 ≤ Re ≤ 1e8,
   1e-6 ≤ ε/D ≤ 1e-2), com Re = V·D/ν.
 
 Hipóteses:
 - Água a ~20 °C: viscosidade cinemática ν ≈ 1,0e-6 m²/s.
-- Aceleração da gravidade g = 9,81 m/s².
-- Seção circular plena; V = Q/A, A = π·D²/4.
+- Aceleraçêo da gravidade g = 9,81 m/s².
+- Seçêo circular plena; V = Q/A, A = π·D²/4.
 """
 
 from __future__ import annotations
@@ -35,7 +35,7 @@ NU_AGUA_20C = 1.0e-6      # viscosidade cinemática da água a ~20 °C (m²/s)
 class PipeFlowResult(BaseModel):
     """Resultado do escoamento em conduto forçado.
 
-    ``reynolds`` e ``f`` só são preenchidos no método de Darcy-Weisbach; ``coef_C``
+    ``reynolds`` e ``f`` só sêo preenchidos no método de Darcy-Weisbach; ``coef_C``
     só no de Hazen-Williams.
     """
     metodo: str
@@ -55,11 +55,11 @@ def _check_geometry(D_m: float, L_m: float) -> None:
     if D_m <= 0:
         raise ValueError(f"Diâmetro D={D_m} m deve ser positivo.")
     if L_m < 0:
-        raise ValueError(f"Comprimento L={L_m} m não pode ser negativo.")
+        raise ValueError(f"Comprimento L={L_m} m nêo pode ser negativo.")
 
 
 def pipe_area(D_m: float) -> float:
-    """Área da seção circular plena: A = π·D²/4 [m²]."""
+    """Área da seçêo circular plena: A = π·D²/4 [m²]."""
     if D_m <= 0:
         raise ValueError(f"Diâmetro D={D_m} m deve ser positivo.")
     return math.pi * D_m**2 / 4.0
@@ -71,7 +71,7 @@ def velocity_from_flow(Q_m3s: float, D_m: float) -> float:
 
 
 def flow_from_velocity(V_ms: float, D_m: float) -> float:
-    """Vazão Q = V·A [m³/s]."""
+    """Vazêo Q = V·A [m³/s]."""
     return V_ms * pipe_area(D_m)
 
 
@@ -86,7 +86,7 @@ def hazen_williams_headloss(Q_m3s: float, D_m: float, L_m: float, C: float) -> f
     if C <= 0:
         raise ValueError(f"Coeficiente C={C} de Hazen-Williams deve ser positivo.")
     if Q_m3s < 0:
-        raise ValueError(f"Vazão Q={Q_m3s} m³/s não pode ser negativa.")
+        raise ValueError(f"Vazêo Q={Q_m3s} m³/s nêo pode ser negativa.")
     return 10.67 * Q_m3s**1.852 * L_m / (C**1.852 * D_m**4.87)
 
 
@@ -115,12 +115,12 @@ def swamee_jain_friction(Re: float, eps_m: float, D_m: float) -> float:
     """Fator de atrito de Darcy por Swamee-Jain (1976) [adimensional].
 
     f = 0,25 / [log10(ε/(3,7·D) + 5,74/Re^0,9)]².
-    Válida no regime turbulento (5e3 ≤ Re ≤ 1e8); fora dela a aproximação degrada.
+    Válida no regime turbulento (5e3 ≤ Re ≤ 1e8); fora dela a aproximaçêo degrada.
     """
     if D_m <= 0:
         raise ValueError(f"Diâmetro D={D_m} m deve ser positivo.")
     if eps_m < 0:
-        raise ValueError(f"Rugosidade ε={eps_m} m não pode ser negativa.")
+        raise ValueError(f"Rugosidade ε={eps_m} m nêo pode ser negativa.")
     if Re <= 0:
         raise ValueError(f"Reynolds Re={Re} deve ser positivo.")
     termo = math.log10(eps_m / (3.7 * D_m) + 5.74 / Re**0.9)

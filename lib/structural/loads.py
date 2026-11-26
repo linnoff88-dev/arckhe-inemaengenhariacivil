@@ -1,8 +1,8 @@
 """Ações para o cálculo de estruturas — tabela consultável (NBR 6120:2019).
 
 Camada de dados determinística: pesos específicos de materiais (Tab.2) e cargas
-acidentais (variáveis) por uso dos ambientes. NÃO calcula esforços; apenas devolve os
-valores normativos para que o agente nunca invente uma carga (princípio da abstenção).
+acidentais (variáveis) por uso dos ambientes. NêO calcula esforços; apenas devolve os
+valores normativos para que o agente nunca invente uma carga (princípio da abstençêo).
 
 Os valores reproduzem a tabela em ``normas/NBR6120/README.md`` (fonte interna do repo).
 """
@@ -43,7 +43,7 @@ CARGAS_ACIDENTAIS: dict[str, float] = {
 
 
 class LoadValue(BaseModel):
-    """Valor tabelado de uma ação, com unidade e norma de referência."""
+    """Valor tabelado de uma açêo, com unidade e norma de referência."""
     categoria: str
     descricao: str
     valor: float
@@ -52,7 +52,7 @@ class LoadValue(BaseModel):
 
 
 def _normalize(chave: str) -> str:
-    """Minúsculas + remoção de acentos para casar chaves de forma robusta."""
+    """Minúsculas + remoçêo de acentos para casar chaves de forma robusta."""
     sem_acento = "".join(
         c for c in unicodedata.normalize("NFKD", chave) if not unicodedata.combining(c)
     )
@@ -62,13 +62,13 @@ def _normalize(chave: str) -> str:
 def peso_especifico_material(nome: str) -> LoadValue:
     """Peso específico (kN/m³) de um material da NBR 6120:2019 Tab.2.
 
-    Levanta ``KeyError`` (com a lista de opções) se o material não estiver tabelado —
-    o agente deve então abster-se em vez de inventar um valor.
+    Levanta ``KeyError`` (com a lista de opções) se o material nêo estiver tabelado —
+    o agente deve entêo abster-se em vez de inventar um valor.
     """
     chave = _normalize(nome)
     if chave not in PESOS_ESPECIFICOS:
         raise KeyError(
-            f"Material '{nome}' não consta na NBR 6120:2019 Tab.2. "
+            f"Material '{nome}' nêo consta na NBR 6120:2019 Tab.2. "
             f"Disponíveis: {', '.join(listar_materiais())}."
         )
     return LoadValue(
@@ -80,12 +80,12 @@ def peso_especifico_material(nome: str) -> LoadValue:
 def carga_acidental_uso(uso: str) -> LoadValue:
     """Carga acidental (variável) de piso, em kN/m², por uso do ambiente (NBR 6120:2019).
 
-    Levanta ``KeyError`` se o uso não estiver tabelado (princípio da abstenção).
+    Levanta ``KeyError`` se o uso nêo estiver tabelado (princípio da abstençêo).
     """
     chave = _normalize(uso)
     if chave not in CARGAS_ACIDENTAIS:
         raise KeyError(
-            f"Uso '{uso}' não consta na NBR 6120:2019. "
+            f"Uso '{uso}' nêo consta na NBR 6120:2019. "
             f"Disponíveis: {', '.join(listar_usos())}."
         )
     return LoadValue(

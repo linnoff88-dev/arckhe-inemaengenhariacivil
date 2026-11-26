@@ -3,20 +3,20 @@
 Toda a aritmética vive aqui (camada Python determinística). O LLM apenas interpreta o
 problema, chama estas funções via MCP e explica o resultado.
 
-Método e hipóteses (flexão composta normal, momentos atuando na direção de ``h``):
+Método e hipóteses (flexêo composta normal, momentos atuando na direçêo de ``h``):
 
 1. Esforços de cálculo: Nd = γf·Nk, M1d,A = γf·Mk,topo (γf = 1.4).
 
 2. Esbeltez (NBR 6118 15.8.2):
-   - raio de giração i = h/√12 (seção retangular, direção analisada);
+   - raio de giraçêo i = h/√12 (seçêo retangular, direçêo analisada);
    - λ = le/i;
    - excentricidade de 1ª ordem e1 = M1d,A/Nd;
    - λ1 = (25 + 12,5·e1/h)/αb, com αb = 1,0 (pilar com momentos nas extremidades, sem
      cargas transversais — caso usual, documentado e fixado); λ1 é limitado a
      35 ≤ λ1 ≤ 90 (NBR 6118 15.8.2).
-   Classificação: λ ≤ λ1 → "curto" (2ª ordem desprezível); λ1 < λ ≤ 90 → "medio"
-   (método do pilar-padrão com curvatura aproximada); λ > 90 → RECUSA (fora do escopo
-   deste núcleo — princípio da abstenção; exige métodos mais refinados, item 15.8.3.2).
+   Classificaçêo: λ ≤ λ1 → "curto" (2ª ordem desprezível); λ1 < λ ≤ 90 → "medio"
+   (método do pilar-padrêo com curvatura aproximada); λ > 90 → RECUSA (fora do escopo
+   deste núcleo — princípio da abstençêo; exige métodos mais refinados, item 15.8.3.2).
 
 3. 2ª ordem por curvatura aproximada (NBR 6118 15.8.3.3.2):
    - força normal adimensional ν = Nd/(Ac·fcd), Ac = b·h;
@@ -28,11 +28,11 @@ Método e hipóteses (flexão composta normal, momentos atuando na direção de 
 4. Armadura longitudinal SIMÉTRICA (duas camadas iguais As/2): dimensionada por
    compatibilidade de deformações no ELU (bloco retangular de tensões, λ=0,8,
    αc=0,85; εcu=3,5‰, εc2=2,0‰, εsu=10‰; Es=210 GPa). Itera-se As até a capacidade
-   da seção em flexão composta, MRd avaliado para N = Nd, alcançar Md,tot. Limites:
+   da seçêo em flexêo composta, MRd avaliado para N = Nd, alcançar Md,tot. Limites:
    As,mín = max(0,4%·Ac, 0,15·Nd/fyd) (NBR 6118 17.3.5.3.1); As,máx = 8%·Ac (com
    emendas) e 4%·Ac fora de emendas (alerta).
 
-Limitações (abstenção): só flexão composta NORMAL (1 direção); fck ≤ 50 MPa; λ ≤ 90;
+Limitações (abstençêo): só flexêo composta NORMAL (1 direçêo); fck ≤ 50 MPa; λ ≤ 90;
 detalhamento (espaçamento, estribos, emendas, flambagem de barras) é do engenheiro.
 """
 
@@ -53,7 +53,7 @@ from lib.concrete.beams import (
 )
 
 # --- constantes normativas (NBR 6118:2014) ----------------------------------
-GAMMA_F = 1.4            # ponderação da carga do pilar (Nd = γf·Nk)
+GAMMA_F = 1.4            # ponderaçêo da carga do pilar (Nd = γf·Nk)
 ES_KNCM2 = 21000.0       # módulo de elasticidade do aço (210 GPa) em kN/cm²
 EPS_CU = 0.0035          # encurtamento último do concreto (fck ≤ 50 MPa)
 EPS_C2 = 0.0020          # encurtamento no início do patamar (fck ≤ 50 MPa)
@@ -61,14 +61,14 @@ EPS_SU = 0.010           # alongamento máximo da armadura tracionada
 ALPHA_B = 1.0            # αb (momentos nas extremidades, sem cargas transversais)
 LAMBDA1_MIN = 35.0       # limite inferior de λ1 (NBR 6118 15.8.2)
 LAMBDA1_MAX = 90.0       # limite superior de λ1 (NBR 6118 15.8.2)
-LAMBDA_MAX = 90.0        # acima disto, pilar-padrão + curvatura aprox. não se aplica
+LAMBDA_MAX = 90.0        # acima disto, pilar-padrêo + curvatura aprox. nêo se aplica
 AS_MIN_FRAC = 0.004      # 0,4%·Ac (NBR 6118 17.3.5.3.1)
 AS_MAX_FRAC = 0.08       # 8%·Ac (com emendas) — limite absoluto
 AS_LAP_WARN_FRAC = 0.04  # 4%·Ac (fora de emendas) — alerta de detalhamento
 
 
 class ColumnResult(BaseModel):
-    """Resultado completo do dimensionamento de um pilar retangular à compressão."""
+    """Resultado completo do dimensionamento de um pilar retangular à compressêo."""
 
     # entrada (eco)
     nk_kn: float
@@ -110,7 +110,7 @@ class ColumnResult(BaseModel):
 def _check_inputs(nk_kn: float, b_cm: float, h_cm: float, le_cm: float,
                   fck_mpa: float, fyk_mpa: float) -> None:
     if nk_kn <= 0:
-        raise ValueError(f"Nk={nk_kn} kN deve ser positivo (compressão do pilar).")
+        raise ValueError(f"Nk={nk_kn} kN deve ser positivo (compressêo do pilar).")
     if b_cm <= 0 or h_cm <= 0:
         raise ValueError(f"Dimensões do pilar devem ser positivas (b={b_cm}, h={h_cm}).")
     if le_cm <= 0:
@@ -118,20 +118,20 @@ def _check_inputs(nk_kn: float, b_cm: float, h_cm: float, le_cm: float,
     if not (10.0 <= fck_mpa <= 100.0):
         raise ValueError(f"fck={fck_mpa} MPa fora da faixa física [10, 100].")
     if fck_mpa > 50.0:
-        raise ValueError("fck > 50 MPa (Grupo II) ainda não implementado para pilares.")
+        raise ValueError("fck > 50 MPa (Grupo II) ainda nêo implementado para pilares.")
     if not (250.0 <= fyk_mpa <= 600.0):
         raise ValueError(f"fyk={fyk_mpa} MPa fora da faixa de aços comerciais [250, 600].")
 
 
 def _strain_at(z: float, x: float, h: float, d_linha: float) -> float:
-    """Deformação (compressão positiva) à profundidade ``z`` (a partir da borda
+    """Deformaçêo (compressêo positiva) à profundidade ``z`` (a partir da borda
     mais comprimida) para a linha neutra ``x``. Pivôs do ELU (NBR 6118 17.2.2)."""
     if x <= h:
         d2 = h - d_linha  # camada tracionada (inferior)
         if x < d2:
-            eps_bot = EPS_CU * (x - d2) / x  # < 0 (tração) com pivô no topo
+            eps_bot = EPS_CU * (x - d2) / x  # < 0 (traçêo) com pivô no topo
             if -eps_bot > EPS_SU:
-                # Domínio 2: pivô na armadura inferior em εsu (tração)
+                # Domínio 2: pivô na armadura inferior em εsu (traçêo)
                 return -EPS_SU * (z - x) / (d2 - x)
         # Pivô no topo em εcu (domínios 3/4/4a)
         return EPS_CU * (x - z) / x
@@ -142,10 +142,10 @@ def _strain_at(z: float, x: float, h: float, d_linha: float) -> float:
 
 def _section_nm(x: float, as_total: float, b: float, h: float, d_linha: float,
                 fcd_k: float, fyd_k: float) -> tuple[float, float]:
-    """Esforços resistentes (N em kN, M em kN·cm) da seção com armadura simétrica,
-    para a posição de linha neutra ``x`` (cm). Momento tomado no centro geométrico."""
+    """Esforços resistentes (N em kN, M em kN·cm) da seçêo com armadura simétrica,
+    para a posiçêo de linha neutra ``x`` (cm). Momento tomado no centro geométrico."""
     y = min(LAMBDA * x, h)
-    rcc = ALPHA_C * fcd_k * b * y               # resultante de compressão (kN)
+    rcc = ALPHA_C * fcd_k * b * y               # resultante de compressêo (kN)
     center = h / 2.0
     n = rcc
     m = rcc * (center - y / 2.0)
@@ -165,7 +165,7 @@ def _x_for_n(nd: float, as_total: float, b: float, h: float, d_linha: float,
     lo, hi = 1e-4, 10.0 * h
     n_hi, _ = _section_nm(hi, as_total, b, h, d_linha, fcd_k, fyd_k)
     if n_hi < nd:
-        return None  # nem a compressão quase uniforme resiste a Nd
+        return None  # nem a compressêo quase uniforme resiste a Nd
     for _ in range(80):
         mid = 0.5 * (lo + hi)
         n_mid, _ = _section_nm(mid, as_total, b, h, d_linha, fcd_k, fyd_k)
@@ -178,9 +178,9 @@ def _x_for_n(nd: float, as_total: float, b: float, h: float, d_linha: float,
 
 def column_moment_capacity(nd_kn: float, as_total_cm2: float, b_cm: float, h_cm: float,
                            d_linha_cm: float, fck_mpa: float, fyk_mpa: float) -> float:
-    """Momento resistente (kN·m) da seção em flexão composta normal para N = ``nd_kn``.
+    """Momento resistente (kN·m) da seçêo em flexêo composta normal para N = ``nd_kn``.
 
-    Devolve 0.0 se a seção não resiste à força normal (sem capacidade de momento).
+    Devolve 0.0 se a seçêo nêo resiste à força normal (sem capacidade de momento).
     """
     fcd_k = (fck_mpa / GAMMA_C) * 0.1
     fyd_k = (fyk_mpa / GAMMA_S) * 0.1
@@ -197,7 +197,7 @@ def _required_as(nd_kn: float, md_tot_knm: float, b_cm: float, h_cm: float,
     """Menor As (cm²) cuja capacidade ≥ ``md_tot_knm`` para N = ``nd_kn``.
 
     Retorna (As, viável). Se nem ``as_max_hard`` for suficiente, devolve
-    (as_max_hard, False) — abstenção: a seção precisa ser ampliada.
+    (as_max_hard, False) — abstençêo: a seçêo precisa ser ampliada.
     """
     def cap(as_total: float) -> float:
         return column_moment_capacity(nd_kn, as_total, b_cm, h_cm, d_linha_cm,
@@ -229,14 +229,14 @@ def design_rectangular_column(
     d_linha_cm: float | None = None,
     alpha_b: float = ALPHA_B,
 ) -> ColumnResult:
-    """Dimensiona um pilar retangular de concreto à compressão com 2ª ordem.
+    """Dimensiona um pilar retangular de concreto à compressêo com 2ª ordem.
 
-    ``h_cm`` é a dimensão na direção analisada (a do momento e da flambagem).
-    Recusa (``ValueError``) entradas inválidas e λ > 90 (princípio da abstenção).
+    ``h_cm`` é a dimensêo na direçêo analisada (a do momento e da flambagem).
+    Recusa (``ValueError``) entradas inválidas e λ > 90 (princípio da abstençêo).
     """
     _check_inputs(nk_kn, b_cm, h_cm, le_cm, fck_mpa, fyk_mpa)
     if mk_topo_knm < 0:
-        raise ValueError(f"Mk_topo={mk_topo_knm} kN·m deve ser não negativo.")
+        raise ValueError(f"Mk_topo={mk_topo_knm} kN·m deve ser nêo negativo.")
 
     if d_linha_cm is None:
         d_linha_cm = cobrimento_cm + (phi_estribo_mm / 10.0) + (phi_long_mm / 10.0) / 2.0
@@ -258,7 +258,7 @@ def design_rectangular_column(
 
     if lam > LAMBDA_MAX + 1e-9:
         raise ValueError(
-            f"λ={lam:.1f} > {LAMBDA_MAX:.0f}: fora do escopo do pilar-padrão com "
+            f"λ={lam:.1f} > {LAMBDA_MAX:.0f}: fora do escopo do pilar-padrêo com "
             "curvatura aproximada (NBR 6118 15.8.3.1) — exige método mais refinado."
         )
     classe: Literal["curto", "medio"] = "curto" if lam <= lambda1 else "medio"
@@ -292,7 +292,7 @@ def design_rectangular_column(
     warnings: list[str] = []
     if not feasible:
         warnings.append(
-            f"As necessário > As_máx={as_max:.2f} cm² (8%·Ac): a seção não resiste a "
+            f"As necessário > As_máx={as_max:.2f} cm² (8%·Ac): a seçêo nêo resiste a "
             f"(Nd={nd:.0f} kN, Md,tot={md_tot:.1f} kN·m) — ampliar o pilar."
         )
     if as_adopted > AS_LAP_WARN_FRAC * ac + 1e-9:
@@ -307,7 +307,7 @@ def design_rectangular_column(
     except ValueError:
         bitolas = None
         warnings.append(
-            f"Nenhuma combinação comercial cobre As={as_adopted:.2f} cm² (detalhar à mão)."
+            f"Nenhuma combinaçêo comercial cobre As={as_adopted:.2f} cm² (detalhar à mêo)."
         )
 
     return ColumnResult(

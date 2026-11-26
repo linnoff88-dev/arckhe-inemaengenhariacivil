@@ -2,10 +2,10 @@
 > fy = 250 MPa). Memorial determinístico — toda a aritmética vem do núcleo Python
 > `lib/steel/stability.py`, validado por `lib/validators/steel_check.py`.
 
-# Memorial de Cálculo — Barra Comprimida de Aço (flambagem por flexão)
+# Memorial de Cálculo — Barra Comprimida de Aço (flambagem por flexêo)
 
 **Norma:** NBR 8800:2008  
-**Elemento:** Perfil laminado comprimido — flambagem global por flexão (ELU)
+**Elemento:** Perfil laminado comprimido — flambagem global por flexêo (ELU)
 
 ## 1. Dados de entrada
 
@@ -16,32 +16,32 @@
 | Resistência ao escoamento fy | 250 MPa |
 | Módulo de elasticidade E | 200000 MPa |
 | Coeficiente de flambagem local Q | 1.00 |
-| Área da seção A | 28.40 cm² |
+| Área da seçêo A | 28.40 cm² |
 | Inércia no eixo de flambagem Iy | 122.0 cm⁴ |
 
 ## 2. Flambagem elástica e esbeltez reduzida
 
 - Carga de flambagem de Euler: Ne = π²·E·Iy/(KL)² = 267.58 kN
 - Esbeltez reduzida: λ0 = √(Q·A·fy/Ne) = 1.6289
-- Fator de redução por flambagem: χ = 0.3305
+- Fator de reduçêo por flambagem: χ = 0.3305
 
 ## 3. Força axial resistente de cálculo
 
-- Coeficiente de ponderação: γa1 = 1.10
+- Coeficiente de ponderaçêo: γa1 = 1.10
 - **Nc,Rd = χ·Q·A·fy/γa1 = 213.33 kN**
 
-## 4. Validação automática
+## 4. Validaçêo automática
 
-| Verificação | Status | Detalhe |
+| Verificaçêo | Status | Detalhe |
 |-------------|--------|---------|
 | units | ✓ | Ne=267.6 kN (dimensional ✓) |
 | physical | ✓ | fy=ok; lambda0=ok; resistencias=ok |
 | normative | ✓ | chi_faixa=ok; NcRd_consistencia=ok |
 
-**Resultado da validação:** APROVADO
+**Resultado da validaçêo:** APROVADO
 
 ---
 
 ⚠️ RESPONSABILIDADE TÉCNICA
 
-Este cálculo é uma ferramenta de suporte à decisão de engenharia. A responsabilidade técnica e legal é exclusiva do engenheiro responsável pelo projeto, formalizada via ART (Anotação de Responsabilidade Técnica), conforme a Lei 6.496/77, a Lei 5.194/66 e a Resolução CONFEA/CREA vigente.
+Este cálculo é uma ferramenta de suporte à decisêo de engenharia. A responsabilidade técnica e legal é exclusiva do engenheiro responsável pelo projeto, formalizada via ART (Anotaçêo de Responsabilidade Técnica), conforme a Lei 6.496/77, a Lei 5.194/66 e a Resoluçêo CONFEA/CREA vigente.

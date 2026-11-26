@@ -3,10 +3,10 @@
 > aritmética vem do núcleo `lib/steel/connections.py`, validado por
 > `lib/validators/steel_connections_check.py`.
 
-# Memorial de Cálculo — Ligação Parafusada (cortante)
+# Memorial de Cálculo — Ligaçêo Parafusada (cortante)
 
 **Norma:** NBR 8800:2008  
-**Elemento:** Ligação por parafusos solicitada ao cortante (ELU)
+**Elemento:** Ligaçêo por parafusos solicitada ao cortante (ELU)
 
 ## 1. Dados de entrada
 
@@ -19,23 +19,23 @@
 | Resistência à ruptura da chapa fu | 400 MPa |
 | Número de planos de corte | 1 |
 | Plano de corte na parte | rosqueada |
-| Coeficiente de ponderação γa2 | 1.35 |
+| Coeficiente de ponderaçêo γa2 | 1.35 |
 
 ## 2. Resistência por parafuso
 
 - Área bruta do parafuso: Ab = π·db²/4 = 3.142 cm²
 - Cortante (§6.3.3.2): Fv,Rd = 74.47 kN
-- Pressão de contato (§6.3.3.3, 2,4·db·t·fu/γa2): Fc,Rd = 135.11 kN
+- Pressêo de contato (§6.3.3.3, 2,4·db·t·fu/γa2): Fc,Rd = 135.11 kN
 - **Resistência governante: Rd = 74.47 kN (cortante)**
 
 ## 3. Número de parafusos
 
 - n = ⌈força/Rd⌉ = **3** parafuso(s)
-- **Capacidade total da ligação: n·Rd = 223.40 kN**
+- **Capacidade total da ligaçêo: n·Rd = 223.40 kN**
 
-## 4. Validação automática
+## 4. Validaçêo automática
 
-| Verificação | Status | Detalhe |
+| Verificaçêo | Status | Detalhe |
 |-------------|--------|---------|
 | materiais_positivos | ✓ | fub=800 MPa, fu=400 MPa (devem ser > 0) |
 | resistencias_positivas | ✓ | Fv,Rd=74.47 kN, Fc,Rd=135.11 kN (> 0) |
@@ -44,10 +44,10 @@
 | capacidade_total | ✓ | n·Rd=223.40 ≈ capacidade=223.40 kN e ≥ força=200.00 kN |
 | bitola_usual | ✓ | db=20 mm (faixa usual [12.5, 25] mm) |
 
-**Resultado da validação:** APROVADO
+**Resultado da validaçêo:** APROVADO
 
 ---
 
 ⚠️ RESPONSABILIDADE TÉCNICA
 
-Este cálculo é uma ferramenta de suporte à decisão de engenharia. A responsabilidade técnica e legal é exclusiva do engenheiro responsável pelo projeto, formalizada via ART (Anotação de Responsabilidade Técnica), conforme a Lei 6.496/77, a Lei 5.194/66 e a Resolução CONFEA/CREA vigente.
+Este cálculo é uma ferramenta de suporte à decisêo de engenharia. A responsabilidade técnica e legal é exclusiva do engenheiro responsável pelo projeto, formalizada via ART (Anotaçêo de Responsabilidade Técnica), conforme a Lei 6.496/77, a Lei 5.194/66 e a Resoluçêo CONFEA/CREA vigente.

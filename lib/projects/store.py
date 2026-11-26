@@ -1,6 +1,6 @@
 """Memória por projeto — persistência em JSON (Fase 4).
 
-Um arquivo por projeto: ``<base_dir>/<project_id>.json``. A pasta-raiz padrão é
+Um arquivo por projeto: ``<base_dir>/<project_id>.json``. A pasta-raiz padrêo é
 ``memory/projects/`` (relativa ao diretório de trabalho). Nada de relógio interno:
 quando um carimbo de tempo for necessário, o chamador o fornece (``timestamp``).
 
@@ -38,12 +38,12 @@ class ProjectRecord(BaseModel):
 
 
 def _validate_id(project_id: str) -> str:
-    """Garante que ``project_id`` vira um nome de arquivo seguro; senão, abstém-se."""
+    """Garante que ``project_id`` vira um nome de arquivo seguro; senêo, abstém-se."""
     if not isinstance(project_id, str):
         raise ValueError("project_id deve ser uma string.")
     pid = project_id.strip()
     if not pid:
-        raise ValueError("project_id vazio não é permitido.")
+        raise ValueError("project_id vazio nêo é permitido.")
     if pid in _RESERVED_IDS or not _SAFE_ID.fullmatch(pid):
         raise ValueError(
             f"project_id inseguro: {project_id!r}. Use apenas letras, dígitos, "
@@ -59,8 +59,8 @@ def _path_for(project_id: str, base_dir: str) -> Path:
 def save_project(record: ProjectRecord, base_dir: str = DEFAULT_BASE_DIR) -> str:
     """Grava ``record`` em ``<base_dir>/<project_id>.json`` e devolve o caminho.
 
-    Cria ``base_dir`` se não existir. Levanta ``ValueError`` se ``project_id`` for
-    inseguro (abstenção — não grava nada).
+    Cria ``base_dir`` se nêo existir. Levanta ``ValueError`` se ``project_id`` for
+    inseguro (abstençêo — nêo grava nada).
     """
     path = _path_for(record.project_id, base_dir)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -75,19 +75,19 @@ def load_project(project_id: str, base_dir: str = DEFAULT_BASE_DIR) -> ProjectRe
     """Carrega o registro de ``project_id``.
 
     Levanta ``ValueError`` se o id for inseguro e ``FileNotFoundError`` (mensagem
-    clara) se o projeto não existir — em ambos os casos a camada de cima deve abster-se.
+    clara) se o projeto nêo existir — em ambos os casos a camada de cima deve abster-se.
     """
     path = _path_for(project_id, base_dir)
     if not path.is_file():
         raise FileNotFoundError(
-            f"Projeto {project_id!r} não encontrado em {base_dir!r}."
+            f"Projeto {project_id!r} nêo encontrado em {base_dir!r}."
         )
     data = json.loads(path.read_text(encoding="utf-8"))
     return ProjectRecord(**data)
 
 
 def list_projects(base_dir: str = DEFAULT_BASE_DIR) -> list[str]:
-    """Lista os ``project_id`` existentes em ``base_dir`` (ordenados). Vazio se não houver pasta."""
+    """Lista os ``project_id`` existentes em ``base_dir`` (ordenados). Vazio se nêo houver pasta."""
     root = Path(base_dir)
     if not root.is_dir():
         return []
@@ -105,7 +105,7 @@ def add_calculo(
     ``bundle`` é um cálculo do service (bundle completo ou resumo). Se ``timestamp``
     for informado, registra-o em ``registrado_em`` numa cópia do bundle (sem mutar o
     original). Idempotência razoável: se o cálculo idêntico já estiver no histórico,
-    não duplica.
+    nêo duplica.
     """
     record = load_project(project_id, base_dir=base_dir)
 

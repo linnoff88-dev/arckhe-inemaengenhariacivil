@@ -5,7 +5,7 @@ Monta um único documento a partir do histórico de cálculos de um
 cálculos e os memoriais já gerados pela engine, concatenados, com o aviso de
 responsabilidade técnica obrigatório ao final.
 
-Camada de saída determinística: não recalcula nada — apenas costura os
+Camada de saída determinística: nêo recalcula nada — apenas costura os
 ``memorial_markdown`` que o service produziu. O PDF é oferecido reusando
 :func:`lib.reporting.pdf_export.export_memorial_to_pdf`.
 """

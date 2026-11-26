@@ -1,11 +1,11 @@
 """MCP server `calc-server` — expõe a engine de cálculo determinística ao agente.
 
 Princípio do projeto: resultados numéricos SÓ vêm destas ferramentas. Se uma ferramenta
-não existir para o que foi pedido, o agente deve abster-se (nunca inventar números).
+nêo existir para o que foi pedido, o agente deve abster-se (nunca inventar números).
 
-Execução:
+Execuçêo:
     python mcp/calc-server/server.py            # inicia o server (stdio)
-    python mcp/calc-server/server.py --selftest # autoteste rápido (não inicia stdio)
+    python mcp/calc-server/server.py --selftest # autoteste rápido (nêo inicia stdio)
 """
 
 from __future__ import annotations
@@ -79,10 +79,10 @@ def dimensionar_viga_retangular(
     cobrimento_cm: float = 3.0,
     d_cm: float | None = None,
 ) -> dict:
-    """Dimensiona uma viga retangular biapoiada de concreto armado à flexão (NBR 6118, ELU).
+    """Dimensiona uma viga retangular biapoiada de concreto armado à flexêo (NBR 6118, ELU).
 
     Cargas em kN/m: g (permanente, exclui peso próprio) e q (variável). Devolve o
-    resultado, o relatório de validação, o memorial em Markdown e o aviso de
+    resultado, o relatório de validaçêo, o memorial em Markdown e o aviso de
     responsabilidade técnica obrigatório.
     """
     return solve_rectangular_beam(
@@ -107,10 +107,10 @@ def dimensionar_pilar(
     d_linha_cm: float | None = None,
     alpha_b: float = 1.0,
 ) -> dict:
-    """Dimensiona um pilar retangular de concreto à compressão com 2ª ordem (NBR 6118).
+    """Dimensiona um pilar retangular de concreto à compressêo com 2ª ordem (NBR 6118).
 
-    ``h_cm`` é a dimensão na direção analisada (a do momento e da flambagem). λ > 90 é
-    recusado (fora do método simplificado). Devolve resultado, validação, memorial e aviso.
+    ``h_cm`` é a dimensêo na direçêo analisada (a do momento e da flambagem). λ > 90 é
+    recusado (fora do método simplificado). Devolve resultado, validaçêo, memorial e aviso.
     """
     return solve_rectangular_column(
         nk_kn=nk_kn, mk_topo_knm=mk_topo_knm, b_cm=b_cm, h_cm=h_cm, le_cm=le_cm,
@@ -133,7 +133,7 @@ def dimensionar_sapata(
 ) -> dict:
     """Dimensiona uma sapata isolada quadrada rígida sob carga centrada (NBR 6122/6118).
 
-    Método das bielas. Devolve resultado, validação, memorial e o aviso obrigatório.
+    Método das bielas. Devolve resultado, validaçêo, memorial e o aviso obrigatório.
     """
     return solve_square_footing(
         nk_kn=nk_kn, sigma_adm_kpa=sigma_adm_kpa,
@@ -154,9 +154,9 @@ def dimensionar_laje_uma_direcao(
     cobrimento_cm: float = 2.5,
     phi_mm: float = 10.0,
 ) -> dict:
-    """Dimensiona uma laje maciça armada em UMA direção à flexão (NBR 6118, ELU).
+    """Dimensiona uma laje maciça armada em UMA direçêo à flexêo (NBR 6118, ELU).
 
-    Cargas em kN/m². Devolve resultado, validação, memorial e o aviso obrigatório.
+    Cargas em kN/m². Devolve resultado, validaçêo, memorial e o aviso obrigatório.
     """
     return solve_one_way_slab(
         lx_m=lx_m, g_knm2=g_knm2, q_knm2=q_knm2, h_cm=h_cm,
@@ -178,8 +178,8 @@ def dimensionar_laje_duas_direcoes(
 ) -> dict:
     """Dimensiona uma laje maciça armada em DUAS direções, apoiada nos 4 lados (NBR 6118).
 
-    ``lx_m`` é o MENOR vão (λ = ly/lx ≥ 1). Método das faixas (Grashof-Rankine).
-    Devolve resultado, validação, memorial e o aviso obrigatório.
+    ``lx_m`` é o MENOR vêo (λ = ly/lx ≥ 1). Método das faixas (Grashof-Rankine).
+    Devolve resultado, validaçêo, memorial e o aviso obrigatório.
     """
     return solve_two_way_slab(
         lx_m=lx_m, ly_m=ly_m, g_knm2=g_knm2, q_knm2=q_knm2, h_cm=h_cm,
@@ -196,9 +196,9 @@ def combinar_acoes_elu(
     gamma_q: float = 1.4,
     psi0: float = 0.5,
 ) -> dict:
-    """Combinação última normal (ELU): Fd = γg·Gk + γq·(Qk_princ + Σ ψ0·Qk_sec).
+    """Combinaçêo última normal (ELU): Fd = γg·Gk + γq·(Qk_princ + Σ ψ0·Qk_sec).
 
-    NBR 8681:2003 / NBR 6118:2014. Devolve a combinação e o aviso de responsabilidade.
+    NBR 8681:2003 / NBR 6118:2014. Devolve a combinaçêo e o aviso de responsabilidade.
     """
     cr = combinar_elu_normal(
         gk=gk, qk_principal=qk_principal, qk_secundarias=qk_secundarias,
@@ -248,10 +248,10 @@ def capacidade_carga_fundacao(
     l_m: float | None = None,
     fs: float = 3.0,
 ) -> dict:
-    """Capacidade de carga de fundação rasa pelo método de Vesic (NBR 6122).
+    """Capacidade de carga de fundaçêo rasa pelo método de Vesic (NBR 6122).
 
     ``shape`` ∈ {corrida, quadrada, retangular, circular} (retangular exige ``l_m``).
-    Devolve q_ult, q_adm, validação, memorial e o aviso de responsabilidade técnica.
+    Devolve q_ult, q_adm, validaçêo, memorial e o aviso de responsabilidade técnica.
     """
     return solve_bearing_capacity(
         c_kpa=c_kpa, phi_deg=phi_deg, gamma_kn_m3=gamma_kn_m3, b_m=b_m,
@@ -269,7 +269,7 @@ def recalque_elastico(
 ) -> dict:
     """Recalque elástico imediato s = q·B·(1−ν²)·Iw/Es (NBR 6122 ELS).
 
-    Devolve o recalque (m e mm), a validação, o memorial e o aviso obrigatório.
+    Devolve o recalque (m e mm), a validaçêo, o memorial e o aviso obrigatório.
     """
     return solve_elastic_settlement(
         q_kpa=q_kpa, b_m=b_m, poisson_nu=poisson_nu, iw=iw, es_kpa=es_kpa,
@@ -286,7 +286,7 @@ def recalque_adensamento(
 ) -> dict:
     """Recalque por adensamento primário (Terzaghi, argila NA) — NBR 6122 ELS.
 
-    s = Cc/(1+e0)·H·log10((σ0+Δσ)/σ0). Devolve recalque, validação, memorial e aviso.
+    s = Cc/(1+e0)·H·log10((σ0+Δσ)/σ0). Devolve recalque, validaçêo, memorial e aviso.
     """
     return solve_consolidation_settlement(
         cc=cc, e0=e0, h_m=h_m, sigma0_kpa=sigma0_kpa, delta_sigma_kpa=delta_sigma_kpa,
@@ -298,7 +298,7 @@ def empuxo_rankine(gamma_kn_m3: float, h_m: float, phi_deg: float) -> dict:
     """Empuxo de terra de Rankine (ativo e passivo) por metro de muro.
 
     Ka=tan²(45−φ/2), Kp=tan²(45+φ/2), E=0,5·γ·H²·K. Devolve coeficientes, empuxos,
-    ponto de aplicação (H/3), validação, memorial e o aviso obrigatório.
+    ponto de aplicaçêo (H/3), validaçêo, memorial e o aviso obrigatório.
     """
     return solve_earth_pressure_rankine(gamma_kn_m3=gamma_kn_m3, h_m=h_m, phi_deg=phi_deg)
 
@@ -314,7 +314,7 @@ def empuxo_coulomb(
 ) -> dict:
     """Empuxo de terra de Coulomb com atrito do muro δ, tardoz β e terrapleno α.
 
-    δ ∈ [0, φ]; α < φ. Devolve coeficientes, empuxos, validação, memorial e o aviso.
+    δ ∈ [0, φ]; α < φ. Devolve coeficientes, empuxos, validaçêo, memorial e o aviso.
     """
     return solve_earth_pressure_coulomb(
         gamma_kn_m3=gamma_kn_m3, h_m=h_m, phi_deg=phi_deg,
@@ -336,7 +336,7 @@ def capacidade_estaca(
     ``{"n_spt": int, "soil_type": str, "thickness_m": float}`` (do topo até a ponta).
     ``pile_type`` ∈ {pre-moldada, metalica, franki, escavada}. Roda os dois métodos,
     valida ambos e emite aviso se a divergência de Rult exceder ``tol`` (20%).
-    Devolve Rult/Radm dos dois métodos, divergência, validação, memorial e o aviso.
+    Devolve Rult/Radm dos dois métodos, divergência, validaçêo, memorial e o aviso.
     """
     return solve_pile_comparison(
         layers=layers, pile_type=pile_type, diameter_m=diameter_m, fs=fs, tol=tol,
@@ -356,11 +356,11 @@ def escoamento_conduto(
     eps_m: float | None = None,
     nu_m2s: float = 1.0e-6,
 ) -> dict:
-    """Escoamento em conduto forçado (tubulação sob pressão).
+    """Escoamento em conduto forçado (tubulaçêo sob pressêo).
 
     ``metodo`` = "hazen-williams" (usa ``C``) ou "darcy-weisbach" (usa ``eps_m`` e o
     fator de atrito de Swamee-Jain). Devolve velocidade, perda de carga distribuída,
-    validação (alerta de velocidade), memorial e o aviso de responsabilidade.
+    validaçêo (alerta de velocidade), memorial e o aviso de responsabilidade.
     """
     return solve_pipe_flow(
         Q_m3s=Q_m3s, D_m=D_m, L_m=L_m, metodo=metodo, C=C, eps_m=eps_m, nu_m2s=nu_m2s,
@@ -380,8 +380,8 @@ def canal_aberto_manning(
     """Escoamento uniforme em canal aberto pela fórmula de Manning.
 
     ``geometria`` ∈ {retangular (usa ``b_m``), trapezoidal (usa ``b_m`` e ``z``),
-    circular (usa ``D_m``)}. Devolve A, P, R, velocidade, vazão, validação (autolimpeza
-    V≥0,5 m/s e erosão V≤3 m/s), memorial e o aviso obrigatório.
+    circular (usa ``D_m``)}. Devolve A, P, R, velocidade, vazêo, validaçêo (autolimpeza
+    V≥0,5 m/s e erosêo V≤3 m/s), memorial e o aviso obrigatório.
     """
     return solve_open_channel(
         geometria=geometria, n=n, S=S, y_m=y_m, b_m=b_m, z=z, D_m=D_m,
@@ -398,7 +398,7 @@ def perda_de_carga(
 
     ``singularidades`` mapeia cada peça (ex.: "curva_90", "registro_gaveta_aberto") à
     sua quantidade. Tipo fora da tabela => erro (o agente deve abster-se). Devolve a
-    composição das perdas, a validação, o memorial e o aviso obrigatório.
+    composiçêo das perdas, a validaçêo, o memorial e o aviso obrigatório.
     """
     return solve_head_loss(
         hf_distribuida_m=hf_distribuida_m, singularidades=singularidades, V_ms=V_ms,
@@ -417,13 +417,13 @@ def dimensionar_compressao_aco(
     q: float = 1.0,
     gamma_a1: float = 1.1,
 ) -> dict:
-    """Dimensiona barra comprimida de aço à flambagem por flexão (NBR 8800:2008 §5.3).
+    """Dimensiona barra comprimida de aço à flambagem por flexêo (NBR 8800:2008 §5.3).
 
     ``designacao`` é um perfil W do catálogo (ver ``consultar_perfil_w``). ``kl_cm`` é o
     comprimento de flambagem (KL); a flambagem governa no eixo de menor inércia (Iy).
-    Hipótese: ``Q = 1`` (seção compacta, sem flambagem local) — se houver flambagem
+    Hipótese: ``Q = 1`` (seçêo compacta, sem flambagem local) — se houver flambagem
     local (Q≠1), FLT, ou outro estado-limite, abstenha-se. Perfil inexistente => erro
-    listando os disponíveis. Devolve Nc,Rd, validação, memorial e o aviso obrigatório.
+    listando os disponíveis. Devolve Nc,Rd, validaçêo, memorial e o aviso obrigatório.
     """
     return solve_compression(
         designacao=designacao, kl_cm=kl_cm, fy_mpa=fy_mpa, e_mpa=e_mpa,
@@ -454,13 +454,13 @@ def ligacao_parafusada(
     rosca_no_plano: bool = True,
     gamma_a2: float = 1.35,
 ) -> dict:
-    """Dimensiona uma ligação parafusada solicitada ao cortante (NBR 8800:2008 §6.3).
+    """Dimensiona uma ligaçêo parafusada solicitada ao cortante (NBR 8800:2008 §6.3).
 
-    Calcula a resistência por parafuso como o mínimo entre cortante (§6.3.3.2) e pressão
+    Calcula a resistência por parafuso como o mínimo entre cortante (§6.3.3.2) e pressêo
     de contato (§6.3.3.3, limite 2,4·db·t·fu/γa2) e adota n = ⌈força/Rd⌉.
     ``rosca_no_plano=True`` usa coef. 0,4 (rosca no plano de corte); ``False`` usa 0,5.
     Hipótese: espaçamentos/distâncias às bordas mínimos atendidos — confirmar no
-    detalhamento. Devolve resistências, nº de parafusos, validação, memorial e o aviso.
+    detalhamento. Devolve resistências, nº de parafusos, validaçêo, memorial e o aviso.
     """
     return solve_bolted_connection(
         forca_kn=forca_kn, db_mm=db_mm, fub_mpa=fub_mpa, t_mm=t_mm, fu_mpa=fu_mpa,
@@ -480,7 +480,7 @@ def solda_filete(
     Rd = 0,6·fw·aw/γa2, com garganta aw = 0,7·perna; ``fw`` é a resistência do metal da
     solda (eletrodo E70 => 485 MPa). Considera o metal da solda governante e esforço
     paralelo ao eixo do filete. Devolve a resistência por cm, o comprimento necessário,
-    a validação, o memorial e o aviso de responsabilidade técnica.
+    a validaçêo, o memorial e o aviso de responsabilidade técnica.
     """
     return solve_weld(forca_kn=forca_kn, perna_mm=perna_mm, fw_mpa=fw_mpa, gamma_a2=gamma_a2)
 
@@ -501,11 +501,11 @@ def dimensionar_pavimento_flexivel(
 ) -> dict:
     """Dimensiona pavimento flexível pelo método empírico do DNER/DNIT (CBR / número N).
 
-    ``n_trafego`` é o número N de solicitações do eixo padrão. ``cbr_reforco`` ativa a
-    camada de reforço do subleito (opcional). ``r_cm`` fixa o revestimento (senão usa o
+    ``n_trafego`` é o número N de solicitações do eixo padrêo. ``cbr_reforco`` ativa a
+    camada de reforço do subleito (opcional). ``r_cm`` fixa o revestimento (senêo usa o
     mínimo DNER). Válido para CBR ∈ [2, 20]% e N ∈ [1e4, 1e8] — fora disso abstém-se.
-    NÃO trata pavimento rígido nem método mecanístico-empírico. Devolve as espessuras
-    por camada, a verificação das inequações, validação, memorial e o aviso obrigatório.
+    NêO trata pavimento rígido nem método mecanístico-empírico. Devolve as espessuras
+    por camada, a verificaçêo das inequações, validaçêo, memorial e o aviso obrigatório.
     """
     return solve_flexible_pavement(
         cbr_subleito=cbr_subleito, n_trafego=n_trafego, cbr_reforco=cbr_reforco,
@@ -524,7 +524,7 @@ def terraplenagem_balanco(
     ``balanco = corte − aterro``: positivo => excesso (bota-fora); negativo => déficit
     (empréstimo). ``fator_empolamento`` ∈ [1,0; 1,5] reporta o volume solto a
     transportar. Volumes negativos ou Fe fora da faixa => erro (o agente deve abster-se).
-    Devolve volumes derivados, situação, validação, memorial e o aviso obrigatório.
+    Devolve volumes derivados, situaçêo, validaçêo, memorial e o aviso obrigatório.
     """
     return solve_earthwork(
         volume_corte_m3=volume_corte_m3, volume_aterro_m3=volume_aterro_m3,
@@ -543,10 +543,10 @@ def talude_infinito(
 ) -> dict:
     """Fator de segurança de talude infinito (ruptura plana paralela à face).
 
-    FS = [c + (γ·z·cos²β − u)·tanφ] / (γ·z·sinβ·cosβ). ``u`` é a poro-pressão na base
-    (informe o valor calculado para percolação). Faixas físicas: φ∈[0,50]°,
+    FS = [c + (γ·z·cos²β − u)·tanφ] / (γ·z·sinβ·cosβ). ``u`` é a poro-pressêo na base
+    (informe o valor calculado para percolaçêo). Faixas físicas: φ∈[0,50]°,
     γ∈[10,25] kN/m³, β∈(0,90)°, c≥0, z>0 — fora delas abstém-se. FS,mín usual ≥ 1,5
-    (NBR 11682). Devolve FS, classificação, validação, memorial e o aviso obrigatório.
+    (NBR 11682). Devolve FS, classificaçêo, validaçêo, memorial e o aviso obrigatório.
     """
     return solve_infinite_slope(
         c_kpa=c_kpa, phi_deg=phi_deg, gamma_kn_m3=gamma_kn_m3, z_m=z_m,
@@ -564,9 +564,9 @@ def talude_fellenius(
 
     ``slices`` é a lista de fatias ``{"w_kn": float, "alpha_deg": float, "dl_m": float,
     "u_kpa": float?}`` (W = peso por metro de talude; α = ângulo da base; ΔL = comprimento
-    da base; u = poro-pressão). FS = Σ[c·ΔL + (W·cosα − u·ΔL)·tanφ] / Σ(W·sinα). Conservador
-    frente a Bishop simplificado (FORA DE ESCOPO — exige iteração). Lista vazia, ΔL≤0 ou W≤0
-    => erro (abster-se). Devolve FS, classificação, validação, memorial e o aviso obrigatório.
+    da base; u = poro-pressêo). FS = Σ[c·ΔL + (W·cosα − u·ΔL)·tanφ] / Σ(W·sinα). Conservador
+    frente a Bishop simplificado (FORA DE ESCOPO — exige iteraçêo). Lista vazia, ΔL≤0 ou W≤0
+    => erro (abster-se). Devolve FS, classificaçêo, validaçêo, memorial e o aviso obrigatório.
     """
     return solve_fellenius(slices=slices, c_kpa=c_kpa, phi_deg=phi_deg)
 
@@ -578,7 +578,7 @@ def talude_fellenius(
 def consultar_tabela_norma(termo: str, base_dir: str = "normas") -> dict:
     """Busca LÉXICA por ``termo`` nas tabelas normativas (``normas/<NORMA>/tables/*.json``).
 
-    Casamento por substring, sem acento e case-insensitive — NÃO usa embeddings/semântica.
+    Casamento por substring, sem acento e case-insensitive — NêO usa embeddings/semântica.
     Devolve SÓ o que está tabelado (chave + dados de cada entrada que casa); termo sem
     correspondência => lista vazia (o agente deve abster-se, nunca inventar valor de norma).
     """
@@ -589,11 +589,11 @@ def consultar_tabela_norma(termo: str, base_dir: str = "normas") -> dict:
 
 @mcp.tool()
 def interpolar_tabela(x: float, xs: list[float], ys: list[float]) -> dict:
-    """Interpolação LINEAR de y(x) numa tabela 1D (NBR — coeficientes tabelados).
+    """Interpolaçêo LINEAR de y(x) numa tabela 1D (NBR — coeficientes tabelados).
 
     ``xs`` deve ser estritamente crescente e ``ys`` ter o mesmo comprimento. Sem
-    extrapolação: ``x`` fora de ``[xs[0], xs[-1]]`` => erro (princípio da abstenção). Use
-    sobre valores obtidos de ``consultar_tabela_norma`` — não invente os nós da tabela.
+    extrapolaçêo: ``x`` fora de ``[xs[0], xs[-1]]`` => erro (princípio da abstençêo). Use
+    sobre valores obtidos de ``consultar_tabela_norma`` — nêo invente os nós da tabela.
     """
     y = linear_interp(x, xs, ys)
     return {"resultado": {"x": x, "y": y}, "aviso": DISCLAIMER}
@@ -611,10 +611,10 @@ def montar_orcamento(
     """Monta um orçamento (custo direto + BDI) a partir de quantitativos.
 
     ``itens`` é a lista ``[{"codigo": str, "quantidade": float}, ...]``; os preços vêm
-    da base tipo SINAPI em ``csv_path``. ATENÇÃO: a base de amostra é ILUSTRATIVA —
-    substitua pela SINAPI vigente/regional (desoneração, mês de referência e UF). BDI ∈
+    da base tipo SINAPI em ``csv_path``. ATENÇêO: a base de amostra é ILUSTRATIVA —
+    substitua pela SINAPI vigente/regional (desoneraçêo, mês de referência e UF). BDI ∈
     [0, 40] %. Código inexistente => erro (o agente deve abster-se). Devolve itens,
-    subtotal, BDI, total, validação aritmética, memorial e o aviso obrigatório.
+    subtotal, BDI, total, validaçêo aritmética, memorial e o aviso obrigatório.
     """
     return solve_orcamento(itens=itens, bdi_pct=bdi_pct, csv_path=csv_path)
 
@@ -627,13 +627,13 @@ def consultar_preco_sinapi(
     """Consulta o preço unitário de um código na base tipo SINAPI (amostra ilustrativa).
 
     Código fora da base => erro (o agente deve abster-se em vez de inventar preço).
-    Devolve o item (código, descrição, unidade, preço unitário) e o aviso obrigatório.
+    Devolve o item (código, descriçêo, unidade, preço unitário) e o aviso obrigatório.
     """
     item = lookup(codigo, load_sinapi(csv_path))
     return {"resultado": item.model_dump(), "aviso": DISCLAIMER}
 
 
-# ============================================================== PROJETOS / DOCUMENTAÇÃO
+# ============================================================== PROJETOS / DOCUMENTAÇêO
 
 
 @mcp.tool()
@@ -707,26 +707,26 @@ def gerar_relatorio_projeto(project_id: str, base_dir: str = "memory/projects") 
 
 @mcp.tool()
 def listar_capacidades() -> dict:
-    """Lista os cálculos disponíveis. Se o pedido não estiver aqui, o agente deve abster-se."""
+    """Lista os cálculos disponíveis. Se o pedido nêo estiver aqui, o agente deve abster-se."""
     return {
         "calculos": [
-            "dimensionar_viga_retangular — flexão simples, seção retangular (NBR 6118:2014)",
-            "dimensionar_pilar — flexão composta normal com 2ª ordem, λ≤90 (NBR 6118:2014)",
+            "dimensionar_viga_retangular — flexêo simples, seçêo retangular (NBR 6118:2014)",
+            "dimensionar_pilar — flexêo composta normal com 2ª ordem, λ≤90 (NBR 6118:2014)",
             "dimensionar_sapata — sapata isolada quadrada rígida, bielas (NBR 6122/6118)",
-            "dimensionar_laje_uma_direcao — laje maciça armada em uma direção (NBR 6118)",
+            "dimensionar_laje_uma_direcao — laje maciça armada em uma direçêo (NBR 6118)",
             "dimensionar_laje_duas_direcoes — laje maciça apoiada nos 4 lados (NBR 6118)",
-            "capacidade_carga_fundacao — capacidade de carga de fundação rasa, Vesic (NBR 6122)",
+            "capacidade_carga_fundacao — capacidade de carga de fundaçêo rasa, Vesic (NBR 6122)",
             "recalque_elastico — recalque elástico imediato (NBR 6122 ELS)",
             "recalque_adensamento — recalque por adensamento primário, Terzaghi (NBR 6122 ELS)",
-            "empuxo_rankine — empuxo de terra de Rankine (contenção)",
-            "empuxo_coulomb — empuxo de terra de Coulomb com δ/β/α (contenção)",
+            "empuxo_rankine — empuxo de terra de Rankine (contençêo)",
+            "empuxo_coulomb — empuxo de terra de Coulomb com δ/β/α (contençêo)",
             "capacidade_estaca — estaca por SPT, Aoki-Velloso × Décourt-Quaresma (NBR 6122)",
-            "dimensionar_compressao_aco — barra comprimida, flambagem por flexão (NBR 8800:2008)",
+            "dimensionar_compressao_aco — barra comprimida, flambagem por flexêo (NBR 8800:2008)",
             "consultar_perfil_w — propriedades geométricas de perfil laminado W (NBR 8800)",
-            "ligacao_parafusada — ligação parafusada à cortante, nº de parafusos (NBR 8800 §6.3)",
+            "ligacao_parafusada — ligaçêo parafusada à cortante, nº de parafusos (NBR 8800 §6.3)",
             "solda_filete — comprimento de solda de filete (NBR 8800 §6.2.6)",
             "consultar_tabela_norma — busca léxica nas tabelas das normas (só o tabelado)",
-            "interpolar_tabela — interpolação linear de coeficientes tabelados (sem extrapolar)",
+            "interpolar_tabela — interpolaçêo linear de coeficientes tabelados (sem extrapolar)",
             "escoamento_conduto — conduto forçado, Hazen-Williams ou Darcy-Weisbach",
             "canal_aberto_manning — escoamento uniforme em canal aberto (Manning)",
             "perda_de_carga — perda distribuída + localizadas (coeficientes K)",
@@ -736,10 +736,10 @@ def listar_capacidades() -> dict:
             "talude_fellenius — FS de talude por Fellenius, fatias circulares (NBR 11682)",
             "montar_orcamento — orçamento custo direto + BDI, base tipo SINAPI (amostra)",
             "consultar_preco_sinapi — preço unitário de um código na base SINAPI (amostra)",
-            "combinar_acoes_elu — combinação última normal de ações (NBR 8681/6118)",
+            "combinar_acoes_elu — combinaçêo última normal de ações (NBR 8681/6118)",
             "consultar_peso_material — peso específico de material (NBR 6120:2019 Tab.2)",
             "consultar_carga_uso — carga acidental por uso do ambiente (NBR 6120:2019)",
-            "verificar_unidades — conversão/validação dimensional (pint)",
+            "verificar_unidades — conversêo/validaçêo dimensional (pint)",
         ],
         "memoria_e_documentacao": [
             "salvar_projeto — cria/atualiza o registro de um projeto (memória persistente)",
@@ -749,9 +749,9 @@ def listar_capacidades() -> dict:
             "gerar_relatorio_projeto — relatório técnico consolidado (Markdown) do projeto",
         ],
         "nota": (
-            "Resultados numéricos só vêm destas ferramentas. Para cálculos não listados, "
-            "informe que não há ferramenta disponível — não invente valores. Os preços "
-            "SINAPI são de AMOSTRA e devem ser atualizados pela tabela vigente/regional."
+            "Resultados numéricos só vêm destas ferramentas. Para cálculos nêo listados, "
+            "informe que nêo há ferramenta disponível — nêo invente valores. Os preços "
+            "SINAPI sêo de AMOSTRA e devem ser atualizados pela tabela vigente/regional."
         ),
     }
 
@@ -769,7 +769,7 @@ def _selftest() -> int:
         nk_kn=500.0, sigma_adm_kpa=200.0, pilar_a_cm=30.0, pilar_b_cm=30.0,
         fck_mpa=25.0, fyk_mpa=500.0,
     )
-    # geotecnia: capacidade de carga de fundação rasa (Vesic)
+    # geotecnia: capacidade de carga de fundaçêo rasa (Vesic)
     fundacao = solve_bearing_capacity(
         c_kpa=10.0, phi_deg=30.0, gamma_kn_m3=18.0, b_m=2.0, depth_df_m=1.5,
     )

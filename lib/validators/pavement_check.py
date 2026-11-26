@@ -1,7 +1,7 @@
-"""Validação obrigatória do domínio de PAVIMENTAÇÃO (pavimento flexível DNER/DNIT).
+"""Validaçêo obrigatória do domínio de PAVIMENTAÇêO (pavimento flexível DNER/DNIT).
 
-Validador próprio do domínio (não toca nos validadores compartilhados). Cada
-cálculo passa por reconstrução (unidades/fórmula), física (faixas razoáveis) e
+Validador próprio do domínio (nêo toca nos validadores compartilhados). Cada
+cálculo passa por reconstruçêo (unidades/fórmula), física (faixas razoáveis) e
 normativa (inequações de equivalência estrutural) antes de ser apresentado.
 Determinístico, sem LLM.
 
@@ -51,9 +51,9 @@ def _assemble(units: Check, phys: list[Check], norm: list[Check],
 def validate_pavement(r: PavementResult) -> ValidationReport:
     """Valida o dimensionamento de pavimento flexível (DNER/DNIT)."""
     if not isinstance(r, PavementResult):
-        raise TypeError(f"Tipo não suportado: {type(r).__name__}")
+        raise TypeError(f"Tipo nêo suportado: {type(r).__name__}")
 
-    # --- unidades / reconstrução: Hm = 77,67·N^0,0482·CBR^-0,598 -------------
+    # --- unidades / reconstruçêo: Hm = 77,67·N^0,0482·CBR^-0,598 -------------
     cbr_ok = CBR_MIN <= r.cbr_subleito <= CBR_MAX
     n_ok = N_MIN <= r.n_trafego <= N_MAX
     if cbr_ok and n_ok:
@@ -61,11 +61,11 @@ def validate_pavement(r: PavementResult) -> ValidationReport:
         ref = max(abs(r.hm_cm), 1.0)
         ok = abs(hm_rec - r.hm_cm) <= TOL * ref
         units = Check(name="units", status="ok" if ok else "fail",
-                      detail=f"Hm={hm_rec:.2f} cm (reconstrução da equação DNER ✓)")
+                      detail=f"Hm={hm_rec:.2f} cm (reconstruçêo da equaçêo DNER ✓)")
     else:
-        # entradas fora de faixa: não há reconstrução confiável
+        # entradas fora de faixa: nêo há reconstruçêo confiável
         units = Check(name="units", status="fail",
-                      detail="entradas fora de faixa: reconstrução não aplicável")
+                      detail="entradas fora de faixa: reconstruçêo nêo aplicável")
 
     # --- física --------------------------------------------------------------
     phys: list[Check] = []

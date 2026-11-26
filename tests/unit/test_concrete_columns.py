@@ -1,6 +1,6 @@
 """Testes de pilar retangular de concreto armado com flambagem (NBR 6118:2014 cap.15).
 
-Valores de referência calculados à mão (a conta está nos comentários). Coeficientes:
+Valores de referência calculados à mêo (a conta está nos comentários). Coeficientes:
 gamma_f=1.4, gamma_c=1.4, gamma_s=1.15; eps_cu=3.5permil, eps_c2=2.0permil; Es=210 GPa.
 
 Esbeltez: i=h/sqrt(12); lambda=le/i; lambda1=(25+12.5*e1/h)/alpha_b limitado a [35,90].
@@ -20,7 +20,7 @@ from lib.concrete.columns import (
 # ---------------------------------------------------- caso esbeltez média (médio)
 
 def _medium_column():
-    # Nk=900, Mk_topo=27, b=40, h=30 (direção analisada), le=400, C25, CA-50
+    # Nk=900, Mk_topo=27, b=40, h=30 (direçêo analisada), le=400, C25, CA-50
     return design_rectangular_column(
         nk_kn=900.0, mk_topo_knm=27.0,
         b_cm=40.0, h_cm=30.0, le_cm=400.0,
@@ -45,7 +45,7 @@ def test_column_slenderness_and_class_medium():
 
 def test_column_second_order_curvature_medium():
     # nu=1260/(1200*1.785714)=0.588
-    # 1/r=0.005/(0.30*1.088)=0.0153186  (cap 0.005/0.30=0.016667, não governa)
+    # 1/r=0.005/(0.30*1.088)=0.0153186  (cap 0.005/0.30=0.016667, nêo governa)
     # M2d=1260*16/10*0.0153186=30.882
     # M1d,min=1260*(0.015+0.03*0.30)=1260*0.024=30.24
     # Md,tot=1.0*37.8+30.882=68.682
@@ -62,7 +62,7 @@ def test_column_reinforcement_sanity_medium():
     assert r.as_calc_cm2 > 0
     assert r.as_adopted_cm2 >= r.as_min_cm2 - 1e-9
     assert r.as_adopted_cm2 <= r.as_max_cm2 + 1e-9
-    # capacidade da seção >= solicitação (Nd, Md,tot)
+    # capacidade da seçêo >= solicitaçêo (Nd, Md,tot)
     mrd = column_moment_capacity(
         r.nd_kn, r.as_adopted_cm2, r.b_cm, r.h_cm, r.d_linha_cm,
         r.fck_mpa, r.fyk_mpa,
@@ -106,7 +106,7 @@ def test_column_lambda1_formula_above_floor():
     assert r.classe == "curto"
 
 
-# ------------------------------------------------------------------- abstenção
+# ------------------------------------------------------------------- abstençêo
 
 def test_column_rejects_excessive_slenderness():
     # le=600, h=20: i=5.7735; lambda=103.9 > 90 -> fora de escopo
@@ -131,7 +131,7 @@ def test_column_rejects_invalid_inputs():
 
 
 def test_column_min_steel_governs_for_light_load():
-    # carga leve em seção grande -> As,mín governa (0.4% Ac ou 0.15 Nd/fyd)
+    # carga leve em seçêo grande -> As,mín governa (0.4% Ac ou 0.15 Nd/fyd)
     r = design_rectangular_column(
         nk_kn=300.0, mk_topo_knm=5.0,
         b_cm=40.0, h_cm=40.0, le_cm=250.0,

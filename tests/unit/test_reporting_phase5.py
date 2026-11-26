@@ -1,7 +1,7 @@
-"""Testes da camada de documentação da Fase 5 — memoriais de estruturas metálicas.
+"""Testes da camada de documentaçêo da Fase 5 — memoriais de estruturas metálicas.
 
 - ``render_compression_memorial``: barra comprimida (NBR 8800 §5.3) — Nc,Rd, χ, λ0.
-- ``render_bolted_memorial``: ligação parafusada (§6.3) — nº de parafusos, governante.
+- ``render_bolted_memorial``: ligaçêo parafusada (§6.3) — nº de parafusos, governante.
 - ``render_weld_memorial``: solda de filete (§6.2.6) — comprimento necessário.
 
 Cada memorial deve conter o aviso de responsabilidade técnica (RESPONSABILIDADE
@@ -26,7 +26,7 @@ def _disclaimer_ok(md: str) -> None:
     assert "NBR 8800" in md
 
 
-# --- compressão ------------------------------------------------------------
+# --- compressêo ------------------------------------------------------------
 def test_compression_memorial_has_disclaimer_norm_and_ncrd():
     base = load_profiles(DEFAULT_TABLE)
     r = design_compression("W250x22,3", base, kl_cm=300.0, fy_mpa=250.0)
@@ -41,10 +41,10 @@ def test_compression_memorial_has_disclaimer_norm_and_ncrd():
     assert f"{r.nc_rd_kn:.2f}" in md
     assert f"{r.chi:.4f}" in md
     assert f"{r.lambda_0:.4f}" in md
-    assert "## 4. Validação automática" in md
+    assert "## 4. Validaçêo automática" in md
 
 
-# --- ligação parafusada ----------------------------------------------------
+# --- ligaçêo parafusada ----------------------------------------------------
 def test_bolted_memorial_has_disclaimer_norm_and_n_bolts():
     r = design_bolted_connection(
         forca_kn=200.0, db_mm=20.0, fub_mpa=800.0, t_mm=9.5, fu_mpa=400.0,
@@ -53,7 +53,7 @@ def test_bolted_memorial_has_disclaimer_norm_and_n_bolts():
     md = render_bolted_memorial(r, rep)
 
     _disclaimer_ok(md)
-    assert "Ligação Parafusada" in md
+    assert "Ligaçêo Parafusada" in md
     # valor-chave: nº de parafusos (3)
     assert f"**{r.n_parafusos}**" in md
     assert r.governante in md

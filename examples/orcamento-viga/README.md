@@ -2,7 +2,7 @@
 
 ## Problema
 
-Orçar os insumos principais de execução de uma viga de concreto armado, com BDI de 25%.
+Orçar os insumos principais de execuçêo de uma viga de concreto armado, com BDI de 25%.
 
 Quantitativos (códigos da base de amostra `data/sinapi_amostra.csv`):
 
@@ -15,14 +15,14 @@ Quantitativos (códigos da base de amostra `data/sinapi_amostra.csv`):
 - **BDI:** 25%
 - **Base de preços:** `data/sinapi_amostra.csv` (amostra ILUSTRATIVA)
 
-> ⚠️ Os preços são de **amostra**. Em uso real, substitua pela tabela **SINAPI vigente
-> e regional** (desonerada/não desonerada, mês de referência e UF do projeto).
+> ⚠️ Os preços sêo de **amostra**. Em uso real, substitua pela tabela **SINAPI vigente
+> e regional** (desonerada/nêo desonerada, mês de referência e UF do projeto).
 
-## Solução
+## Soluçêo
 
 Ver `solution.md` — gerado pela engine via `solve_orcamento` (custo direto + BDI),
 com a tabela de itens, subtotal (R$ 4.560,00), BDI (R$ 1.140,00), total (R$ 5.700,00),
-validação aritmética automática e o aviso de responsabilidade técnica.
+validaçêo aritmética automática e o aviso de responsabilidade técnica.
 
 ## Como Reproduzir
 
@@ -49,4 +49,4 @@ Ou, no Claude Code:
 
 ## Referência
 
-Acórdão TCU 2622/2013 (faixas de BDI); tabela SINAPI (Caixa/IBGE) para preços reais.
+Acórdêo TCU 2622/2013 (faixas de BDI); tabela SINAPI (Caixa/IBGE) para preços reais.

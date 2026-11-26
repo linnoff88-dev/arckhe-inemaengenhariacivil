@@ -1,6 +1,6 @@
-"""Testes da montagem de orçamento e da validação aritmética.
+"""Testes da montagem de orçamento e da validaçêo aritmética.
 
-Valores de referência calculados à mão (a conta está nos comentários). Preços vêm
+Valores de referência calculados à mêo (a conta está nos comentários). Preços vêm
 do CSV de amostra ILUSTRATIVO ``data/sinapi_amostra.csv``.
 """
 
@@ -43,7 +43,7 @@ def test_montar_orcamento_known_case():
 
 
 def test_montar_orcamento_sem_bdi():
-    # BDI padrão = 0 -> total == subtotal
+    # BDI padrêo = 0 -> total == subtotal
     # 3 m² forma (92438) a R$ 85,00 -> 255,00
     r = montar_orcamento([{"codigo": "92438", "quantidade": 3.0}], _base())
     assert r.bdi_pct == 0.0
@@ -60,7 +60,7 @@ def test_montar_orcamento_item_detalhado():
     assert item.quantidade == pytest.approx(10.0)
     assert item.preco_unitario == pytest.approx(12.50, abs=1e-6)
     assert item.custo == pytest.approx(125.00, abs=1e-6)
-    assert item.descricao  # descrição preenchida a partir da base
+    assert item.descricao  # descriçêo preenchida a partir da base
 
 
 def test_montar_orcamento_quantidade_negativa_raises():
@@ -94,7 +94,7 @@ def test_validate_orcamento_passes():
 
 
 def test_validate_orcamento_detects_inconsistent_total():
-    # total adulterado (não bate com subtotal·(1+bdi)) -> reprova
+    # total adulterado (nêo bate com subtotal·(1+bdi)) -> reprova
     bad = OrcamentoResult(
         itens=[ItemOrcamento(codigo="X", descricao="d", unidade="un",
                              quantidade=2.0, preco_unitario=10.0, custo=20.0)],
@@ -116,7 +116,7 @@ def test_validate_orcamento_detects_negative_price():
 
 
 def test_validate_orcamento_detects_bad_subtotal():
-    # custos certos por item, mas subtotal não é a soma -> reprova
+    # custos certos por item, mas subtotal nêo é a soma -> reprova
     bad = OrcamentoResult(
         itens=[ItemOrcamento(codigo="X", descricao="d", unidade="un",
                              quantidade=2.0, preco_unitario=10.0, custo=20.0)],

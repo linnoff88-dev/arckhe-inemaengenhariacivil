@@ -2,18 +2,18 @@
 
 Um **agente** é a camada de *persona* da plataforma: um `SKILL.md` que lê o pedido em
 linguagem natural, escolhe a(s) ferramenta(s) MCP de cálculo, apresenta o memorial e
-reforça a abstenção e o disclaimer. **O agente não faz contas** — todo número vem das
+reforça a abstençêo e o disclaimer. **O agente nêo faz contas** — todo número vem das
 ferramentas MCP do `calc-server` (que por sua vez chamam a engine Python determinística).
 
 > **Pré-requisito.** Um agente só pode acionar uma ferramenta que já exista. Se o cálculo
-> ainda não tem núcleo/validador/memorial/`solve_*`/ferramenta MCP, crie-o **primeiro**
+> ainda nêo tem núcleo/validador/memorial/`solve_*`/ferramenta MCP, crie-o **primeiro**
 > seguindo [`11-como-adicionar-skill.md`](11-como-adicionar-skill.md). Adicionar um agente
-> não adiciona capacidade de cálculo — só dá uma porta de entrada e roteamento a ela.
+> nêo adiciona capacidade de cálculo — só dá uma porta de entrada e roteamento a ela.
 
 ## Onde o agente vive
 
-Cada agente é uma pasta sob `agents/` com um único arquivo `SKILL.md`. A organização é
-plana, uma pasta por agente (não aninhada por domínio):
+Cada agente é uma pasta sob `agents/` com um único arquivo `SKILL.md`. A organizaçêo é
+plana, uma pasta por agente (nêo aninhada por domínio):
 
 ```
 agents/
@@ -28,11 +28,11 @@ agents/
 
 ### 1. Decidir: novo agente ou expandir um existente?
 
-- **Novo agente:** um domínio/persona novo, com intenções de ativação próprias e um
+- **Novo agente:** um domínio/persona novo, com intenções de ativaçêo próprias e um
   conjunto coeso de ferramentas (ex.: `pavement`, `slope-stability`).
 - **Expandir existente:** o cálculo é vizinho de um agente que já existe (mesma persona,
   mesmas intenções). Nesse caso só adicione a nova ferramenta ao `Fluxo`/`Escopo` do
-  `SKILL.md` existente — não crie pasta nova.
+  `SKILL.md` existente — nêo crie pasta nova.
 
 ### 2. Criar a pasta e o `SKILL.md`
 
@@ -43,24 +43,24 @@ $EDITOR agents/<novo-agente>/SKILL.md
 
 ### 3. Escrever o `SKILL.md` (frontmatter + seções)
 
-Siga o padrão dos agentes atuais (ex.: `agents/earthwork/SKILL.md`). O arquivo tem um
-**frontmatter YAML** (`name` + `description` orientada a ativação) e seções fixas:
+Siga o padrêo dos agentes atuais (ex.: `agents/earthwork/SKILL.md`). O arquivo tem um
+**frontmatter YAML** (`name` + `description` orientada a ativaçêo) e seções fixas:
 
 ```markdown
 ---
 name: <novo-agente>
 description: >-
-  Use quando o usuário pedir <intenções de ativação em linguagem natural>. Interpreta
-  o problema, chama a ferramenta MCP de cálculo e apresenta o memorial. NÃO faz contas.
+  Use quando o usuário pedir <intenções de ativaçêo em linguagem natural>. Interpreta
+  o problema, chama a ferramenta MCP de cálculo e apresenta o memorial. NêO faz contas.
 ---
 
 # Agente — <Título legível>
 
 ## Princípio inegociável
 
-**Você não faz aritmética.** Todo número vem da ferramenta MCP `<nome_da_ferramenta>`
-do `calc-server`. Se a ferramenta não existir, ou o pedido fugir do que ela calcula,
-**diga que não há ferramenta para isso e abstenha-se** — nunca invente valores
+**Você nêo faz aritmética.** Todo número vem da ferramenta MCP `<nome_da_ferramenta>`
+do `calc-server`. Se a ferramenta nêo existir, ou o pedido fugir do que ela calcula,
+**diga que nêo há ferramenta para isso e abstenha-se** — nunca invente valores
 (ver `listar_capacidades`).
 
 ## Fluxo
@@ -70,26 +70,26 @@ do `calc-server`. Se a ferramenta não existir, ou o pedido fugir do que ela cal
    geometria, σ_adm, etc.).
 3. **Chame** `<nome_da_ferramenta>(...)` com os dados extraídos.
 4. **Apresente** o `memorial_markdown` retornado e explique o resultado.
-5. **Verifique a validação**: se `aprovado` for falso, NÃO apresente como solução final —
+5. **Verifique a validaçêo**: se `aprovado` for falso, NêO apresente como soluçêo final —
    aponte o que reprovou e oriente.
 6. **Sempre** termine com o aviso de responsabilidade técnica retornado (`aviso`).
 
 ## Escopo
 
 - ✅ [o que a ferramenta cobre]
-- ❌ [o que fica de fora — avise que não há ferramenta e abstenha-se]
+- ❌ [o que fica de fora — avise que nêo há ferramenta e abstenha-se]
 
 ## Limites legais
 
-O cálculo é suporte à decisão. A responsabilidade técnica é do engenheiro responsável,
-formalizada via ART (Lei 6.496/77, Lei 5.194/66, Resolução CONFEA/CREA).
+O cálculo é suporte à decisêo. A responsabilidade técnica é do engenheiro responsável,
+formalizada via ART (Lei 6.496/77, Lei 5.194/66, Resoluçêo CONFEA/CREA).
 ```
 
-Pontos não negociáveis (são o que diferencia esta plataforma):
+Pontos nêo negociáveis (sêo o que diferencia esta plataforma):
 
-- **Abstenção explícita.** O agente deve recusar o que não está em `listar_capacidades`
+- **Abstençêo explícita.** O agente deve recusar o que nêo está em `listar_capacidades`
   em vez de inventar números.
-- **Validação antes de apresentar.** Sempre olhar `aprovado`/`validacao` do bundle.
+- **Validaçêo antes de apresentar.** Sempre olhar `aprovado`/`validacao` do bundle.
 - **Disclaimer obrigatório.** A resposta termina com o `aviso` retornado pela ferramenta
   (que cita a Lei 6.496/77) — ele nunca é redigido pelo agente.
 
@@ -102,7 +102,7 @@ domínio**, ligando os sinais do pedido ao novo agente:
 | <palavras-chave que ativam> | <Domínio> | `<novo-agente>` |
 ```
 
-Se o agente trouxer um domínio inédito, atualize também a seção **Escopo atual da
+Se o agente trouxer um domínio inédito, atualize também a seçêo **Escopo atual da
 plataforma** do orquestrador.
 
 ### 5. Garantir a cobertura E2E
@@ -116,19 +116,19 @@ dicionário `_CASOS_APROVADOS` daquela suíte (ver
 ### 6. (Opcional) Exemplo de uso
 
 Adicione um caso real em `examples/<nome>/` (`README.md` com o enunciado +
-`solution.md` com a saída esperada), no padrão dos exemplos existentes.
+`solution.md` com a saída esperada), no padrêo dos exemplos existentes.
 
 ---
 
 ## Checklist de Novo Agente
 
-- [ ] A ferramenta MCP que o agente usa já existe (senão, ver `11-como-adicionar-skill.md`)
+- [ ] A ferramenta MCP que o agente usa já existe (senêo, ver `11-como-adicionar-skill.md`)
 - [ ] Pasta `agents/<nome>/` criada com `SKILL.md`
-- [ ] Frontmatter YAML (`name`, `description` de ativação) preenchido
-- [ ] Princípio inegociável de abstenção presente ("não faço contas")
+- [ ] Frontmatter YAML (`name`, `description` de ativaçêo) preenchido
+- [ ] Princípio inegociável de abstençêo presente ("nêo faço contas")
 - [ ] Fluxo lista a(s) ferramenta(s) MCP reais por nome
-- [ ] Escopo ✅/❌ explícito (o que NÃO cobre é abstenção, não chute)
-- [ ] Verificação de `aprovado`/`validacao` antes de apresentar
+- [ ] Escopo ✅/❌ explícito (o que NêO cobre é abstençêo, nêo chute)
+- [ ] Verificaçêo de `aprovado`/`validacao` antes de apresentar
 - [ ] Aviso de responsabilidade técnica (`aviso`) ao final
 - [ ] Registrado na tabela de roteamento do `orchestrator`
 - [ ] Caso aprovado coberto na suíte E2E

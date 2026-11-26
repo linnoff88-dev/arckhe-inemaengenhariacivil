@@ -23,7 +23,7 @@
 │  │  calc-server │   │ report-server│   │  fs-server │  │
 │  └──────┬───────┘   └──────┬───────┘   └────────────┘  │
 └─────────┼──────────────────┼─────────────────────────── ┘
-          │ chama função     │ gera documento
+          │ chama funçêo     │ gera documento
 ┌─────────▼──────────────────▼────────────────────────────┐
 │              ENGINE DE CÁLCULO (Python)                  │
 │                                                          │
@@ -47,16 +47,16 @@
 
 ```
 1. ENTRADA
-   Usuário: "Dimensione uma viga T de concreto C30, vão 6m, carga 30kN/m"
+   Usuário: "Dimensione uma viga T de concreto C30, vêo 6m, carga 30kN/m"
 
 2. ORQUESTRADOR
    → identifica domínio: concreto estrutural
    → roteia para agente: concrete
 
 3. AGENTE CONCRETE
-   → interpreta: viga de concreto armado, flexão simples
+   → interpreta: viga de concreto armado, flexêo simples
    → identifica norma: NBR 6118:2014
-   → seleciona método: seção T, estado limite último
+   → seleciona método: seçêo T, estado limite último
    → prepara parâmetros de entrada
 
 4. MCP CALL → calc-server
@@ -65,7 +65,7 @@
 
 5. PYTHON ENGINE
    → lib/concrete/beams.py::design_t_beam()
-   → calcula Md, escolhe armadura, verifica deflexão
+   → calcula Md, escolhe armadura, verifica deflexêo
 
 6. VALIDATOR (automático)
    → check_units: kN·m ✓
@@ -78,7 +78,7 @@
    → escolha: 4 φ 16mm (As = 8.04 cm²) — verifica com ρ_min
    → detalhamento: cobrimento 3cm, estribos φ8c/20cm
 
-8. AGENTE CONCRETE (continuação)
+8. AGENTE CONCRETE (continuaçêo)
    → explica cada etapa do cálculo
    → mostra hipóteses adotadas
    → identifica limitações
@@ -86,7 +86,7 @@
 9. REPORTER
    → gera memorial de cálculo (Markdown → PDF)
    → gera planilha de resultados (Excel)
-   → gera checklist de revisão
+   → gera checklist de revisêo
 
 10. SAÍDA
     → Memorial PDF + Excel + Checklist
@@ -95,18 +95,18 @@
 
 ## Princípios de Design
 
-### Separação de responsabilidades
-- Agentes: interpretação, seleção de método, explicação
+### Separaçêo de responsabilidades
+- Agentes: interpretaçêo, seleçêo de método, explicaçêo
 - Python: toda aritmética e lógica de cálculo
-- MCP: protocolo de comunicação entre as camadas
+- MCP: protocolo de comunicaçêo entre as camadas
 - Validator: verificações determinísticas, sem LLM
 
 ### Contrato de dados (Pydantic)
-Todo input e output de função Python tem schema Pydantic:
-- Garante que unidades estão presentes
+Todo input e output de funçêo Python tem schema Pydantic:
+- Garante que unidades estêo presentes
 - Impede parâmetros ausentes
-- Gera documentação automática
+- Gera documentaçêo automática
 
-### Segundo método de verificação
-Para cálculos críticos, dois métodos independentes são executados.
-Se divergência > 20%, o agente avisa o engenheiro para revisão manual.
+### Segundo método de verificaçêo
+Para cálculos críticos, dois métodos independentes sêo executados.
+Se divergência > 20%, o agente avisa o engenheiro para revisêo manual.

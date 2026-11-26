@@ -1,6 +1,6 @@
 """Testes de recalque — elástico imediato e adensamento primário.
 
-Valores de referência calculados à mão (a conta está nos comentários).
+Valores de referência calculados à mêo (a conta está nos comentários).
 Fontes:
   - Recalque elástico: teoria da elasticidade (Timoshenko/Boussinesq),
     s = q·B·(1−ν²)·Iw / Es.

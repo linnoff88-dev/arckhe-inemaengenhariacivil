@@ -1,6 +1,6 @@
-"""Validação obrigatória do domínio de AÇO — barras comprimidas (NBR 8800:2008).
+"""Validaçêo obrigatória do domínio de AÇO — barras comprimidas (NBR 8800:2008).
 
-Validador próprio da Fase 5 (não toca nos validadores compartilhados). Cada
+Validador próprio da Fase 5 (nêo toca nos validadores compartilhados). Cada
 resultado passa por unidades (pint), física (faixas razoáveis) e normativa
 (consistência / limites) antes de ser apresentado. Determinístico, sem LLM.
 
@@ -46,13 +46,13 @@ def _assemble(
 def validate_compression(r: CompressionResult) -> ValidationReport:
     """Valida barra comprimida (NBR 8800:2008 §5.3): unidades, física, normativa.
 
-    - unidades: reconstrói ``Ne = π²·E·I/(KL)²`` com pint e confere a dimensão (kN).
+    - unidades: reconstrói ``Ne = π²·E·I/(KL)²`` com pint e confere a dimensêo (kN).
     - física: ``fy ∈ [250, 450]`` MPa (aços estruturais comuns); ``λ0 > 0``
       (alerta se ``λ0 > 3``, barra muito esbelta); ``Nc,Rd > 0``.
     - normativa: ``χ`` na faixa (0, 1]; consistência ``Nc,Rd = χ·Q·A·fy/γa1``.
     """
     if not isinstance(r, CompressionResult):
-        raise TypeError(f"Tipo não suportado: {type(r).__name__}")
+        raise TypeError(f"Tipo nêo suportado: {type(r).__name__}")
 
     # --- unidades: Ne dimensional (megapascal·cm⁴/cm² -> kilonewton) ---------
     ne_q = (

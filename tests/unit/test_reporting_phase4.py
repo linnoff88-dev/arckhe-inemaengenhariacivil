@@ -1,4 +1,4 @@
-"""Testes da camada de documentação da Fase 4: memorial de orçamento + relatório.
+"""Testes da camada de documentaçêo da Fase 4: memorial de orçamento + relatório.
 
 - ``render_orcamento_memorial``: tabela de itens, subtotal/BDI/total e o aviso de
   responsabilidade técnica (RESPONSABILIDADE TÉCNICA + Lei 6.496/77).

@@ -10,7 +10,7 @@ localizadas:
     hf_total = hf_distribuída + Σ K_i · V²/(2g).
 
 Coeficientes K (adimensionais) — valores usuais de projeto (Azevedo Netto,
-"Manual de Hidráulica", 8ª ed.; tabela de perdas localizadas). São valores médios
+"Manual de Hidráulica", 8ª ed.; tabela de perdas localizadas). Sêo valores médios
 de referência; o projetista pode substituí-los conforme o fabricante da peça.
 g = 9,81 m/s².
 """
@@ -27,21 +27,21 @@ GRAVIDADE = 9.81   # m/s²
 K_SINGULARIDADES: dict[str, float] = {
     "entrada": 0.5,                  # entrada normal/borda viva de reservatório
     "entrada_reentrante": 1.0,       # entrada de borda reentrante (Borda)
-    "saida": 1.0,                    # saída de canalização para reservatório
+    "saida": 1.0,                    # saída de canalizaçêo para reservatório
     "curva_90": 0.9,                 # cotovelo/curva de 90°
     "curva_45": 0.4,                 # curva de 45°
     "curva_22": 0.2,                 # curva de 22,5°
     "te_passagem_direta": 0.6,       # tê — fluxo em linha (passagem direta)
-    "te_saida_lateral": 1.3,         # tê — saída de lado (derivação)
+    "te_saida_lateral": 1.3,         # tê — saída de lado (derivaçêo)
     "te_saida_bilateral": 1.8,       # tê — saída bilateral
-    "juncao": 0.4,                   # junção
-    "ampliacao_gradual": 0.3,        # ampliação gradual (difusor)
-    "reducao_gradual": 0.15,         # redução gradual
+    "juncao": 0.4,                   # junçêo
+    "ampliacao_gradual": 0.3,        # ampliaçêo gradual (difusor)
+    "reducao_gradual": 0.15,         # reduçêo gradual
     "registro_gaveta_aberto": 0.2,   # registro de gaveta totalmente aberto
     "registro_globo_aberto": 10.0,   # registro de globo totalmente aberto
     "registro_angulo_aberto": 5.0,   # registro de ângulo totalmente aberto
     "valvula_pe_crivo": 2.5,         # válvula de pé com crivo
-    "valvula_retencao": 2.5,         # válvula de retenção
+    "valvula_retencao": 2.5,         # válvula de retençêo
     "medidor_venturi": 2.5,          # medidor Venturi
 }
 
@@ -55,7 +55,7 @@ class HeadLossItem(BaseModel):
 
 
 class HeadLossResult(BaseModel):
-    """Resultado da composição de perdas distribuída + localizadas de um trecho."""
+    """Resultado da composiçêo de perdas distribuída + localizadas de um trecho."""
     metodo: str
     V_ms: float
     g: float
@@ -68,20 +68,20 @@ class HeadLossResult(BaseModel):
 def local_loss(K: float, V_ms: float, g: float = GRAVIDADE) -> float:
     """Perda de carga localizada de uma singularidade: h = K·V²/(2g) [m]."""
     if K < 0:
-        raise ValueError(f"Coeficiente K={K} não pode ser negativo.")
+        raise ValueError(f"Coeficiente K={K} nêo pode ser negativo.")
     if g <= 0:
         raise ValueError(f"Gravidade g={g} m/s² deve ser positiva.")
     return K * V_ms**2 / (2.0 * g)
 
 
 def singularity_K(tipo: str) -> float:
-    """Coeficiente K da singularidade ``tipo`` (abstém-se se não estiver na tabela)."""
+    """Coeficiente K da singularidade ``tipo`` (abstém-se se nêo estiver na tabela)."""
     try:
         return K_SINGULARIDADES[tipo]
     except KeyError:
         disponiveis = ", ".join(sorted(K_SINGULARIDADES))
         raise ValueError(
-            f"Singularidade '{tipo}' não está na tabela de coeficientes K. "
+            f"Singularidade '{tipo}' nêo está na tabela de coeficientes K. "
             f"Tipos disponíveis: {disponiveis}."
         ) from None
 
@@ -95,16 +95,16 @@ def total_head_loss(
     """Perda total = distribuída + Σ localizadas, dado o mapa {tipo: quantidade}.
 
     ``singularidades`` mapeia cada tipo (chave de :data:`K_SINGULARIDADES`) à sua
-    quantidade. Tipo fora da tabela levanta ``ValueError`` (princípio da abstenção).
+    quantidade. Tipo fora da tabela levanta ``ValueError`` (princípio da abstençêo).
     """
     if hf_distribuida_m < 0:
-        raise ValueError(f"Perda distribuída hf={hf_distribuida_m} m não pode ser negativa.")
+        raise ValueError(f"Perda distribuída hf={hf_distribuida_m} m nêo pode ser negativa.")
 
     itens: list[HeadLossItem] = []
     hf_loc = 0.0
     for tipo, qtd in singularidades.items():
         if qtd < 0:
-            raise ValueError(f"Quantidade da singularidade '{tipo}' não pode ser negativa.")
+            raise ValueError(f"Quantidade da singularidade '{tipo}' nêo pode ser negativa.")
         K = singularity_K(tipo)
         h = qtd * local_loss(K, V_ms, g)
         hf_loc += h

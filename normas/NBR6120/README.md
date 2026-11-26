@@ -3,7 +3,7 @@
 ## Metadados
 
 - **Código:** ABNT NBR 6120
-- **Edição:** 2019 (3ª edição)
+- **Ediçêo:** 2019 (3ª ediçêo)
 - **Título:** Ações para o cálculo de estruturas de edificações
 - **Status:** Em vigor
 - **Substitui:** NBR 6120:1980

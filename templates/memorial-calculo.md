@@ -1,10 +1,10 @@
 # MEMORIAL DE CÁLCULO
 
 **Projeto:** [Nome do Projeto]
-**Elemento:** [Identificação do Elemento]
+**Elemento:** [Identificaçêo do Elemento]
 **Responsável Técnico:** [Nome / CREA]
 **Data:** [Data]
-**Revisão:** [0]
+**Revisêo:** [0]
 
 ---
 
@@ -12,8 +12,8 @@
 
 | Item | Valor |
 |------|-------|
-| Localização | — |
-| Classe de agressividade | CA-II (urbano padrão) |
+| Localizaçêo | — |
+| Classe de agressividade | CA-II (urbano padrêo) |
 | Vida útil de projeto | 50 anos |
 
 ---
@@ -38,7 +38,7 @@
 
 ## 4. Ações e Combinações
 
-| Ação | Valor Característico | γ_f | Valor de Cálculo |
+| Açêo | Valor Característico | γ_f | Valor de Cálculo |
 |------|---------------------|-----|-----------------|
 | Permanente | — | 1,4 | — |
 | Variável | — | 1,4 | — |
@@ -69,9 +69,9 @@
 
 ---
 
-## 7. Conclusão
+## 7. Conclusêo
 
-[Síntese dos resultados e adequação normativa]
+[Síntese dos resultados e adequaçêo normativa]
 
 ---
 

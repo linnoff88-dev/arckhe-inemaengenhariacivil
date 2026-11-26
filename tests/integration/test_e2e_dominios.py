@@ -1,9 +1,9 @@
-"""Testes E2E (Fase 6) — pilha completa de cada domínio: service → cálculo → validação → memorial.
+"""Testes E2E (Fase 6) — pilha completa de cada domínio: service → cálculo → validaçêo → memorial.
 
 Cada caso exercita um orquestrador ``solve_*`` de :mod:`lib.service` de ponta a ponta
-(é E2E de código: não sobe o processo do MCP, mas percorre a mesma engine que o server
-expõe). As entradas são idênticas às dos testes unitários de ``test_service_phase*.py``,
-ou seja, casos comprovadamente APROVADOS na camada de validação.
+(é E2E de código: nêo sobe o processo do MCP, mas percorre a mesma engine que o server
+expõe). As entradas sêo idênticas às dos testes unitários de ``test_service_phase*.py``,
+ou seja, casos comprovadamente APROVADOS na camada de validaçêo.
 
 Para cada domínio asserta-se:
 - o bundle tem as 5 chaves do contrato (``resultado``, ``validacao``, ``memorial_markdown``,
@@ -159,13 +159,13 @@ _CASOS_APROVADOS = {
 
 @pytest.mark.parametrize("dominio", sorted(_CASOS_APROVADOS))
 def test_e2e_dominio_aprovado(dominio: str) -> None:
-    """Pilha completa de um caso aprovado por domínio: contrato + aprovação + aviso."""
+    """Pilha completa de um caso aprovado por domínio: contrato + aprovaçêo + aviso."""
     bundle = _CASOS_APROVADOS[dominio]()
 
-    # contrato: o bundle tem as 5 chaves padrão
+    # contrato: o bundle tem as 5 chaves padrêo
     assert set(bundle) >= _KEYS
 
-    # o caso escolhido passa na validação e o flag é coerente com o relatório embutido
+    # o caso escolhido passa na validaçêo e o flag é coerente com o relatório embutido
     assert bundle["aprovado"] is True
     assert bundle["aprovado"] == bundle["validacao"]["passed"]
 
@@ -187,7 +187,7 @@ def test_e2e_cobre_todos_os_dominios() -> None:
 def test_e2e_ciclo_memoria_projeto(tmp_path) -> None:
     """Ciclo de memória: criar projeto → registrar bundle real → relatório consolidado.
 
-    Usa ``tmp_path`` (não toca em ``memory/projects/`` real). O relatório consolidado
+    Usa ``tmp_path`` (nêo toca em ``memory/projects/`` real). O relatório consolidado
     deve embutir o memorial do cálculo, o cabeçalho do projeto e o aviso obrigatório.
     """
     bundle = solve_rectangular_beam(

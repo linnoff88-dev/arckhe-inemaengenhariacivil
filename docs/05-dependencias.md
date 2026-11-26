@@ -4,27 +4,27 @@
 
 ### Core
 
-| Pacote | Versão | Uso |
+| Pacote | Versêo | Uso |
 |--------|--------|-----|
 | `numpy` | >=1.26 | Arrays, álgebra linear, operações numéricas |
-| `scipy` | >=1.12 | Otimização, integração, equações diferenciais |
-| `sympy` | >=1.12 | Álgebra simbólica, verificação analítica |
-| `pint` | >=0.23 | Verificação dimensional de unidades |
-| `pydantic` | >=2.5 | Validação de schemas de entrada/saída |
+| `scipy` | >=1.12 | Otimizaçêo, integraçêo, equações diferenciais |
+| `sympy` | >=1.12 | Álgebra simbólica, verificaçêo analítica |
+| `pint` | >=0.23 | Verificaçêo dimensional de unidades |
+| `pydantic` | >=2.5 | Validaçêo de schemas de entrada/saída |
 | `mcp` | >=1.0 | SDK do Model Context Protocol |
 
 ### Relatórios
 
-| Pacote | Versão | Uso |
+| Pacote | Versêo | Uso |
 |--------|--------|-----|
-| `openpyxl` | >=3.1 | Geração e leitura de planilhas Excel |
-| `reportlab` | >=4.0 | Geração de PDF programático |
+| `openpyxl` | >=3.1 | Geraçêo e leitura de planilhas Excel |
+| `reportlab` | >=4.0 | Geraçêo de PDF programático |
 | `matplotlib` | >=3.8 | Gráficos de esforços, diagramas |
-| `pandas` | >=2.1 | Manipulação de tabelas, importação CSV |
+| `pandas` | >=2.1 | Manipulaçêo de tabelas, importaçêo CSV |
 
 ### Desenvolvimento
 
-| Pacote | Versão | Uso |
+| Pacote | Versêo | Uso |
 |--------|--------|-----|
 | `pytest` | >=8.0 | Framework de testes |
 | `pytest-cov` | >=4.0 | Cobertura de código |
@@ -37,7 +37,7 @@
 | Server | Porta | Responsabilidade |
 |--------|-------|-----------------|
 | `calc-server` | 8001 | Ferramentas de cálculo Python |
-| `report-server` | 8002 | Geração de documentos |
+| `report-server` | 8002 | Geraçêo de documentos |
 
 ### Externos (opcionais)
 
@@ -49,13 +49,13 @@
 
 ## Runtime
 
-| Ferramenta | Versão | Uso |
+| Ferramenta | Versêo | Uso |
 |------------|--------|-----|
 | Python | >=3.11 | Engine de cálculo |
 | `uv` | latest | Gerenciamento de dependências Python |
 | Claude Code | latest | Interface de agentes |
 
-## Instalação
+## Instalaçêo
 
 ```bash
 # Instalar uv (gerenciador Python moderno)
@@ -68,7 +68,7 @@ uv sync
 # Instalar dependências de desenvolvimento
 uv sync --extra dev
 
-# Verificar instalação
+# Verificar instalaçêo
 python -c "import numpy, scipy, pint, pydantic; print('OK')"
 ```
 
@@ -80,7 +80,7 @@ python -c "import numpy, scipy, pint, pydantic; print('OK')"
 | NBR 6120 | 2019 | Em vigor |
 | NBR 6122 | 2010 | Em vigor |
 | NBR 6123 | 1988 | Em vigor |
-| NBR 7190 | 1997 | Em revisão |
+| NBR 7190 | 1997 | Em revisêo |
 | NBR 8800 | 2008 | Em vigor |
 | NBR 9649 | 1986 | Em vigor |
 | NBR 12218 | 2017 | Em vigor |

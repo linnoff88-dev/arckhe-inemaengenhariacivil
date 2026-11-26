@@ -1,11 +1,11 @@
 """Testes de terraplenagem — volumes, empolamento e balanço corte/aterro.
 
-Valores de referência calculados à mão (a conta está nos comentários).
+Valores de referência calculados à mêo (a conta está nos comentários).
 
 Fonte do método: método das áreas médias (average end area), V=(A1+A2)/2·L
-(DNIT, Manual de Implantação Básica de Rodovia; topografia/terraplenagem).
+(DNIT, Manual de Implantaçêo Básica de Rodovia; topografia/terraplenagem).
 Estados de volume: corte/banco -> solto (fator de empolamento Fe>=1) ->
-compactado (fator de compactação Fc<1).
+compactado (fator de compactaçêo Fc<1).
 """
 
 import pytest
@@ -94,7 +94,7 @@ def test_balanco_abstem_invalido():
         balanco_corte_aterro(1000.0, 600.0, fator_empolamento=1.8)  # Fe fora de faixa
 
 
-# --------------------------------------------------------------- validação
+# --------------------------------------------------------------- validaçêo
 
 from lib.validators.earthwork_check import validate_earthwork  # noqa: E402
 

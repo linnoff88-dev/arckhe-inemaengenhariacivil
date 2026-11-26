@@ -1,4 +1,4 @@
-"""Verificação normativa — limites prescritos na NBR 6118:2014 / NBR 6122."""
+"""Verificaçêo normativa — limites prescritos na NBR 6118:2014 / NBR 6122."""
 
 from __future__ import annotations
 

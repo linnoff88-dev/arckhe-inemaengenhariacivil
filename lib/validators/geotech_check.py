@@ -1,6 +1,6 @@
-"""Validação obrigatória do domínio de GEOTECNIA.
+"""Validaçêo obrigatória do domínio de GEOTECNIA.
 
-Arquivo próprio do domínio (não toca nos validadores compartilhados). Cada cálculo
+Arquivo próprio do domínio (nêo toca nos validadores compartilhados). Cada cálculo
 passa por unidades (pint), física (faixas razoáveis) e normativa (consistência /
 limites) antes de ser apresentado. Determinístico, sem LLM.
 
@@ -40,10 +40,10 @@ from lib.units.registry import Q_, ensure
 from lib.validators.report import Check, ValidationReport
 
 # faixas físicas adicionais
-C_MIN = 0.0                 # coesão ≥ 0
-FS_BEARING_MIN = 3.0        # FS analítico usual de fundação rasa (NBR 6122)
+C_MIN = 0.0                 # coesêo ≥ 0
+FS_BEARING_MIN = 3.0        # FS analítico usual de fundaçêo rasa (NBR 6122)
 FS_PILE_MIN = 2.0           # FS global usual de estaca (NBR 6122)
-SETTLEMENT_WARN_MM = 25.0   # recalque que costuma exigir atenção (NBR 6122)
+SETTLEMENT_WARN_MM = 25.0   # recalque que costuma exigir atençêo (NBR 6122)
 TOL = 1e-3                  # tolerância relativa das reconstruções
 
 
@@ -71,7 +71,7 @@ def _assemble(units: Check, phys: list[Check], norm: list[Check],
 
 # --- capacidade de carga (Vesic) --------------------------------------------
 def validate_bearing(r: BearingCapacityResult) -> ValidationReport:
-    """Valida capacidade de carga de fundação rasa (unidades, física, normativa)."""
+    """Valida capacidade de carga de fundaçêo rasa (unidades, física, normativa)."""
     # unidades: reconstrói q_ult = c·Nc·sc + q·Nq·sq + 0,5·γ·B·Nγ·sγ (kPa)
     term_c = Q_(r.c_kpa, "kilopascal") * r.nc * r.sc
     term_q = Q_(r.q_surcharge_kpa, "kilopascal") * r.nq * r.sq
@@ -176,7 +176,7 @@ def validate_settlement(
         return _validate_elastic(r)
     if isinstance(r, ConsolidationSettlementResult):
         return _validate_consolidation(r)
-    raise TypeError(f"Tipo de recalque não suportado: {type(r).__name__}")
+    raise TypeError(f"Tipo de recalque nêo suportado: {type(r).__name__}")
 
 
 # --- empuxo de terra --------------------------------------------------------
@@ -185,7 +185,7 @@ def validate_earth_pressure(
 ) -> ValidationReport:
     """Valida empuxo de terra (Rankine ou Coulomb): unidades, física, normativa."""
     if not isinstance(r, (RankineEarthPressureResult, CoulombEarthPressureResult)):
-        raise TypeError(f"Tipo de empuxo não suportado: {type(r).__name__}")
+        raise TypeError(f"Tipo de empuxo nêo suportado: {type(r).__name__}")
 
     # unidades: E = 0,5·γ·H²·Ka -> kN/m
     ea_q = 0.5 * Q_(r.gamma_kn_m3, "kilonewton/meter**3") * Q_(r.h_m, "meter") ** 2 * r.ka
@@ -214,7 +214,7 @@ def validate_earth_pressure(
     ok = abs(r.point_of_application_m - r.h_m / 3.0) <= TOL * max(r.h_m, 1.0)
     norm.append(Check(name="ponto_aplicacao", status="ok" if ok else "fail",
                       detail=f"z={r.point_of_application_m:.3f} m ≈ H/3 "
-                             "(distribuição triangular)"))
+                             "(distribuiçêo triangular)"))
     return _assemble(units, phys, norm, r.warnings)
 
 

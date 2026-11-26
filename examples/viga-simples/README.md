@@ -5,15 +5,15 @@
 Dimensionar uma viga de concreto armado com as seguintes características:
 
 - **Tipo:** Biapoiada
-- **Vão:** 5,0 m
-- **Seção:** 25 x 50 cm
+- **Vêo:** 5,0 m
+- **Seçêo:** 25 x 50 cm
 - **Concreto:** C25 (fck = 25 MPa)
 - **Aço:** CA-50 (fyk = 500 MPa)
 - **Carga permanente:** g = 10 kN/m (excl. PP)
 - **Carga variável:** q = 15 kN/m
 - **Classe agressividade:** CA-II
 
-## Solução Esperada
+## Soluçêo Esperada
 
 Ver `solution.md` (a ser gerado pelo agente).
 
@@ -29,4 +29,4 @@ claude
 
 ## Referência
 
-Fusco, P.B. (2010). *Técnica de armar as estruturas de concreto*. PINI, São Paulo. Capítulo 4.
+Fusco, P.B. (2010). *Técnica de armar as estruturas de concreto*. PINI, Sêo Paulo. Capítulo 4.

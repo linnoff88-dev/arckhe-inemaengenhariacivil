@@ -2,17 +2,17 @@
 
 ## Gatilho
 
-Usuário solicita dimensionamento de rede de distribuição de água.
+Usuário solicita dimensionamento de rede de distribuiçêo de água.
 
 ## Fluxo
 
 ### Passo 1 — Coletar Dados
 
-- [ ] População de projeto (ou número de economias)
-- [ ] Per capita de consumo (L/hab/dia) ou padrão NBR
+- [ ] Populaçêo de projeto (ou número de economias)
+- [ ] Per capita de consumo (L/hab/dia) ou padrêo NBR
 - [ ] Coeficientes K1 (dia de maior consumo) e K2 (hora de maior consumo)
 - [ ] Traçado da rede (comprimentos, cotas)
-- [ ] Pressão disponível na entrada
+- [ ] Pressêo disponível na entrada
 
 ### Passo 2 — Calcular Vazões
 
@@ -32,13 +32,13 @@ Chamar ferramenta MCP: `size_pipe`
 
 Chamar ferramenta MCP: `calculate_head_loss_network`
 - Método: Hazen-Williams
-- Saída: hf por trecho, pressão em cada nó
+- Saída: hf por trecho, pressêo em cada nó
 
 ### Passo 5 — Verificar Pressões
 
 Chamar ferramenta MCP: `check_pressures`
-- Pressão mínima: 10 mca (NBR 12218)
-- Pressão máxima: 50 mca (NBR 12218)
+- Pressêo mínima: 10 mca (NBR 12218)
+- Pressêo máxima: 50 mca (NBR 12218)
 - Se algum nó falhar: redimensionar
 
 ### Passo 6 — Dimensionar Reservatório
@@ -46,14 +46,14 @@ Chamar ferramenta MCP: `check_pressures`
 Chamar ferramenta MCP: `size_reservoir`
 - Volume mínimo = 1/4 do consumo diário médio
 
-### Passo 7 — Validação
+### Passo 7 — Validaçêo
 
-Pipeline de validação:
+Pipeline de validaçêo:
 - Velocidades dentro dos limites (0.6 a 3.0 m/s)
 - Pressões dentro dos limites em todos os nós
 - Reservatório adequado
 
-### Passo 8 — Gerar Documentação
+### Passo 8 — Gerar Documentaçêo
 
 Memorial + planilha com quadro de tubulações + mapa de pressões
 

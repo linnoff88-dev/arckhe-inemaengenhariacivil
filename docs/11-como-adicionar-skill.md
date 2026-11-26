@@ -6,7 +6,7 @@ passa pelos mesmos seis estágios, **sempre por TDD** (o teste vem antes do cód
 
 ```
 teste (hand-calc + norma)            ← escreva primeiro, veja falhar (RED)
-  └─ núcleo  lib/<domínio>/<x>.py     ← aritmética + Pydantic + abstenção (ValueError)
+  └─ núcleo  lib/<domínio>/<x>.py     ← aritmética + Pydantic + abstençêo (ValueError)
        └─ validador lib/validators/<domínio>_check.py   ← unidades (pint) + física + norma
             └─ memorial lib/reporting/memorial.py        ← render_*  (embute o DISCLAIMER)
                  └─ orquestrador lib/service.py           ← solve_*  (devolve o bundle)
@@ -16,10 +16,10 @@ teste (hand-calc + norma)            ← escreva primeiro, veja falhar (RED)
 Regras do projeto (de `CLAUDE.md`) que valem para **toda** skill:
 
 1. **LLM nunca faz aritmética.** Todo número nasce no núcleo Python.
-2. **Unidades verificadas com `pint`** antes de qualquer operação (no validador).
-3. **Validação obrigatória** antes de apresentar (`lib/validators/`).
-4. **Disclaimer obrigatório** em toda saída (vem do `reporting`, nunca redigido à mão).
-5. **Abstenção:** fora da faixa de validade → levante `ValueError`/`KeyError`; nunca chute.
+2. **Unidades verificadas com `pint`** antes de qualquer operaçêo (no validador).
+3. **Validaçêo obrigatória** antes de apresentar (`lib/validators/`).
+4. **Disclaimer obrigatório** em toda saída (vem do `reporting`, nunca redigido à mêo).
+5. **Abstençêo:** fora da faixa de validade → levante `ValueError`/`KeyError`; nunca chute.
 
 ## Quando criar uma nova skill vs. expandir uma existente
 
@@ -35,7 +35,7 @@ Regras do projeto (de `CLAUDE.md`) que valem para **toda** skill:
 
 Crie `tests/unit/test_<domínio>_<x>.py`. O caso de referência traz o cálculo manual no
 comentário, **citando a norma/fonte e a página**, e uma tolerância numérica explícita
-(padrão 0,1 %). Esse comentário é o que torna o teste auditável.
+(padrêo 0,1 %). Esse comentário é o que torna o teste auditável.
 
 ```python
 # tests/unit/test_<domínio>_<x>.py
@@ -47,14 +47,14 @@ from lib.<domínio>.<x> import design_<x>
 def test_<x>_caso_referencia():
     """Hand-calc — NBR XXXX:AAAA §Y / <Autor (ano), p.NN>.
 
-    Dados: ...; à mão: <fórmula> = <valor> <unidade>.
+    Dados: ...; à mêo: <fórmula> = <valor> <unidade>.
     """
     r = design_<x>(param_a=..., param_b=...)
     assert r.saida_principal == pytest.approx(<valor_esperado>, rel=1e-3)
 
 
 def test_<x>_fora_de_faixa_abstem():
-    # Entrada fisicamente inválida → abstenção (não inventa número).
+    # Entrada fisicamente inválida → abstençêo (nêo inventa número).
     with pytest.raises(ValueError):
         design_<x>(param_a=<valor_invalido>, param_b=...)
 ```
@@ -65,7 +65,7 @@ Rode e **veja falhar** (`uv run pytest tests/unit/test_<domínio>_<x>.py -q`).
 
 A aritmética vive aqui, determinística e sem efeitos colaterais. Saída em um modelo
 **Pydantic** (serializável). Constantes de faixa de validade no topo; fora delas,
-**abstenha-se** com `ValueError`. **Não** insira o disclaimer aqui (entra na integração).
+**abstenha-se** com `ValueError`. **Nêo** insira o disclaimer aqui (entra na integraçêo).
 
 ```python
 # lib/<domínio>/<x>.py
@@ -74,7 +74,7 @@ from __future__ import annotations
 
 from pydantic import BaseModel
 
-# faixas de validade (abstenção fora delas)
+# faixas de validade (abstençêo fora delas)
 PARAM_A_MIN, PARAM_A_MAX = ..., ...
 
 
@@ -137,7 +137,7 @@ def validate_<x>(r: <X>Result) -> ValidationReport:
 ### 4. Memorial — `lib/reporting/memorial.py`
 
 Adicione `render_<x>_memorial(r, rep) -> str`. O memorial é Markdown legível (dados,
-fórmula, resultado, validação) e **termina embutindo o `DISCLAIMER`** — é ele que carrega
+fórmula, resultado, validaçêo) e **termina embutindo o `DISCLAIMER`** — é ele que carrega
 a `RESPONSABILIDADE TÉCNICA` e a `Lei 6.496/77` exigidas em toda saída.
 
 ```python
@@ -147,14 +147,14 @@ from lib.reporting.disclaimer import DISCLAIMER
 def render_<x>_memorial(r, rep) -> str:
     linhas = [f"# Memorial — <Cálculo> ({r.metodo})", ""]
     linhas += [f"- saída principal: {r.saida_principal:.3f}", ""]
-    # ... etapas e resultado da validação (rep) ...
+    # ... etapas e resultado da validaçêo (rep) ...
     linhas += ["---", "", DISCLAIMER]
     return "\n".join(linhas)
 ```
 
 ### 5. Orquestrador — `solve_<x>` em `lib/service.py`
 
-O `solve_*` costura núcleo → validação → memorial e devolve o **bundle padrão** via o
+O `solve_*` costura núcleo → validaçêo → memorial e devolve o **bundle padrêo** via o
 helper `_bundle(r, rep, memorial)` (5 chaves: `resultado`, `validacao`,
 `memorial_markdown`, `aviso`, `aprovado`). É a fronteira testável; o MCP é só transporte.
 
@@ -177,7 +177,7 @@ def solve_<x>(param_a: float, param_b: float) -> dict:
 
 A ferramenta é **fina**: tipa as entradas, chama `solve_<x>` e devolve o bundle. Nenhuma
 lógica de cálculo aqui. Acrescente também a entrada em `listar_capacidades` (é a fonte de
-verdade de "o que existe"; o que não está lá, o agente recusa).
+verdade de "o que existe"; o que nêo está lá, o agente recusa).
 
 ```python
 # em mcp/calc-server/server.py
@@ -195,7 +195,7 @@ def <nome_da_ferramenta>(param_a: float, param_b: float) -> dict:
 ### 7. Cobertura E2E e fixtures
 
 - Acrescente o caso **aprovado** ao dicionário `_CASOS_APROVADOS` de
-  `tests/integration/test_e2e_dominios.py` (entradas que passam na validação). A suíte
+  `tests/integration/test_e2e_dominios.py` (entradas que passam na validaçêo). A suíte
   já asserta as 5 chaves, `aprovado is True` e o aviso no memorial.
 - Se o `--selftest` do server deve cobrir a skill, inclua um bundle dela em `_selftest()`.
 - (Opcional, recomendado) Fixture de referência em `tests/fixtures/` com fonte, entrada e
@@ -214,7 +214,7 @@ uv run python mcp/calc-server/server.py --selftest    # → "SELFTEST OK"
 ## Checklist de Nova Skill
 
 - [ ] Teste escrito **primeiro**, com hand-calc citando a norma e tolerância explícita
-- [ ] Núcleo em `lib/<domínio>/<x>.py` com modelo Pydantic e abstenção (`ValueError`)
+- [ ] Núcleo em `lib/<domínio>/<x>.py` com modelo Pydantic e abstençêo (`ValueError`)
 - [ ] Validador `validate_<x>` retornando `ValidationReport` (unidades `pint` + física + norma)
 - [ ] `render_<x>_memorial` embutindo o `DISCLAIMER`
 - [ ] `solve_<x>` em `lib/service.py` usando `_bundle` (5 chaves)

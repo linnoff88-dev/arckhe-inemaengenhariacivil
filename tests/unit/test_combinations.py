@@ -1,6 +1,6 @@
 """Testes de combinações de ações (NBR 8681:2003 / NBR 6118:2014).
 
-Valores de referência calculados à mão (a conta está em cada comentário).
+Valores de referência calculados à mêo (a conta está em cada comentário).
 ELU normal:  Fd = γg·Gk + γq·(Qk_princ + Σ ψ0·Qk_sec)
 ELS q.perm.: Fd,serv = Gk + Σ ψ2·Qk
 """
@@ -62,7 +62,7 @@ def test_els_quase_permanente_sem_variaveis():
     assert r.parcela_variavel == pytest.approx(0.0, abs=1e-9)
 
 
-# ----------------------------------------------------------------- abstenção
+# ----------------------------------------------------------------- abstençêo
 
 def test_combinacao_rejeita_negativos():
     with pytest.raises(ValueError):

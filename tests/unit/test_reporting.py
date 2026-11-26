@@ -1,4 +1,4 @@
-"""Testes da geração de memorial de cálculo e do aviso de responsabilidade."""
+"""Testes da geraçêo de memorial de cálculo e do aviso de responsabilidade."""
 
 from lib.concrete.beams import design_rectangular_beam
 from lib.concrete.columns import design_rectangular_column
@@ -72,7 +72,7 @@ def test_footing_memorial_has_key_sections_and_values():
     assert "6.496/77" in md
     assert f"L = {r.lado_cm:.0f} cm" in md           # lado da sapata
     assert f"σ_solo = {r.sigma_solo_kpa:.1f} kPa" in md
-    assert f"{r.as_x_cm2:.2f}" in md                 # armadura direção x
+    assert f"{r.as_x_cm2:.2f}" in md                 # armadura direçêo x
 
 
 def test_one_way_slab_memorial_has_key_sections_and_values():
@@ -86,7 +86,7 @@ def test_one_way_slab_memorial_has_key_sections_and_values():
     assert "NBR 6118" in md
     assert "RESPONSABILIDADE TÉCNICA" in md
     assert "6.496/77" in md
-    assert "uma direção" in md
+    assert "uma direçêo" in md
     assert f"Mx = {r.mx_knm:.2f}" in md
     assert f"{r.as_x_cm2_m:.2f}" in md
 

@@ -1,8 +1,8 @@
 """Testes da base local de preços tipo SINAPI (amostra ILUSTRATIVA).
 
-Valores de referência vêm do CSV de amostra ``data/sinapi_amostra.csv`` — são
+Valores de referência vêm do CSV de amostra ``data/sinapi_amostra.csv`` — sêo
 ilustrativos e devem ser substituídos pela SINAPI vigente/regional. A base é uma
-tabela consultável: código inexistente -> KeyError (princípio da abstenção).
+tabela consultável: código inexistente -> KeyError (princípio da abstençêo).
 """
 
 from pathlib import Path

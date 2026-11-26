@@ -1,6 +1,6 @@
-"""Validação obrigatória de ESTABILIDADE DE TALUDES.
+"""Validaçêo obrigatória de ESTABILIDADE DE TALUDES.
 
-Arquivo próprio do domínio (não toca nos validadores compartilhados). Cada cálculo
+Arquivo próprio do domínio (nêo toca nos validadores compartilhados). Cada cálculo
 passa por unidades (pint), física (faixas razoáveis) e normativa (FS,mín ≈ 1,5,
 NBR 11682) antes de ser apresentado. Determinístico, sem LLM.
 
@@ -106,7 +106,7 @@ def _validate_infinite(r: InfiniteSlopeResult) -> ValidationReport:
 
 
 def _validate_fellenius(r: FelleniusResult) -> ValidationReport:
-    # unidades: c·ΔL (1 m) deve ter dimensão de força/comprimento (kN/m); FS = res/drv
+    # unidades: c·ΔL (1 m) deve ter dimensêo de força/comprimento (kN/m); FS = res/drv
     cdl_q = Q_(r.c_kpa, "kilopascal") * Q_(1.0, "meter")
     cdl_val = ensure(cdl_q, "kilonewton/meter")
     fs_val = r.resisting_kn_m / r.driving_kn_m
@@ -147,4 +147,4 @@ def validate_slope(
         return _validate_infinite(r)
     if isinstance(r, FelleniusResult):
         return _validate_fellenius(r)
-    raise TypeError(f"Tipo de resultado de talude não suportado: {type(r).__name__}")
+    raise TypeError(f"Tipo de resultado de talude nêo suportado: {type(r).__name__}")

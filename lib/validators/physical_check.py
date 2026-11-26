@@ -1,4 +1,4 @@
-"""Verificação física — limites razoáveis de cada grandeza."""
+"""Verificaçêo física — limites razoáveis de cada grandeza."""
 
 from __future__ import annotations
 
