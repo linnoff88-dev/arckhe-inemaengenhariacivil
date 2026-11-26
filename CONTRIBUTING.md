@@ -1,4 +1,4 @@
-# Guia de Contribuiçêo — INEMA Engenharia Civil
+# Guia de Contribuiçêo — ARCKHÉ Engenharia Civil
 
 Obrigado por contribuir. Esta plataforma calcula coisas que sustentam estruturas reais,
 entêo a barra de qualidade é alta e algumas regras sêo **inegociáveis**. Leia este guia

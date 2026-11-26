@@ -1,4 +1,4 @@
-# INEMA Engenharia Civil — Configuraçêo Claude Code
+# ARCKHÉ Engenharia Civil — Configuraçêo Claude Code
 
 ## Projeto
 

@@ -62,7 +62,7 @@
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Instalar dependências do projeto
-cd inemaengenhariacivil
+cd ARCKHÉengenhariacivil
 uv sync
 
 # Instalar dependências de desenvolvimento

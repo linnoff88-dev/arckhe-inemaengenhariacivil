@@ -605,7 +605,7 @@ wheels = [
 ]
 
 [[package]]
-name = "inema-engenharia-civil"
+name = "ARCKHÉ-engenharia-civil"
 version = "1.0.0"
 source = { virtual = "." }
 dependencies = [

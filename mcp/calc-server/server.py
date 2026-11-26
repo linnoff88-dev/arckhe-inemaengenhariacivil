@@ -64,7 +64,7 @@ from lib.structural.loads import (  # noqa: E402
 )
 from lib.units.registry import Q_, ensure  # noqa: E402
 
-mcp = FastMCP("inema-calc-server")
+mcp = FastMCP("ARCKHÉ-calc-server")
 
 
 @mcp.tool()

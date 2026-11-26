@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Landing + guia — INEMA Engenharia Civil. Padrao projetos-landing-guia (CSS intacto). -->
+<!-- Landing + guia — ARCKHÉ Engenharia Civil. Padrao projetos-landing-guia (CSS intacto). -->
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>INEMA Engenharia Civil — Agentes de IA para cálculos de engenharia civil</title>
+<title>ARCKHÉ Engenharia Civil — Agentes de IA para cálculos de engenharia civil</title>
 <meta name="description" content="Plataforma de agentes de IA para cálculos de engenharia civil. O agente interpreta e escolhe o método; o Python calcula, valida e gera o memorial. A conta nunca sai do LLM.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,8 +37,8 @@
   nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
   nav .brand .emoji{font-size:1.25rem}
   nav .sep{color:var(--mut);opacity:.45}
-  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
-  nav .inema:hover{filter:brightness(1.15)}
+  nav .ARCKHÉ{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .ARCKHÉ:hover{filter:brightness(1.15)}
   nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
   nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
   .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
@@ -92,9 +92,9 @@
 <body>
 
 <nav><div class="wrap">
-  <a class="brand" href="#top"><span class="emoji">🏗️</span> INEMA Engenharia Civil</a>
+  <a class="brand" href="#top"><span class="emoji">🏗️</span> ARCKHÉ Engenharia Civil</a>
   <span class="sep">|</span>
-  <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+  <a class="ARCKHÉ" href="https://ARCKHÉ AI" target="_blank" rel="noopener">ARCKHÉ AI</a>
   <div class="links">
     <a class="sec" href="#oque">O que é</a>
     <a class="sec" href="#fluxo">Como funciona</a>
@@ -102,7 +102,7 @@
     <a class="sec" href="#dominios">Domínios</a>
     <a class="sec" href="#roadmap">Roadmap</a>
     <button class="tgl" id="themeToggle" aria-label="Alternar tema" title="Alternar tema">🌙</button>
-    <a class="btn" href="https://github.com/inematds/inemaengenhariacivil" target="_blank" rel="noopener">GitHub</a>
+    <a class="btn" href="https://github.com/linnoff88-dev/ARCKHÉengenhariacivil" target="_blank" rel="noopener">GitHub</a>
   </div>
 </div></nav>
 
@@ -115,7 +115,7 @@
       <p class="lead">O agente entende o problema e escolhe o método normativo. A conta sai do Python — validada, com referência à norma e memorial pronto. Nunca do modelo de linguagem.</p>
       <div class="cta">
         <a class="btn" href="#guia">Começar o guia</a>
-        <a class="btn ghost" href="https://github.com/inematds/inemaengenhariacivil" target="_blank" rel="noopener">Ver no GitHub</a>
+        <a class="btn ghost" href="https://github.com/linnoff88-dev/ARCKHÉengenhariacivil" target="_blank" rel="noopener">Ver no GitHub</a>
       </div>
     </div>
     <figure>
@@ -223,7 +223,7 @@ print(b[<span class="s">"memorial_markdown"</span>])        <span class="c"># me
 <section id="dominios"><div class="wrap">
   <span class="chip">Domínios · 18 cálculos</span>
   <h2>O que a plataforma calcula</h2>
-  <p class="sub">Lista completa (com cada <code>solve_*</code>, ferramenta MCP e norma) no <a href="https://github.com/inematds/inemaengenhariacivil/blob/main/docs/14-catalogo-calculos.md">catálogo de cálculos</a>. A fonte que o agente consulta em tempo de execuçêo é a ferramenta <code>listar_capacidades</code>.</p>
+  <p class="sub">Lista completa (com cada <code>solve_*</code>, ferramenta MCP e norma) no <a href="https://github.com/linnoff88-dev/ARCKHÉengenhariacivil/blob/main/docs/14-catalogo-calculos.md">catálogo de cálculos</a>. A fonte que o agente consulta em tempo de execuçêo é a ferramenta <code>listar_capacidades</code>.</p>
   <div class="grid g3">
     <div class="card"><h3>🏛️ Concreto armado</h3><p>Viga (flexêo), pilar com 2ª ordem, sapata isolada, laje em 1 e 2 direções. <span class="mut">NBR 6118 · 6122</span></p></div>
     <div class="card"><h3>⛰️ Geotecnia & fundações</h3><p>Capacidade de carga (Vesic), recalque (elástico/adensamento), empuxo (Rankine/Coulomb), estaca por SPT. <span class="mut">Aoki-Velloso × Décourt</span></p></div>
@@ -238,7 +238,7 @@ print(b[<span class="s">"memorial_markdown"</span>])        <span class="c"># me
 <section id="roadmap"><div class="wrap">
   <span class="chip">Roadmap</span>
   <h2>Seis fases — todas concluídas</h2>
-  <p class="sub">Plano completo em <a href="https://github.com/inematds/inemaengenhariacivil/blob/main/docs/06-fases-implementacao.md">docs/06-fases-implementacao.md</a>. Cada fase fechou com testes verdes, <code>ruff</code> limpo e selftest do MCP OK.</p>
+  <p class="sub">Plano completo em <a href="https://github.com/linnoff88-dev/ARCKHÉengenhariacivil/blob/main/docs/06-fases-implementacao.md">docs/06-fases-implementacao.md</a>. Cada fase fechou com testes verdes, <code>ruff</code> limpo e selftest do MCP OK.</p>
   <div class="phase"><div class="tag">v0.1.0</div><div class="d"><strong>Fase 1 — Fundaçêo</strong><span>Viga de concreto (flexêo NBR 6118) + camada de validaçêo + MCP server.</span></div></div>
   <div class="phase"><div class="tag">v0.2.0</div><div class="d"><strong>Fase 2 — Estrutural</strong><span>Pilares, lajes, sapatas, cargas (NBR 6120), combinações e exports Excel/PDF.</span></div></div>
   <div class="phase"><div class="tag">v0.3.0</div><div class="d"><strong>Fase 3 — Geotecnia + Hidráulica</strong><span>Capacidade de carga, recalque, empuxo, estacas; condutos, canal e perdas.</span></div></div>
@@ -250,15 +250,15 @@ print(b[<span class="s">"memorial_markdown"</span>])        <span class="c"># me
 <footer>
   <div class="wrap">
     <div class="pill">Python</div><div class="pill">MCP</div><div class="pill">Pydantic</div><div class="pill">pint</div><div class="pill">NBR 6118/6120/6122/8800</div><div class="pill">Claude Code</div>
-    <p style="margin-top:18px">INEMA Engenharia Civil · projeto de pesquisa/educaçêo ·
-      <a href="https://github.com/inematds/inemaengenhariacivil">github.com/inematds/inemaengenhariacivil</a> ·
-      <a href="https://inema.club">INEMA.CLUB</a></p>
+    <p style="margin-top:18px">ARCKHÉ Engenharia Civil · projeto de pesquisa/educaçêo ·
+      <a href="https://github.com/linnoff88-dev/ARCKHÉengenhariacivil">github.com/linnoff88-dev/ARCKHÉengenhariacivil</a> ·
+      <a href="https://ARCKHÉ AI">ARCKHÉ AI</a></p>
   </div>
 </footer>
 
 <script>
   (function(){
-    var KEY='inema-eng-civil-theme';
+    var KEY='ARCKHÉ-eng-civil-theme';
     var b=document.body, t=document.getElementById('themeToggle');
     if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; }
     t.addEventListener('click',function(){

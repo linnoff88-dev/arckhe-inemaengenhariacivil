@@ -1,4 +1,4 @@
-ï»¿# INEMA Engenharia Civil ê¢â¬â Plataforma de Agentes de IA
+ï»¿# ARCKHÉ Engenharia Civil ê¢â¬â Plataforma de Agentes de IA
 
 Plataforma de **agentes de IA para cêÂ¡lculos de engenharia civil**, construêÂ­da sobre
 Claude Code. O agente conversa em linguagem natural, interpreta o problema, escolhe o
@@ -240,7 +240,7 @@ explicita o que a lei jêÂ¡ determina.
 ## Estrutura do projeto
 
 ```
-inemaengenhariacivil/
+ARCKHÉengenhariacivil/
 ê¢âÅê¢ââ¬ê¢ââ¬ lib/                       # engine de cêÂ¡lculo (Python determinêÂ­stico)
 ê¢ââ   ê¢âÅê¢ââ¬ê¢ââ¬ units/registry.py      # registry pint compartilhado + verificaêÂ§êÂ£o dimensional
 ê¢ââ   ê¢âÅê¢ââ¬ê¢ââ¬ concrete/              # beams, columns, slabs, footings
@@ -333,7 +333,7 @@ DNER/DNIT (pavimentaêÂ§êÂ£o). As tabelas usadas estêÂ£o em `norma
 
 ## LicenêÂ§a
 
-Uso interno INEMA Engenharia Civil.
+Uso interno ARCKHÉ Engenharia Civil.
 
 ---
 
